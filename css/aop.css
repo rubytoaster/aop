@@ -11,21 +11,6 @@ nav{
     font-size:16px;
   }
 
-<<<<<<< HEAD
-html, body{
-  max-width:100%;
-  overflow-x: hidden;
-}
-.splashBackground{
-  background: #01579b;
-  background: radial-gradient(circle,#fff 10%,#01579b);
-}
-
-.tabs-content.carousel .carousel-item
-{
-  height:100%;
-}
-=======
   #sidenav-overlay {
     z-index: 996;
   }
@@ -38,26 +23,16 @@ html, body{
     background: #01579b;
     background: radial-gradient(circle,#fff 10%,#01579b);
   }
->>>>>>> 9453967b6aa1eb0228ed18f4e9d66d52503229e6
 
   .tabs-content.carousel .carousel-item
   {
     height:100%;
   }
 
-<<<<<<< HEAD
-.slider .slides li img {
-  height:100%;
-  width:100%;
-  background-size:cover;
-  background-position:center;
-}
-=======
   .slider.fullscreen ul.slides {
     height:100%;
     background-color:#fff;
   }
->>>>>>> 9453967b6aa1eb0228ed18f4e9d66d52503229e6
 
   .slider .slides li img {
     height:100%;
@@ -143,11 +118,7 @@ a.middle-indicator-text{
   background-size:contain;
   background-repeat: no-repeat;
   background-position:center;
-<<<<<<< HEAD
- /* background-color:#fff; */
-=======
   /* background-color:#fff; */
->>>>>>> 9453967b6aa1eb0228ed18f4e9d66d52503229e6
   height:97%;
   width:100%;
 }
@@ -176,12 +147,9 @@ a.middle-indicator-text{
 {
   .rightPadding{
     padding-right:50%;
-<<<<<<< HEAD
-=======
   }
   nav .brand-logo{
     font-size:3.5vh;
->>>>>>> 9453967b6aa1eb0228ed18f4e9d66d52503229e6
   }
 }
 
@@ -214,21 +182,6 @@ a.middle-indicator-text{
 
   /*.myProgress{
     bottom:45px;
-<<<<<<< HEAD
-  }*/
-}
-
-@media screen and (orientation:landscape)
-{
-  #leftArrow a{
-    position:absolute;
-    top:40%;
-  }
-
-  #rightArrow a{
-    position:absolute;
-    top:40%;
-=======
     }*/
   }
 
@@ -243,44 +196,8 @@ a.middle-indicator-text{
       position:absolute;
       top:40%;
     }
->>>>>>> 9453967b6aa1eb0228ed18f4e9d66d52503229e6
   }
 
-<<<<<<< HEAD
-.exitSlideButton{
-  z-index:600;
-  position:fixed;
-  bottom:0;
-  right:0;
-  margin:10px;
-  background-color:#151c77;
-}
-
-.positionNumber{
-  position:fixed;
-  bottom:0;
-  right:50%;
-  z-index:500;
-}
-
-
-.myProgress {
-  width: 100%;
-  background-color: grey;
-  z-index:500;
-  position:fixed;
-  margin-right:0 !important;
-  margin-left:0 !important;
- bottom:45px;
-/*bottom:0;*/
-}
-.myBar {
-  width: 1%;
-  height: 15px;
-  background-color: #151c77;
-  z-index:500;
-}
-=======
   .exitSlideButton{
     z-index:600;
     position:fixed;
@@ -314,7 +231,6 @@ a.middle-indicator-text{
     background-color: #151c77;
     z-index:500;
   }
->>>>>>> 9453967b6aa1eb0228ed18f4e9d66d52503229e6
 
 
 
@@ -338,12 +254,6 @@ a.middle-indicator-text{
     }
   }
 
-<<<<<<< HEAD
-@media only screen and (min-width: 993px)
-{
-  #mobileFooter{
-    visibility: hidden;
-=======
   @media only screen and (min-width: 993px)
   {
     #mobileFooter{
@@ -364,7 +274,6 @@ a.middle-indicator-text{
       height:85%;
       margin-top:65px;
     }
->>>>>>> 9453967b6aa1eb0228ed18f4e9d66d52503229e6
   }
 
   .footerTable td{
@@ -396,16 +305,6 @@ a.middle-indicator-text{
     display:inline;
   }
 
-<<<<<<< HEAD
-.calculatorButton{
-  margin-top:5px;
-  margin-bottom:5px;
-  color:#fff;
-  width:100%;
-  text-align: center;
-  font-weight:bold;
-}
-=======
   .calculatorButton{
     margin-top:5px;
     margin-bottom:5px;
@@ -414,7 +313,6 @@ a.middle-indicator-text{
     text-align: center;
     font-weight:bold;
   }
->>>>>>> 9453967b6aa1eb0228ed18f4e9d66d52503229e6
 
   .clearCalcButton{
     padding-left: 0 !important;
@@ -479,11 +377,6 @@ a.middle-indicator-text{
     padding:5px !important;
   }
 
-<<<<<<< HEAD
-.calcModal{
-  padding:5px !important;
-}
-=======
 
   .comingSoon{
     color:#2E64D2;
@@ -491,4 +384,12 @@ a.middle-indicator-text{
     font-weight: bold;
     text-align: center;
   }
->>>>>>> 9453967b6aa1eb0228ed18f4e9d66d52503229e6
+
+  .gettingStartedHeader{
+    width: auto !important;
+    line-height:initial !important;
+    display: block !important;
+    font-size:6rem !important;
+    float:none !important;
+
+  }

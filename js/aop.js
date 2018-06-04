@@ -15,7 +15,7 @@ function initalLoad(){
     $("#sidenav-overlay").trigger("click");
   });
 
-  
+
 /*  $(window).scroll(function() {
     clearTimeout(scroll_time);
     var current_scroll = $(window).scrollTop();
@@ -171,11 +171,6 @@ function loadGame(){
   closeSidenav();
   $(function(){
     $("#app_cont").empty();
-<<<<<<< HEAD
-    	car_S = new p5(carSim,'app_cont');
-    });
-   $("#pageTitle").text("Game");
-=======
     car_S = new p5(carSim,'app_cont');
   });
   $("#pageTitle").text("Game");
@@ -191,7 +186,6 @@ function loadHandbook(){
   clearColor();
   $("#app_cont").load("content/handbook.html");
   $("#pageTitle").text("Handbook");
->>>>>>> 9453967b6aa1eb0228ed18f4e9d66d52503229e6
 }
 
 function loadAcronyms(){
