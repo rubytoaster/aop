@@ -3,8 +3,8 @@ var total = 20;
 
 function initalLoad(){
 
-  var scroll_pos = 0;
-  var scroll_time;
+  /*var scroll_pos = 0;
+  var scroll_time;*/
 
   $('.button-collapse').sideNav({
     draggable:true,
@@ -16,7 +16,7 @@ function initalLoad(){
   });
 
   
-  $(window).scroll(function() {
+/*  $(window).scroll(function() {
     clearTimeout(scroll_time);
     var current_scroll = $(window).scrollTop();
 
@@ -31,7 +31,7 @@ function initalLoad(){
     scroll_time = setTimeout(function() {
       scroll_pos = $(window).scrollTop();
     },100);
-  });
+  });*/
 }
 
 function closeSidenav()
@@ -202,6 +202,7 @@ function loadWallWalks(){
 
 function loadTraining(){
   clearColor();
+  closeSidenav();
   $("#app_cont").load("content/training.html");
   $("#pageTitle").text("Training");
 }
