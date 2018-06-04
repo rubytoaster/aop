@@ -133,9 +133,8 @@ function clearColor(){
 function loadGame(){
 
   $(function(){
-
-  $("#app_cont").empty();
-  	car_S = new p5(carSim,'app_cont');
-  });
+    $("#app_cont").empty();
+    	car_S = new p5(carSim,'app_cont');
+    });
    $("#pageTitle").text("Game");
 }
