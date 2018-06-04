@@ -23,15 +23,6 @@ function initalLoad(){
   });
 
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-  
-
-  
-=======
->>>>>>> 82f95cadca82b0f075cf87182e86187f1466d3c6
-=======
->>>>>>> 82f95cadca82b0f075cf87182e86187f1466d3c6
 /*  $(window).scroll(function() {
     clearTimeout(scroll_time);
     var current_scroll = $(window).scrollTop();
