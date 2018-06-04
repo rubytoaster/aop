@@ -1,10 +1,17 @@
 var slideIndex = 1;
 var total = 20;
 
+
+
 function initalLoad(){
 
   /*var scroll_pos = 0;
   var scroll_time;*/
+/*
+  $('.collapsible').collapsible({
+    accordion:true
+  });*/
+
 
   $('.button-collapse').sideNav({
     draggable:true,
@@ -15,7 +22,13 @@ function initalLoad(){
     $("#sidenav-overlay").trigger("click");
   });
 
+
+<<<<<<< HEAD
   
+
+  
+=======
+>>>>>>> 82f95cadca82b0f075cf87182e86187f1466d3c6
 /*  $(window).scroll(function() {
     clearTimeout(scroll_time);
     var current_scroll = $(window).scrollTop();
@@ -49,7 +62,7 @@ function loadHome(){
   $("#pageTitle").text('AoP');
   $("#app_cont").css('background-color', '#e0e0e0');
   $("#app_cont").css('height','100%');
-  $('body').css('background-color', '#e0e0e0');
+  $('body').css('background-color', '#e0e0e0');   
 }
 
 function clickNextSlide(){
@@ -173,7 +186,7 @@ function loadGame(){
     $("#app_cont").empty();
     car_S = new p5(carSim,'app_cont');
   });
-  $("#pageTitle").text("Game");
+  $("#pageTitle").text("Activity");
 }
 
 function loadGuidance(){
