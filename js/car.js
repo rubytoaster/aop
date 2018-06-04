@@ -1,9 +1,9 @@
 
-function Car(sketch, id, imageNameList, maxCarsRendered)
+function Car(sketch, laneXVals, id, imageNameList, maxCarsRendered)
 {
 
 
-  let evaluationPoint = 600;
+  let evaluationPoint = 700;
 
 
   this.carId = id;
@@ -11,7 +11,8 @@ function Car(sketch, id, imageNameList, maxCarsRendered)
   this.isWaitingInTraffic = false;
   this.waitingAtGate = false;
   this.yLoc =  sketch.height + 10;
-  this.xLoc =  sketch.random(sketch.laneXVals);
+  //this.xLoc =  sketch.random(laneXVals);
+  this.xLoc = sketch.width / 2;
 
 
   this.waitTimer = 7000;
@@ -117,6 +118,7 @@ function Car(sketch, id, imageNameList, maxCarsRendered)
           if(this.carSprite.position.y < carQue[i].carSprite.position.y)
           {
             this.carSprite.displace(carQue[i].carSprite);
+            this.carSprite.velocity.y = 0;
           }
           else {
             carQue[i].carSprite.displace(this.carSprite);

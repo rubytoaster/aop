@@ -79,7 +79,11 @@
   <div id="app_cont" >
   </div>
 
-
+  <div id="animation_container" style="display: none; background-color:rgba(255, 255, 255, 1.00); width:650px; height:350px">
+    <canvas id="canvas" width="650" height="350" style="position: absolute; display: block; background-color:rgba(255, 255, 255, 1.00);"></canvas>
+    <div id="dom_overlay_container" style="pointer-events:none; overflow:hidden; width:650px; height:350px; position: absolute; left: 0px; top: 0px; display: block;">
+    </div>
+  </div>
 
   <div id="calc_modal">
     <div id="modal1" class="modal" style="box-shadow: none;background-color:transparent;">
@@ -146,6 +150,8 @@
 
       <!--JavaScript at end of body for optimized loading-->
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      <script src="https://code.createjs.com/createjs-2015.11.26.min.js"></script>
+      <script src="content/LittlesLawAnimation.js"></script>
       <script src="js/aop.js"></script>
       <script src="js/aopCalc.js"></script>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>

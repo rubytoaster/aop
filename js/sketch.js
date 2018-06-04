@@ -185,7 +185,7 @@ let proFontWindows;
 
     if(!lanesFull && !popup.popupVisible)
     {
-      let cust = new Car(sketch, idCtr, imageNameList, maxCarsRendered);
+      let cust = new Car(sketch, laneXVals, idCtr, imageNameList, maxCarsRendered);
       idCtr++;
       carList.push(cust);
 
