@@ -1,5 +1,6 @@
 function Popup(sketch, font, displayText, showValue1, showValue2, showValue3, defaultVal1, defaultVal2, defaultVal3)
 {
+
   this.questionText = displayText;
 
   this.value1Units = "gates";
@@ -16,12 +17,16 @@ function Popup(sketch, font, displayText, showValue1, showValue2, showValue3, de
   this.value3Min;
 
   this.xLoc = 200;
-  this.yLoc = 270;
+  this.yLoc = 300;
+
+  this.buttonLocX = this.xLoc+100;
+  this.buttonLocY = this.yLoc+115;
+
   this.useValue1 = showValue1;
   this.useValue2 = showValue2;
   this.useValue3 = showValue3;
 
-  this.height = 250;
+  this.height = 300;
   this.width = 300;
   this.popupVisible = true;
 
@@ -37,12 +42,12 @@ function Popup(sketch, font, displayText, showValue1, showValue2, showValue3, de
   this.popupSprite = sketch.createSprite( this.xLoc, this.yLoc, this.width, this.height);
   this.popupSprite.shapeColor="DarkGray";
 
-  this.okBtnSprite = sketch.createSprite( this.xLoc+100, this.yLoc+75);
+  this.okBtnSprite = sketch.createSprite( this.buttonLocX, this.buttonLocY);
   this.okBtnSprite.addImage(sketch.loadImage("../images/game/okBtn.png"));
   this.okBtnSprite.depth = 200;
   this.okBtnSprite.visible = false;
 
-  this.plyBtnSprite = sketch.createSprite( this.xLoc+100, this.yLoc+75);
+  this.plyBtnSprite = sketch.createSprite( this.buttonLocX, this.buttonLocY);
   this.plyBtnSprite.addImage(sketch.loadImage("../images/game/play.png"));
   this.plyBtnSprite.depth = 200;
   this.plyBtnSprite.visible = false;
@@ -123,12 +128,10 @@ function Popup(sketch, font, displayText, showValue1, showValue2, showValue3, de
       this.value3--;
   }
 
-  this.clickOpen = function()//playBtnVisible)
+  this.clickOpen = function()
   {
     this.popupVisible = true;
     this.popupSprite.visible = true;
-    //this.plyBtnSprite.visible = playBtnVisible;
-    //this.okBtnSprite.visible = !playBtnVisible;
 
     this.value1UpSprite.visible = this.useValue1;
     this.value2UpSprite.visible = this.useValue2;
@@ -142,7 +145,7 @@ function Popup(sketch, font, displayText, showValue1, showValue2, showValue3, de
     sketch.textFont(font);
     sketch.textSize(12);
 
-    sketch.text(this.questionText, this.xLoc - 130, this.yLoc - 100);
+    sketch.text(this.questionText, this.xLoc - 130, this.yLoc - 130);
 
 
     if(this.useValue1)

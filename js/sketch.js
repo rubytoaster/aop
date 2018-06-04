@@ -50,6 +50,7 @@ var carSim = function(sketch) {
     let minutes;
 
     let inter;
+    let carInter;
 
 let proFontWindows;
 
@@ -89,7 +90,7 @@ let proFontWindows;
     }
     else {
 
-      can = sketch.createCanvas(400, 400);
+      can = sketch.createCanvas(400, 500);
       const canvasElt = can.elt;
       canvasElt.style.width = '100%', canvasElt.style.height="100%";
     }
@@ -162,7 +163,7 @@ let proFontWindows;
       if(carsThroughCt < 2)
         popup.setParams("Failed! Not Enough Cars", false, false, true);
       else
-        popup.setParams("Congrats! YouWin! \n" + carsThroughCt + " Cars Through", false, false, false);
+        popup.setParams("Congrats! YouWin! \n\n" + carsThroughCt + " Cars Through", false, false, false);
 
       popup.popupVisible = true;
     }
@@ -170,9 +171,32 @@ let proFontWindows;
 
   function addCar()
   {
+
+    let lanesFull = true;
+
+    for(let i = 0; i < gateList.length; i ++)
+    {
+      if(gateList[i].gateOpen && gateList[i].carQueue.length < 7)
+      {
+        lanesFull = false;
+        //console.log("lane full");
+      }
+    }
+
+    if(!lanesFull && !popup.popupVisible)
+    {
       let cust = new Car(sketch, idCtr, imageNameList, maxCarsRendered);
       idCtr++;
       carList.push(cust);
+
+      //carCt++;
+      //console.log("Car List Sz: " + carList.length);
+      //console.log("Lane 0 Sz: " +   gateList[0].carQueue.length);
+      //console.log("Lane 1 Sz: " +   gateList[1].carQueue.length);
+      //console.log("Lane 2 Sz: " +   gateList[2].carQueue.length);
+      //console.log("Lane 3 Sz: " +   gateList[3].carQueue.length);
+      //console.log("Gate List Sz: " + gateList.length);
+    }
   }
 
   window.onresize = function()
@@ -191,18 +215,6 @@ let proFontWindows;
   sketch.draw = function() {
 
     sketch.background(roadBackground);
-    if(sketch.frameCount % (80) == 0 && carList.length < maxCarsRendered && !popup.popupVisible)
-    {
-      addCar();
-      //carCt++;
-      //console.log("Car List Sz: " + carList.length);
-      //console.log("Lane 0 Sz: " +   gateList[0].carQueue.length);
-      //console.log("Lane 1 Sz: " +   gateList[1].carQueue.length);
-      //console.log("Lane 2 Sz: " +   gateList[2].carQueue.length);
-      //console.log("Lane 3 Sz: " +   gateList[3].carQueue.length);
-      //console.log("Gate List Sz: " + gateList.length);
-
-    }
 
 
     let howManyWaitingThisCycle = 0;
@@ -252,6 +264,7 @@ let proFontWindows;
         }
         popup.clickClose();
         inter = setInterval(timeIt, 1000);
+        carInter = setInterval(addCar, 1000);
         carsThroughCt = 0;
       }
     }

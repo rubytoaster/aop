@@ -14,7 +14,7 @@ function Car(sketch, id, imageNameList, maxCarsRendered)
   this.xLoc =  sketch.random(sketch.laneXVals);
 
 
-  this.waitTimer = 5000;
+  this.waitTimer = 7000;
   this.waited = false;
   this.speed = -1;
   this.myLaneIndex = -1;
