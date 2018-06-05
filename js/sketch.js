@@ -179,7 +179,7 @@ var carSim = function(sketch) {
 
     for(let i = 0; i < gateList.length; i ++)
     {
-      if(gateList[i].gateOpen && gateList[i].carQueue.length < 6)
+      if(gateList[i].gateOpen && gateList[i].carQueue.length < 3)
       {
         lanesFull = false;
         //console.log("lane full");
@@ -289,7 +289,7 @@ var carSim = function(sketch) {
         }
         else if(question1Complete)
         {
-          setupQuestion2(popup);
+          setTimeout(()=>{setupQuestion2(popup)}, 500);
         }
       }
   }
