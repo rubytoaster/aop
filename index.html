@@ -44,7 +44,19 @@
       <a href="#!" class="brand-logo left " >
         <span id="pageTitle"></span>
       </a>
-
+      <div class="right-align">
+        <a class="waves-effect" href="javaScript:(loadSearchModal())">
+          <table class="footerTable">
+            <tr>
+              <td class="center-align"><i class="small material-icons footerIcons" style="color: white;">search</i>
+              </td>
+            </tr>
+            <tr>
+              <td class="center-align">Search</td>
+            </tr>
+          </table>
+        </a>
+        </div>
       <ul class="right hide-on-med-and-down">
         <li><a class="waves-effect" href="javascript:(loadHome())">Home</a></li>
         <li><a class="waves-effect" href="javascript:(loadAboutUs())">About us</a></li>
@@ -109,7 +121,7 @@
   <div class="container">
     <div class="row" style="margin-bottom:3px;">
 
-      <div class="col m3 s3 center-align">
+      <div class="col m4 s4 center-align">
         <a class="waves-effect" href="javaScript:(loadCalculatorModal())" disabled="disabled">
           <table class="footerTable">
             <tr>
@@ -125,7 +137,7 @@
               </tr>
             </table></a>
           </div>
-          <div class="col m3 s3 center-align">
+          <div class="col m4 s4 center-align">
             <a class="waves-effect" href="#!">
               <table class="footerTable">
                 <tr>
@@ -137,7 +149,7 @@
                 </tr>
               </table></a>
             </div>
-            <div class="col m3 s3 center-align">
+            <div class="col m4 s4 center-align">
               <a class="waves-effect" href="#!">
                 <table class="footerTable">
                   <tr>
@@ -149,18 +161,7 @@
                   </tr>
                 </table>  </a>
               </div>
-              <div class="col m3 s3 center-align">
-                <a class="waves-effect" href="javaScript:(loadSearchModal())">
-                  <table class="footerTable">
-                    <tr>
-                      <td class="center-align"><i class="small material-icons footerIcons">mail_outline</i>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="center-align">Search</td>
-                    </tr>
-                  </table>  </a>
-                </div>
+
               </div>
             </div>
 
@@ -191,15 +192,7 @@
       initalLoad();
       loadHome();
 
-      $(document).ready(function(){
-    $('input.autocomplete').autocomplete({
-      data: {
-        "Apple": null,
-        "Microsoft": null,
-        "Google": 'https://placehold.it/250x250'
-      },
-    });
-  });
+
       </script>
 
     </body>

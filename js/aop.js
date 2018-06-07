@@ -162,6 +162,32 @@ function loadSearchModal(){
       dismissible:false
     });
     $('#search_modal').modal('open');
+
+    $(document).ready(function(){
+      $('input.autocomplete').autocomplete({
+        data: {
+          "Apple": null,
+          "Microsoft": null,
+          "Google": 'https://placehold.it/250x250',
+
+          "AA - Aircraft Availability" : null,
+          "ABSS- Automated Business Service System " : null,
+          "ABW- Air Base Wing " : null,
+          "ACF- Acceptance Check Flight " : null,
+          "AFI- Air Force Instruction " : null,
+          "AFMAN- Air Froce Manual " : null,
+          "AFPC- Air Force Personnel Center " : null,
+          "AFPD- Air Force Policy Directive " : null,
+          "AFRIMS- Air Force Records Information Management System" : null,
+          "AFSAS- Air Force Safety Automated System" : null,
+          "AFSOC- Air Force Special Operations Command" : null,
+          "AMOC- Aircraft Maintenance Operation Center" : null,
+          "AO- Action Officer" : null,
+          "AOC- Air Operations Center" : null,
+          "AOR- Area of Responsibility " : null,
+        },
+      });
+    });
 }
 
 function loadResources(){
