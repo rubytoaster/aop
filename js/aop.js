@@ -112,29 +112,56 @@ function loadCalculator(){
   $("#app_cont").load("content/calculator.html");
   $("#pageTitle").text("Little's Law Calculator");
   $("#calcLabel").css('color','#0EABDA');
-  $('#calcsvg').css({fill: "#0EABDA"});
   $("#app_cont").css('background-color', '#e0e0e0');
   $("#app_cont").css('height','100%');
   $('body').css('background-color', '#e0e0e0');
+  //$("#calcsvg").css({ fill: "#ff0000" });
+
 }
 
 function loadCalculatorModal(){
+  var defaultColor= "#424242";
   var pageTitle = $("#pageTitle").text();
   if(pageTitle !== "Little's Law Calculator"){
     $("#calc_content").load("content/calculator.html");
     $("#calcContainer").css('padding-top','0px');
     $("#calcLabel").css('color','#0EABDA');
-    $('#calcsvg').css({fill: "#0EABDA"});
+    //$("#calcsvg").css('color','#0EABDA');
+    //$("#calcsvg").css({ fill: "#ff0000" });
+    //$('#calcsvg').css({fill: defaultColor});
+    $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
+
+
     $(document).ready(function(){
-      $('.modal').modal();
+      $('#modal1').modal();
     });
 
-    $('.modal').modal({
+    $('#modal1').modal({
       dismissible:false
     });
-    $('.modal').modal('open');
+    $('#modal1').modal('open');
 
   }
+
+
+}
+
+function loadSearchModal(){
+
+    $("#search_content").load("content/search.html");
+    $("#searchContainer").css('padding-top','0px');
+    //$("#calcLabel").css('color','#0EABDA');
+    $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
+
+
+    $(document).ready(function(){
+      $('#search_modal').modal();
+    });
+
+    $('#search_modal').modal({
+      dismissible:false
+    });
+    $('#search_modal').modal('open');
 }
 
 function loadResources(){
@@ -179,9 +206,13 @@ function clearColor(){
   var defaultColor= "#424242"
   $("#calcLabel").css('color',defaultColor);
   $('#calcsvg').css({fill: defaultColor});
+  //$("#calcsvg").css({ fill: "#ff0000" });
+
   $("#app_cont").css('background-color', '#e0e0e0');
   $("#app_cont").css('height','');
   $('body').css('background-color', '#e0e0e0');
+  $("#app_cont").css('filter', '');
+
 }
 
 function closeGame() {
