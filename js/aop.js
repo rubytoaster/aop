@@ -1,6 +1,118 @@
 var slideIndex = 1;
 var total = 20;
 
+var searchDomain = [
+  {key: "AA", value : "Aircraft Availability", area : "acro"},
+  {key: "ABSS", value : "Automated Business Service System", area : "acro"},
+  {key: "ABW", value : "Air Base Wing", area : "acro"},
+  {key: "ACF", value : "Acceptance Check Flight", area : "acro"},
+  {key: "AFI", value : "Air Force Instruction", area : "acro"},
+  {key: "AFMAN", value : "Air Force Manual", area : "acro"},
+  {key: "AFPC", value : "Air Force Personnel Center", area : "acro"},
+  {key: "AFPD", value : "Air Force Policy Directive", area : "acro"},
+  {key: "AFRIMS", value : "Air Force Records Information Management System", area : "acro"},
+  {key: "AFSAS", value : "Air Force Safety Automated System", area : "acro"},
+  {key: "AFSOC", value : "Air Force Special Operations Command", area : "acro"},
+  {key: "AMOC", value : "Aircraft Maintenance Operation Center", area : "acro"},
+  {key: "AO", value : "Action Officer", area : "acro"},
+  {key: "AOC", value : "Air Operations Center", area : "acro"},
+  {key: "AOR", value : "Area of Responsibility ", area : "acro"},
+  {key: "CER", value : "Cost Effective Readiness", area : "acro"},
+  {key: "CoF", value : "Complex of the Future", area : "acro"},
+  {key: "CPI", value : "Continuous Process Improvement", area : "acro"},
+  {key: "DBR", value : "Drum Buffer Rope", area : "acro"},
+  {key: "DLA", value : "Defense Logistics Agency", area : "acro"},
+  {key: "DMAIC", value : "Define, Measure, Analyze, Improve, Control", area : "acro"},
+  {key: "DMAWG", value : "Depot Maintenance Activation Working Group", area : "acro"},
+  {key: "DoD", value : "Department of Defense", area : "acro"},
+  {key: "DOTmLPF-P", value : "Doctrine, Organization, Training, material, Leadership, Personnel, Facilities, and Policy", area : "acro"},
+  {key: "DP", value : "Directorate of Personnel", area : "acro"},
+  {key: "FDB", value : "Financial Data Base", area : "acro"},
+  {key: "FM", value : "Financial Management ", area : "acro"},
+  {key: "FRIP", value : "Full Rate Initial Production", area : "acro"},
+  {key: "GMT", value : "Gated Management Tool", area : "acro"},
+  {key: "GPC", value : "Government Purchase Card", area : "acro"},
+  {key: "IA", value : "Implements Agreements", area : "acro"},
+  {key: "ICE", value : "Interactive Customer Evaluation", area : "acro"},
+  {key: "IM", value : "Item Manager", area : "acro"},
+  {key: "IMS", value : "Integrated Master Schedule", area : "acro"},
+  {key: "IMSC", value : "Installation and Mission Support Center", area : "acro"},
+  {key: "IPV", value : "Individual Prime Vendor", area : "acro"},
+  {key: "JA", value : "Judge Advocate", area : "acro"},
+  {key: "LAIRMCM", value : "Large Aircraft Infrared Countermeasures", area : "acro"},
+  {key: "LGS", value : "Logistics Directorate's Performance Management Division", area : "acro"},
+  {key: "LRIP", value : "Low Rate Initial Production", area : "acro"},
+  {key: "LRS", value : "Logistics Readiness Squadron", area : "acro"},
+  {key: "LRU", value : "Line Replacement Unit", area : "acro"},
+  {key: "MAPO", value : "Maintenance Aquisition Program Office", area : "acro"},
+  {key: "MDS", value : "Mission Design Series", area : "acro"},
+  {key: "METL", value : "Mission Essential Task List", area : "acro"},
+  {key: "METs", value : "Mission Essential Tasks", area : "acro"},
+  {key: "MGA", value : "Major Graded Area", area : "acro"},
+  {key: "MIPR", value : "Military Interdepartmental Purchase Request", area : "acro"},
+  {key: "MLG", value : "Main Landing Gear", area : "acro"},
+  {key: "MORD", value : "Miscellaneous Obligation Requirements Document", area : "acro"},
+  {key: "NAF", value : "Numbered Air Force", area : "acro"},
+  {key: "OC-ALC", value : "Oklahoma City Air Logistics Complex", area : "acro"},
+  {key: "OO-ALC/OBP", value : "OO-ALC Business Office", area : "acro"},
+  {key: "OFPS", value : "Operational Flight Programs", area : "acro"},
+  {key: "OMS", value : "Occupational Medical Services", area : "acro"},
+  {key: "OO-ALC", value : "Ogden Air Logistics Complex", area : "acro"},
+  {key: "ORB", value : "Opportunity Review Board", area : "acro"},
+  {key: "OPR", value : "Office of  Primary Responsibility", area : "acro"},
+  {key: "OSHA", value : "Occupational Safety and Health Administration", area : "acro"},
+  {key: "PCS", value : "Permanent Change of Station", area : "acro"},
+  {key: "PDM", value : "Programmed Depot Maintenance", area : "acro"},
+  {key: "PM", value : "Program Manager ", area : "acro"},
+  {key: "PPA-HQ", value : "Personal Property Headquarters Activity", area : "acro"},
+  {key: "PPPO", value : "Personal Property Processing Office", area : "acro"},
+  {key: "PPSO", value : "Personal Property Shipping Office", area : "acro"},
+  {key: "QA", value : "Quality Assurance", area : "acro"},
+  {key: "RCA", value : "Root Cause Analysis", area : "acro"},
+  {key: "RDS", value : "Records Disposition Schedule", area : "acro"},
+  {key: "RIE", value : "Rapid Identification Worksheet", area : "acro"},
+  {key: "SIO", value : "Single Investigating Officer", area : "acro"},
+  {key: "SME", value : "Subject Matter Expert", area : "acro"},
+  {key: "SPO", value : "System Program Office", area : "acro"},
+  {key: "ToC", value : "Theory of Constraints", area : "acro"},
+  {key: "TSP", value : "Transportation Service Provider", area : "acro"},
+  {key: "UDLM", value : "Unfunded Depot Level Maintenance", area : "acro"},
+  {key: "USR", value : "Unit Safety Representative", area : "acro"},
+  {key: "VPP", value : "Voluntary Protection Program", area : "acro"},
+  {key: "WCD", value : "Work Control Document", area : "acro"},
+  {key: "WIP", value : "Work In Process", area : "acro"},
+  {key: "WR-ALC", value : "Warner Robbins Air Logistics Complex ", area : "acro"},
+
+
+{key : "Art of the Possible (AoP)", value : "A constraints based managment system designed to create an environement for success by creating a culture of problem-solvers, defining processes (aka machines), eliminating constratints, and continously improving.  It is the framework for how the AFSC conducts business and how we strive to achieve world class results in warfighter support.", area : "gloss"},
+{key : "AFTO-202", value : "Noncomforming Technical Assistance Request and Reply.  Process used in AFSC to request engineering disposition to a production process problem.", area : "gloss"},
+{key : "Andon", value : "A signal used to call for help when an abnormal condition is recongized, or that some sort of action is required.  (Andon comes from an old Japanese word for paper lantern).", area : "gloss"},
+{key : "Comfortable in Red", value : "Refers to the Willingness to set aggressive targets with the understanding the metrics will show as 'red' until process throughput efficiencies improve.", area : "gloss"},
+{key : "Constraint", value : "The gate with the lowest throughput rate.", area : "gloss"},
+{key : "Critical Path", value : "A sequence of activities in a project plan which must be completed by a specific time for the project to be completed on its needs date.  The AFSC adaption of this term refers to the linkage of critical elements in a process or project that keepan asset realistically moving forward toward completion.", area : "gloss"},
+{key : "Flowtime", value : "The average time that a unit stays in a production machine.", area : "gloss"},
+{key : "Implied Tasks", value : "Actions or activities not specifically stated but which must be accomplished to sucessfully complete the mission.", area : "gloss"},
+{key : "Manloading", value : "A systematic assignment of personnel to jobs or tasks in an effiicient manner.", area : "gloss"},
+{key : "Maturity Matrix", value : "AFSC method of measuring organizational maturity which regard to the a adaptation of principles found in the 'Execution' section of the AFSC Radiator Chart.", area : "gloss"},
+{key : "Process Machine", value : "Refers to the science of the process and implies that any process can be gated in order to measure throughput and focus process improvment activities.", area : "gloss"},
+{key : "Pull System", value : "A system where products, material or information is 'pulled' (once a demand is placed on the process step then it produces) by consumer requests through a production machine.", area : "gloss"},
+{key : "Push System", value : "A system where products, material or information are pushed through a production machine based on past order history and decisions are based on logn term forecasts.", area : "gloss"},
+{key : "Queue", value : "Assets awaiting induction to a process.  Also a WIP control tool in gated monitoring system.", area : "gloss"},
+{key : "Radiator Chart", value : "Model depicting the fundamental components of the AoP methodology.", area : "gloss"},
+{key : "Rapid Improvment Events (RIE)", value : "A Lean, 6 Sigma or ToC event that allows for root cause and the development of countermeasures in less that 5 days.  The preparation and implementation will occur outside of the RIE.", area : "gloss"},
+{key : "Road To...", value : "Reflects the throughput-pace required for oth the interest of the customer and the organization.  The goal that sets the pace of the process.", area : "gloss"},
+{key : "Root Cause Analysis (RCA)", value : "Tracing a problem to it origins.  If you only fix the symptoms, what you see on the surface, the problem will almost certainly happen again which will lead you to fix it, again, and again, and again.", area : "gloss"},
+{key : "Specified Tasks", value : "Tasks direclty stated in the mission, by the next higher commander, or by law or regulation.", area : "gloss"},
+{key : "Standard Work", value : "A detailed, documented and sometimes visual system by which members develop and follow a series of predefined process steps.", area : "gloss"},
+{key : "Tactical Management", value : "An established frequent review of WIP flowing through the process machine.  It focuses on the individual items of WIP flwoing through the process machine rather than the process machine performance at the operational level.", area : "gloss"},
+{key : "Takt Time", value : "The rate of customer demand, how often a single unit must be produced from a machine (takt is a German word for rhythm or meter).", area : "gloss"},
+{key : "Theory of Constraints (ToC)", value : "1. Identify the system's contraint(s), 2. Decide how to exploit the system's constraint(s). 5. Return to step one but beware of inertia WIP.", area : "gloss"},
+{key : "Throughput", value : "The required output of a production machine expressed in units per time.  Traditional definition based in ToC - The rate at which the system generates money through sales.", area : "gloss"},
+{key : "Urgency Tools", value : "Process tools that allow an organization to react and quickly resovle constraints encountered during the process execution.", area : "gloss"},
+{key : "Value Stream Analysis (VSA)", value : "A method of analyzing a value stream map to determine value add process steps as well as waste.", area : "gloss"},
+{key : "Value Stream Map (VSM)", value : "A method of creating a simple diagram of the material and information flow that bring a product through a value system.", area : "gloss"},
+{key : "Visual Managment", value : "The use of simple visual indicators to help people determine immediately whether they are working inside the standards or deviating form it, this must be done at the place where the work is done.", area : "gloss"},
+{key : "Wall Walk", value : "A recurring process-focused review to understand process machine performance, to identify constraints, and to coordinate resolution.", area : "gloss"}]
 
 
 function initalLoad(){
@@ -165,6 +277,152 @@ function loadSearchModal(){
       dismissible:false
     });
     $('#search_modal').modal('open');
+
+    $(document).ready(function(){
+      $('input.autocomplete').autocomplete({
+        data: {
+          "AA" : null,
+          "ABSS" : null,
+          "ABW" : null,
+          "ACF" : null,
+          "AFI" : null,
+          "AFMAN" : null,
+          "AFPC" : null,
+          "AFPD" : null,
+          "AFRIMS" : null,
+          "AFSAS" : null,
+          "AFSOC" : null,
+          "AMOC" : null,
+          "AO" : null,
+          "AOC" : null,
+          "AOR" : null,
+          "CER" : null,
+          "CoF" : null,
+          "CPI" : null,
+          "DBR" : null,
+          "DLA" : null,
+          "DMAIC" : null,
+          "DMAWG" : null,
+          "DoD" : null,
+          "DOTmLPF-P" : null,
+          "DP" : null,
+          "FDB" : null,
+          "FM" : null,
+          "FRIP" : null,
+          "GMT" : null,
+          "GPC" : null,
+          "IA" : null,
+          "ICE" : null,
+          "IM" : null,
+          "IMS" : null,
+          "IMSC" : null,
+          "IPV" : null,
+          "JA" : null,
+          "LAIRMCM" : null,
+          "LGS" : null,
+          "LRIP" : null,
+          "LRS" : null,
+          "LRU" : null,
+          "MAPO" : null,
+          "MDS" : null,
+          "METL" : null,
+          "METs" : null,
+          "MGA" : null,
+          "MIPR" : null,
+          "MLG" : null,
+          "MORD" : null,
+          "NAF" : null,
+          "OC-ALC" : null,
+          "OO-ALC/OBP" : null,
+          "OFPS" : null,
+          "OMS" : null,
+          "OO-ALC" : null,
+          "ORB" : null,
+          "OPR" : null,
+          "OSHA" : null,
+          "PCS" : null,
+          "PDM" : null,
+          "PM" : null,
+          "PPA-HQ" : null,
+          "PPPO" : null,
+          "PPSO" : null,
+          "QA" : null,
+          "RCA" : null,
+          "RDS" : null,
+          "RIE" : null,
+          "SIO" : null,
+          "SME" : null,
+          "SPO" : null,
+          "ToC" : null,
+          "TSP" : null,
+          "UDLM" : null,
+          "USR" : null,
+          "VPP" : null,
+          "WCD" : null,
+          "WIP" : null,
+          "WR-ALC" : null,
+
+          "Art of the Possible (AoP)" : null,
+          "AFTO-202" : null,
+          "Andon" : null,
+          "Comfortable in Red" : null,
+          "Constraint" : null,
+          "Critical Path" : null,
+          "Flowtime" : null,
+          "Implied Tasks" : null,
+          "Manloading" : null,
+          "Maturity Matrix" : null,
+          "Process Machine" : null,
+          "Pull System" : null,
+          "Push System" : null,
+          "Queue" : null,
+          "Radiator Chart" : null,
+          "Rapid Improvment Events (RIE)" : null,
+          "Road To..." : null,
+          "Root Cause Analysis (RCA)" : null,
+          "Specified Tasks" : null,
+          "Standard Work" : null,
+          "Tactical Management" : null,
+          "Takt Time" : null,
+          "Theory of Constraints (ToC)" : null,
+          "Throughput" : null,
+          "Urgency Tools" : null,
+          "Value Stream Analysis (VSA)" : null,
+          "Value Stream Map (VSM)" : null,
+          "Visual Managment" : null,
+          "Wall Walk" : null,
+        },
+        onAutocomplete: function(txt, val, val) {
+          $("#search_title").html(txt);
+          $("#search_result" ).html( search(txt, searchDomain) );
+        },
+        limit: 20,
+      });
+    });
+}
+
+function search(nameKey, myArray){
+  for (var i=0; i < myArray.length; i++) {
+      if (myArray[i].key === nameKey) {
+        area = myArray[i].area;
+        if(area === 'gloss')
+        {
+          firstLetter = nameKey[0].toUpperCase();
+        }
+        else {
+          firstLetter = nameKey[0].toLowerCase();
+
+        }
+
+          return nameKey + " - " + myArray[i].value;
+      }
+    }
+    return "No Result Found";
+}
+
+function clearSearchInput()
+{
+  $("#autocomplete-input").value="";
 }
 
 function loadResources(){
@@ -251,9 +509,9 @@ function loadHandbook(){
 }
 
 function loadAcronyms(){
+  $('#search_modal').modal('close');
   clearColor();
   closeGame();
-
 
   $("#app_cont").load("content/acronyms.html");
   $("#pageTitle").text("Acronyms");
@@ -273,10 +531,8 @@ function loadTraining(){
   closeSidenav();
   closeGame();
 
-  //$("#app_cont").load("content/training.html");
   $(function(){
     $("#app_cont").empty();
-    //$("#app_cont").load("content/LittlesLawAnimation.html");
 
     var anim_container = document.createElement("div");
     anim_container.id = "animation_container";
