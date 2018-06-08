@@ -126,6 +126,9 @@ function loadCalculatorModal(){
     $("#calc_content").load("content/calculator.html");
     $("#calcContainer").css('padding-top','0px');
     $("#calcLabel").css('color','#0EABDA');
+    //$("#calcsvg").attr("fill","#0EABDA"); 
+    $(".calculator").css("fill", "#0EABDA");
+    //$("#calcsvg").css({fill: #0eABDA});
     //$("#calcsvg").css('color','#0EABDA');
     //$("#calcsvg").css({ fill: "#ff0000" });
     //$('#calcsvg').css({fill: defaultColor});
@@ -206,8 +209,7 @@ function clearColor(){
   var defaultColor= "#424242"
   $("#calcLabel").css('color',defaultColor);
   $('#calcsvg').css({fill: defaultColor});
-  //$("#calcsvg").css({ fill: "#ff0000" });
-
+  $(".calculator").css("fill", "#424242");
   $("#app_cont").css('background-color', '#e0e0e0');
   $("#app_cont").css('height','');
   $('body').css('background-color', '#e0e0e0');
