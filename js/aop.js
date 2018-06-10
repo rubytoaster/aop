@@ -252,7 +252,7 @@ function loadSearchModal(){
     });
     $('#search_modal').modal('open');
 
-    
+
 }
 
 function search(nameKey, myArray){
