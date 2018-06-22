@@ -370,9 +370,14 @@ function closeGame() {
   if(typeof car_S != 'undefined' && car_S !== null) {
     gameCleanup(car_S,'app_cont');
   }
+
+  if(typeof exportRoot != 'undefined' && exportRoot !== null) {
+    gameCleanup(exportRoot,'app_cont');
+  }
 }
 
 function loadGame(){
+  closeGame();
   closeSidenav();
 
   $(function(){
