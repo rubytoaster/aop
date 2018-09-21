@@ -361,7 +361,7 @@ function loadAboutUs(){
     $(".calculator").css({fill: defaultColor});
     $(".eventNote").css({fill: defaultColor});
     $("#notesLabel").css('color',defaultColor);
-     $(".mailIcon").css({fill: defaultColor});
+    $(".mailIcon").css({fill: defaultColor});
     $("#mailLabel").css('color',defaultColor);
     $("#app_cont").css('background-color', '#e0e0e0');
     $("#app_cont").css('height','');
@@ -378,6 +378,17 @@ function closeGame() {
   if(typeof exportRoot != 'undefined' && exportRoot !== null) {
     gameCleanup(exportRoot,'app_cont');
   }
+}
+
+function loadGame2(){
+  closeGame();
+  closeSidenav();
+
+  $(function(){
+    $("#app_cont").empty();
+    car_S = new p5(convSim,'app_cont');
+  });
+  $("#pageTitle").text("Activity");
 }
 
 function loadGame(){
