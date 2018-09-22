@@ -380,6 +380,18 @@ function closeGame() {
   }
 }
 
+function loadGame3(){
+  closeGame();
+  closeSidenav();
+
+  $(function(){
+    $("#app_cont").empty();
+    car_S = new p5(cPathSim,'app_cont');
+  });
+  $("#pageTitle").text("Activity");
+}
+
+
 function loadGame2(){
   closeGame();
   closeSidenav();
