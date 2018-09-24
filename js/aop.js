@@ -1,5 +1,5 @@
 var slideIndex = 1;
-var total = 6;
+var total = 20;
 
 var searchDomain = [
   {key: "AA", value : "Aircraft Availability", area : "acro"},
@@ -125,8 +125,8 @@ function initalLoad(){
   $(".drag-target").on("swipeleft", function () {
     $("#sidenav-overlay").trigger("click");
   });
-  
-   $("#backToResourcesButton").hide(); 
+
+   $("#backToResourcesButton").hide();
 }
 
 function closeSidenav()
@@ -160,8 +160,8 @@ function loadSlide(n){
   clearColor();
   closeSidenav();
   $("#pageTitle").text('AOP Slides');
-  $("#menuButton").hide(); 
-  $("#backToResourcesButton").show(); 
+  $("#menuButton").hide();
+  $("#backToResourcesButton").show();
   $("#app_cont").load("content/slideScreen.html", function()
   {
     var numberList = document.getElementById("numberList");
@@ -327,8 +327,8 @@ function loadResources(){
   closeSidenav();
   $("#app_cont").load("content/resources.html");
   $("#pageTitle").text("Resources");
-  $("#menuButton").show(); 
-  $("#backToResourcesButton").hide(); 
+  $("#menuButton").show();
+  $("#backToResourcesButton").hide();
 }
 
 function loadGettingStarted(){
@@ -386,7 +386,6 @@ function closeGame() {
   }
 }
 
-<<<<<<< HEAD
 function loadGame3(){
   closeGame();
   closeSidenav();
@@ -398,11 +397,7 @@ function loadGame3(){
   $("#pageTitle").text("Activity");
 }
 
-
-function loadGame2(){
-=======
 function loadGame(){
->>>>>>> a03358ce900a14421169037ec6208065867b3055
   closeGame();
   closeSidenav();
 
@@ -430,8 +425,8 @@ function loadGuidance(){
 
   $("#app_cont").load("content/guidance.html");
   $("#pageTitle").text("Guidance");
-  $("#menuButton").hide(); 
-  $("#backToResourcesButton").show(); 
+  $("#menuButton").hide();
+  $("#backToResourcesButton").show();
 }
 
 function loadHandbook(){
@@ -449,18 +444,18 @@ function loadAcronyms(){
 
   $("#app_cont").load("content/acronyms.html");
   $("#pageTitle").text("Acronyms");
-  $("#menuButton").hide(); 
-  $("#backToResourcesButton").show(); 
+  $("#menuButton").hide();
+  $("#backToResourcesButton").show();
 }
 
 function loadWallWalks(){
   clearColor();
   closeGame();
-  
+
   $("#app_cont").load("content/wallWalks.html");
   $("#pageTitle").text("Wall Walks");
-  $("#menuButton").hide(); 
-  $("#backToResourcesButton").show(); 
+  $("#menuButton").hide();
+  $("#backToResourcesButton").show();
 }
 
 function loadTraining(){
