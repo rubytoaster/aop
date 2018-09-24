@@ -372,6 +372,15 @@ function loadAboutUs(){
   $("#pageTitle").text("About Us");
 }
 
+function loadCharts()
+{
+  clearColor(); 
+  closeGame(); 
+  closeSidenav(); 
+  $("#app_cont").load("content/charts.html"); 
+  $("#pageTitle").text("Charts"); 
+}
+
 function clearColor(){
     var defaultColor= "#424242"
     $("#calcLabel").css('color',defaultColor);
@@ -387,6 +396,16 @@ function clearColor(){
     $("#app_cont").css('filter', '');
 
   }
+  
+  
+function loadActivityPage()
+{
+  clearColor(); 
+  closeGame(); 
+  closeSidenav();
+  $("#app_cont").load("content/activity.html"); 
+  $("#pageTitle").text("Activities"); 
+}
 
 function closeGame() {
   if(typeof car_S != 'undefined' && car_S !== null) {
@@ -437,6 +456,15 @@ function loadGuidance(){
 
   $("#app_cont").load("content/guidance.html");
   $("#pageTitle").text("Guidance");
+  animateArrow(); 
+}
+
+function loadTemplate(){
+  clearColor();
+  closeGame();
+
+  $("#app_cont").load("content/template.html");
+  $("#pageTitle").text("Templates");
   animateArrow(); 
 }
 
