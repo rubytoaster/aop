@@ -134,10 +134,15 @@ $(document).ready(function(){
       "Value Stream Map (VSM) " : null,
       "Visual Managment " : null,
       "Wall Walk " : null,
+      "PDF-aop-handbook" :
     },
     onAutocomplete: function(txt, val, val) {
+      let pdfSearch = (text, searchDomain) => {
+
+      };
       $("#search_title").html(txt);
-      $("#search_result" ).html( search(txt, searchDomain) );
+      $("#search_result" ).html( pdfSearch(text, searchDomain) search(text, searchDomain));
+
     },
     limit: 20,
   });
