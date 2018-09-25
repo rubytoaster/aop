@@ -603,3 +603,15 @@ nav .button-collapse{
   border-left: 1px solid #ddd; */
 }
 
+.carGameBackground{
+  background-image: url("../css/svg/carGame.PNG");
+  background-repeat: no-repeat;
+  background-size:100% auto;
+}
+
+.activityTitle{
+  font-weight: bold; 
+  /*color:#000;*/
+  vertical-align: middle;
+ /* text-shadow: -3px 0px 6px rgba(150, 150, 150, 1);*/
+}
