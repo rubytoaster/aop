@@ -374,9 +374,6 @@ a.middle-indicator-text{
     margin-top: 0;
   }
 
-  
-
-
   .calcResultTable{
     width:100%;
     color: #000;
@@ -407,11 +404,14 @@ a.middle-indicator-text{
   }
 
   .modal{
-    top:2% !important;
     z-index:600;
     border-radius: 5px;
     max-height:95% !important;
     /*overflow-y:hidden !important;*/
+  }
+
+  .calcModal{
+     top:2% !important;
   }
 
   @media only screen and (max-width:992px)
@@ -561,11 +561,6 @@ nav a.button-collapse{
   margin:0 !important; 
 }
 
-nav .button-collapse{
-
-}
-
-
 .iconTab{
   padding:0px !important; 
   text-align:center !important;   
@@ -614,4 +609,16 @@ nav .button-collapse{
   /*color:#000;*/
   vertical-align: middle;
  /* text-shadow: -3px 0px 6px rgba(150, 150, 150, 1);*/
+}
+
+.landscapeMode{
+  color:#2E64D2;
+  font-size: 30px;
+  font-weight: bold;
+  text-align: center;
+}
+
+.landscapeModal{
+  top:25% !important;
+
 }

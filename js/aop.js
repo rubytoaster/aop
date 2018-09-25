@@ -252,7 +252,6 @@ function loadCalculatorModal(){
 }
 
 function loadSearchModal(){
-
     $("#modal_content").load("content/search.html");
     $("#searchContainer").css('padding-top','0px');
     //$("#calcLabel").css('color','#0EABDA');
@@ -267,7 +266,25 @@ function loadSearchModal(){
       dismissible:false
     });
     $('#modal1').modal('open');
+}
 
+function loadLandscapeModal(){
+  if(window.innerHeight > window.innerWidth){
+    $("#modal_content_landscape").load("content/landscape.html");
+    $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
+
+    /*var landscapeModal= document.getElementById("modal1"); 
+    landscapeModal.style="top:30% !important"; */
+
+    $(document).ready(function(){
+      $('#landscapeModal').modal();
+    });
+
+    $('#landscapeModal').modal({
+      dismissible: false
+    });
+    $('#landscapeModal').modal('open');
+}
 
 }
 
@@ -574,6 +591,10 @@ function resetActivityArrow()
   topPatty.style="transform:rotate(45deg);width:24px; top:45%; left:15%;"; 
   bottomPatty.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%";  
 }
+
+
+
+
 
 function loadTraining(){
   clearColor();
