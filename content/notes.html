@@ -45,7 +45,11 @@
 	</div>
 
 	<div id="calculations" class="col s12">
+		<div id="calculationsBlurb" class="col s12" style="display:block">
+			Shows you all of your saved calculations for easy recall.
+		</div>
 	</div>
+
 
 	<div id="searches" class="col s12">
 		Your saved search terms will be displayed here.
@@ -119,6 +123,12 @@
 	}
 
 	function displayGroups(records){
+		if(records[0] != null){
+			document.getElementById("calculationsBlurb").style.display = "none";
+		}
+		else{
+			document.getElementById("calculationsBlurb").style.display = "block";
+		}
 		console.log(JSON.stringify(records));
 		var rowCount = 0;
 		var colCount = 0;
