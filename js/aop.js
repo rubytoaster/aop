@@ -202,7 +202,7 @@ function loadSearchModal(){
 
 function searchInKey(nameKey, myArray){
   for (var i=0; i < myArray.length; i++) {
-      if (myArray[i].key === nameKey) {
+      if (myArray[i].key.includes(nameKey)) {
         area = myArray[i].area;
         if(area === 'gloss')
         {
@@ -220,17 +220,26 @@ function searchInKey(nameKey, myArray){
 }
 
 function searchInValue(term, myArray) {
+  let results = [];
   for (let i = 0; i < myArray.length; i++) {
-    if (myArray[i].value === term) {
+
+    if (myArray[i].value.includes(term)) {
       area = myArray[i].area;
-      if (area === "handbook") {
-        return myArray[i].key;
+      if (area === "handbook-pdf") {
+        let link = term + ' - <a href="../pdf/aop-handbook.pdf#page=' + myArray[i].page + '">' +
+        myArray[i].key + '</a></br>'
+        results.push(link);
       } else {
-        return term + " - " + myArray[i].value;
+        let result = term + " - " + myArray[i].value + "</br>";
+        results.push(result);
       }
     }
   }
-  return "No Result Found";
+  if (results.length <= 0) {
+    return "No Result Found";
+  } else {
+    return results;
+  }
 }
 
 function clearSearchInput()
