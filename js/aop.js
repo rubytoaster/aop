@@ -417,6 +417,34 @@ function animateArrow()
   bottomPatty.style="transform:rotate(45deg);width:15px; top:63%;";
 }
 
+//activity page back arrow
+function animateActivityArrow()
+{
+  $("#menuButton").hide();
+  $("#backActivityButton").show();
+
+  var topPatty = document.getElementById("patAct1");
+  var bottomPatty = document.getElementById("patAct3");
+  topPatty.style="height:4px; width:24px; position:absolute; top:45%; left:15%";
+
+  topPatty.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;";
+  bottomPatty.style="transform:rotate(45deg);width:15px; top:63%;";
+
+}
+
+function clickBackToActivity()
+{
+
+  var burger1 = document.getElementById("bur1");
+  var burger3 = document.getElementById("bur3");
+  burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"
+  burger3.style="transform:rotate(45deg);width:15px; top:63%;";
+  loadActivityPage();
+  resetActivityArrow();
+  burger1.style="tranform:rotate(45deg); width:24px; top:20%; left:15%;";
+  burger3.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%;";
+}
+
 function clickBackToResources()
 {
   var burger1 = document.getElementById("bur1");
@@ -428,6 +456,14 @@ function clickBackToResources()
   burger1.style="tranform:rotate(45deg); width:24px; top:20%; left:15%;";
   burger3.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%;";
 
+}
+
+function resetActivityArrow()
+{
+  var topPatty = document.getElementById("patAct1");
+  var bottomPatty = document.getElementById("patAct3");
+  topPatty.style="transform:rotate(45deg);width:24px; top:45%; left:15%;";
+  bottomPatty.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%";
 }
 
 function resetArrow()
