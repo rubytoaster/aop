@@ -358,7 +358,7 @@ function loadGame2(){
 function loadGame3(){
   closeGame();
   closeSidenav();
-animateActivityArrow();
+  animateActivityArrow();
   $(function(){
     $("#app_cont").empty();
     car_S = new p5(cPathSim,'app_cont');
@@ -366,6 +366,23 @@ animateActivityArrow();
   $("#pageTitle").text("Activity");
 }
 
+function loadLandscapeModal(){
+  if(window.innerHeight > window.innerWidth){
+    $("#modal_content_landscape").load("content/landscape.html");
+    $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
+
+    /*var landscapeModal= document.getElementById("modal1");
+    landscapeModal.style="top:30% !important"; */
+
+    $(document).ready(function(){
+      $('#landscapeModal').modal();
+    });
+
+    $('#landscapeModal').modal({
+      dismissible: false
+    });
+    $('#landscapeModal').modal('open');
+}
 
 function loadGuidance(){
   clearColor();
