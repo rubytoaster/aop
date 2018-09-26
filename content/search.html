@@ -16,11 +16,15 @@
         <div class="card-action">
           <!-- <a onclick="loadAcronyms();">Acronyms and Glossary</a> -->
           <div>
-            <input type="checkbox" id="AcrnmGloss" checked="checked" onclick=""/>
-            <label for="AcrnmGloss">Acronyms and Glossary</label>
+            <input type="checkbox" id="acrnm" checked="checked" onclick="loadAcrnmIndecies();"/>
+            <label for="acrnm">Acronyms</label>
           </div>
           <div>
-            <input type="checkbox" id="aop-handbook" checked="checked" onclick=""/>
+            <input type="checkbox" id="gloss" checked="checked" onclick="loadGlossIndecies();"/>
+            <label for="gloss">Glossary</label>
+          </div>
+          <div>
+            <input type="checkbox" id="aop-handbook" checked="checked" onclick="loadHandbookIndecies();"/>
             <label for="aop-handbook">AoP Handbook</label>
           </div></br>
         </div>
@@ -28,6 +32,13 @@
     </div>
 </div>
 </div>
+<!-- <script>
+  window.onload = () => {
+    loadAcrnmIndecies();
+    loadGlossIndecies();
+    loadHandbookIndecies();
+  }
+</script> -->
 <script>
 $(document).ready(function(){
   $('input.autocomplete').autocomplete({
@@ -142,14 +153,24 @@ $(document).ready(function(){
       "Value Stream Map (VSM) " : null,
       "Visual Managment " : null,
       "Wall Walk " : null,
-      "PDF-aop-handbook" :
+
+      "1. Chapter 1" : null,
+      "1.1. What is Art of the Possible (AoP)?" : null,
+      "1.2. Why does AFSC practice AoP?" : null,
+      "1.3. The Concept of Speed." : null,
+      "1.4. What are the Core Tenets of AoP" : null,
+      "1.5. How Do I Implement AoP?" : null,
+      "2. Chapter 2" : null,
+      "2.1. Introduction: AFSC has developed a Leadership Model" : null,
+      "2.2. Leadership Model Breakdown" : null
+
     },
     onAutocomplete: function(txt, val, val) {
-      let pdfSearch = (text, searchDomain) => {
-
-      };
+      // let pdfSearch = (text, searchDomain) => {
+      //
+      // };
       $("#search_title").html(txt);
-      $("#search_result" ).html( pdfSearch(text, searchDomain) search(text, searchDomain));
+      $("#search_result" ).html( searchInKey(txt, searchDomain) );
 
     },
     limit: 20,
