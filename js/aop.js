@@ -311,7 +311,8 @@ function loadLandscapeModal(){
 
     $("#modal_content").load("content/notes.html");
     $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
-    $(".eventNote").css("fill", "#0EABDA");
+    $('#binderIcon').children().css('fill', '#0EABDA');
+    $('#binderIcon').children().css('stroke', '#0EABDA');
     $("#notesLabel").css('color','#0EABDA');
     $(document).ready(function(){
       $('#modal1').modal();
@@ -321,6 +322,7 @@ function loadLandscapeModal(){
       dismissible:false
     });
     $('#modal1').modal('open');
+    
 
 
   }
@@ -404,8 +406,10 @@ function clearColor(){
     $('#calcsvg').css({fill: defaultColor});
     $(".calculator").css({fill: defaultColor});
     $(".eventNote").css({fill: defaultColor});
+    $('#binderIcon').children().css('fill', defaultColor);
+    $('#binderIcon').children().css('stroke', defaultColor);
     $("#notesLabel").css('color',defaultColor);
-     $(".mailIcon").css({fill: defaultColor});
+    $(".mailIcon").css({fill: defaultColor});
     $("#mailLabel").css('color',defaultColor);
     $("#app_cont").css('background-color', '#e0e0e0');
     $("#app_cont").css('height','');

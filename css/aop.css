@@ -620,5 +620,11 @@ nav a.button-collapse{
 
 .landscapeModal{
   top:25% !important;
+}
 
+.activityCard{
+  padding:5px; 
+  margin:0;
+  height:150px;
+  border-radius:10px;
 }
