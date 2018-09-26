@@ -628,3 +628,28 @@ nav a.button-collapse{
   height:150px;
   border-radius:10px;
 }
+
+.input-field .prefix.active{
+  color: #0eabda;
+  fill: #0eabda;
+}
+
+.input-field input[type=text]:focus + label, .input-field input[type=email]:focus + label {
+  color: #0eabda;
+}
+
+.input-field input[type=text]:focus, .input-field input[type=email]:focus  {
+  border-bottom: 1px solid #0eabda;
+  box-shadow: 0 1px 0 0 #0eabda;     
+}
+
+[type="radio"]:checked + label::after, [type="radio"].with-gap:checked + label::after {
+    background-color: #0eabda !important;
+}
+[type="radio"]:checked + label::after, [type="radio"].with-gap:checked + label::before, [type="radio"].with-gap:checked + label::after {
+    border: 2px solid #0eabda !important;
+}
+
+.precisionRadio{
+  display:inline;
+}

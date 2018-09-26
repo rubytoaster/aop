@@ -430,6 +430,16 @@ function loadActivityPage()
   $("#backActivityButton").hide(); 
 }
 
+function loadSettings()
+{
+  clearColor();
+  closeGame(); 
+  closeSidenav(); 
+  $("#app_cont").load("content/settings.html"); 
+  $("#pageTitle").text("Settings"); 
+}
+
+
 function closeGame() {
   if(typeof car_S != 'undefined' && car_S !== null) {
     gameCleanup(car_S,'app_cont');
