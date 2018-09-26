@@ -1,5 +1,5 @@
 var slideIndex = 1;
-var total = 146;
+var total = 6;
 
 let script = document.createElement("script");
 script.src = "js/searchDomain.js";
@@ -287,6 +287,15 @@ function loadAboutUs(){
   $("#pageTitle").text("About Us");
 }
 
+function loadCharts()
+{
+  clearColor(); 
+  closeGame(); 
+  closeSidenav(); 
+  $("#app_cont").load("content/charts.html"); 
+  $("#pageTitle").text("Charts"); 
+}
+
 function clearColor(){
     var defaultColor= "#424242"
     $("#calcLabel").css('color',defaultColor);
@@ -302,6 +311,18 @@ function clearColor(){
     $("#app_cont").css('filter', '');
 
   }
+  
+  
+function loadActivityPage()
+{
+  clearColor(); 
+  closeGame(); 
+  closeSidenav();
+  $("#app_cont").load("content/activity.html"); 
+  $("#pageTitle").text("Activities"); 
+  $("#menuButton").show();
+  $("#backActivityButton").hide(); 
+}
 
 function closeGame() {
   if(typeof car_S != 'undefined' && car_S !== null) {
@@ -316,6 +337,7 @@ function closeGame() {
 function loadGame(){
   closeGame();
   closeSidenav();
+  animateActivityArrow(); 
 
   $(function(){
     $("#app_cont").empty();
@@ -327,6 +349,7 @@ function loadGame(){
 function loadGame2(){
   closeGame();
   closeSidenav();
+  animateActivityArrow(); 
    $(function(){
     $("#app_cont").empty();
     car_S = new p5(convSim,'app_cont');
@@ -337,6 +360,7 @@ function loadGame2(){
 function loadGame3(){
   closeGame();
   closeSidenav();
+  animateActivityArrow(); 
 
   $(function(){
     $("#app_cont").empty();
@@ -355,7 +379,20 @@ function loadGuidance(){
   animateArrow();
 }
 
+<<<<<<< HEAD
 function loadHandbook(page = 1){
+=======
+function loadTemplate(){
+  clearColor();
+  closeGame();
+
+  $("#app_cont").load("content/template.html");
+  $("#pageTitle").text("Templates");
+  animateArrow(); 
+}
+
+function loadHandbook(){
+>>>>>>> master
   clearColor();
   closeGame();
 
@@ -384,6 +421,7 @@ function loadWallWalks(){
   animateArrow();
 }
 
+//Resources back arrow
 function animateArrow()
 {
   $("#menuButton").hide();
@@ -397,6 +435,23 @@ function animateArrow()
   bottomPatty.style="transform:rotate(45deg);width:15px; top:63%;";
 }
 
+
+
+//activity page back arrow
+function animateActivityArrow()
+{
+  $("#menuButton").hide();
+  $("#backActivityButton").show(); 
+
+  var topPatty = document.getElementById("patAct1"); 
+  var bottomPatty = document.getElementById("patAct3"); 
+  topPatty.style="height:4px; width:24px; position:absolute; top:45%; left:15%"; 
+  
+  topPatty.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"; 
+  bottomPatty.style="transform:rotate(45deg);width:15px; top:63%;";
+
+}
+
 function clickBackToResources()
 {
   var burger1 = document.getElementById("bur1");
@@ -407,7 +462,20 @@ function clickBackToResources()
   resetArrow();
   burger1.style="tranform:rotate(45deg); width:24px; top:20%; left:15%;";
   burger3.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%;";
+}
 
+
+function clickBackToActivity()
+{
+  
+  var burger1 = document.getElementById("bur1"); 
+  var burger3 = document.getElementById("bur3"); 
+  burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"
+  burger3.style="transform:rotate(45deg);width:15px; top:63%;";   
+  loadActivityPage(); 
+  resetActivityArrow(); 
+  burger1.style="tranform:rotate(45deg); width:24px; top:20%; left:15%;";
+  burger3.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%;";
 }
 
 function resetArrow()
@@ -417,6 +485,15 @@ function resetArrow()
   topPatty.style="transform:rotate(45deg);width:24px; top:45%; left:15%;";
   bottomPatty.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%";
 }
+
+function resetActivityArrow()
+{
+  var topPatty = document.getElementById("patAct1"); 
+  var bottomPatty = document.getElementById("patAct3"); 
+  topPatty.style="transform:rotate(45deg);width:24px; top:45%; left:15%;"; 
+  bottomPatty.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%";  
+}
+
 function loadTraining(){
   clearColor();
   closeSidenav();

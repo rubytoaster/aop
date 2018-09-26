@@ -50,6 +50,13 @@
             <span class="patty2" id="pat3"></span>
           </div>        
         </a>
+        <a id ="backActivityButton" href="javascript:(clickBackToActivity())" style="display:none;">
+          <div class="burger">
+            <span class="patty0" id="patAct1"></span>
+            <span class="patty1" id="patAct2"></span>
+            <span class="patty2" id="patAct3"></span>
+          </div>        
+        </a>
       </td>
       <td style="padding:0"> 
         <a href="#!" style="font-size:20px; color:#fff; margin-left:10px;" >
@@ -83,8 +90,8 @@
         <li><a class="waves-effect" href="javascript:(loadAboutUs())">About us</a></li>
         <li><a class="waves-effect" href="javascript:(loadTraining())">Training</a></li>
         <li><a class="waves-effect" href="javascript:(loadResources())">Resources</a></li>
-        <li><a class="waves-effect" href="javascript:(loadGame())">Activity</a></li>
-        <li><a class="waves-effect" href="javascript:(loadGame2())">Activity2</a></li>
+        <li><a class="waves-effect" href="javascript:(loadActivityPage())">Activity</a></li>
+    <li><a class="waves-effect" href="javascriptL(loadCharts())">Charts</a></li>
         <li><a class="waves-effect" href="javascript:(loadNewsletter())">Archived Newsletters</a></li>
         <li><a class="waves-effect" href="javaScript:(loadCalculator())">Calculator</a></li>
       </ul>
@@ -105,13 +112,12 @@
       <img src="css/svg/photo-library.svg" height="24px" width="24px">
     </i>Resources</a></li>
     <li><div class="divider"></div></li>
-    <li><a class="waves-effect sidenav-close" href="javascript:(loadGame())"><i class="small"><img src="css/svg/star.svg" height="24px" width="24px">
-    </i>Activity</a></li>
-    <li><a class="waves-effect sidenav-close" href="javascript:(loadGame2())"><i class="small"><img src="css/svg/star.svg" height="24px" width="24px">
-    </i>Activity2</a></li>
-    <li><a class="waves-effect sidenav-close" href="javascript:(loadGame3())"><i class="small"><img src="css/svg/star.svg" height="24px" width="24px">
-    </i>Activity3</a></li>
-    <li><a class="waves-effect sidenav-close" href="javascript:(loadNewsletter())"> <i class="small"><img src="css/svg/folded-newspaper-small.svg"></i> Archived Newsletter</a></li>
+    <li><a class="waves-effect sidenav-close" href="javascript:(loadActivityPage())"><i class="small"><img src="css/svg/star.svg" height="24px" width="24px">
+    </i>Activities</a></li>
+
+    <li><a class="waves-effect sidenav-close" href="javascript:(loadCharts())"><i class="small"><img src="css/svg/chart.svg" height="24px" width="24px">
+    </i>Charts</a></li>
+    <li><a class="waves-effect sidenav-close" href="javascript:(loadNewsletter())"> <i class="small"><img src="css/svg/folded-newspaper-small.svg"></i> Archived Newsletters</a></li>
   </ul>
   <div id="app_cont" >
   </div>
@@ -216,7 +222,7 @@
 <script src="js/aop.js"></script>
 <script src="js/aopCalc.js"></script>
 <script src="js/materialize.min.js"></script>
-<!-- <script type="text/javascript" src="js/materialize.min.js"></script> -->
+<script language="javascript" type="text/javascript" src="js/indexedDBWrapper.js"></script>
 <script language="javascript" type="text/javascript" src="js/p5.js"></script>
 <script language="javascript" type="text/javascript" src="js/p5.dom.min.js"></script>
 <script language="javascript" type="text/javascript" src="js/p5.play_patch119.js"></script>
