@@ -19,6 +19,26 @@ function initalLoad(){
    loadSidenav();
 }
 
+function loadActivityPage()
+{
+  clearColor();
+  closeGame();
+  closeSidenav();
+  $("#app_cont").load("content/activity.html");
+  $("#pageTitle").text("Activities");
+  $("#menuButton").show();
+  $("#backActivityButton").hide();
+}
+
+function loadSettings()
+{
+  clearColor();
+  closeGame();
+  closeSidenav();
+  $("#app_cont").load("content/settings.html");
+  $("#pageTitle").text("Settings");
+}
+
 function loadSidenav()
 {
   /*var sideNavButton = document.getElementById("menuButton");
