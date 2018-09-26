@@ -386,6 +386,15 @@ function loadLandscapeModal(){
 
 }
 
+function loadTemplate(){
+  clearColor();
+  closeGame();
+
+  $("#app_cont").load("content/template.html");
+  $("#pageTitle").text("Templates");
+  animateArrow();
+}
+
 function loadGuidance(){
   clearColor();
   closeGame();
