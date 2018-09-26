@@ -393,11 +393,11 @@ function loadAboutUs(){
 
 function loadCharts()
 {
-  clearColor(); 
-  closeGame(); 
-  closeSidenav(); 
-  $("#app_cont").load("content/charts.html"); 
-  $("#pageTitle").text("Charts"); 
+  clearColor();
+  closeGame();
+  closeSidenav();
+  $("#app_cont").load("content/charts.html");
+  $("#pageTitle").text("Charts");
 }
 
 function clearColor(){
@@ -417,17 +417,17 @@ function clearColor(){
     $("#app_cont").css('filter', '');
 
   }
-  
-  
+
+
 function loadActivityPage()
 {
-  clearColor(); 
-  closeGame(); 
+  clearColor();
+  closeGame();
   closeSidenav();
-  $("#app_cont").load("content/activity.html"); 
-  $("#pageTitle").text("Activities"); 
+  $("#app_cont").load("content/activity.html");
+  $("#pageTitle").text("Activities");
   $("#menuButton").show();
-  $("#backActivityButton").hide(); 
+  $("#backActivityButton").hide();
 }
 
 function loadSettings()
@@ -453,7 +453,7 @@ function closeGame() {
 function loadGame(){
   closeGame();
   closeSidenav();
-  animateActivityArrow(); 
+  animateActivityArrow();
 
   $(function(){
     $("#app_cont").empty();
@@ -465,7 +465,7 @@ function loadGame(){
 function loadGame2(){
   closeGame();
   closeSidenav();
-  animateActivityArrow(); 
+  animateActivityArrow();
    $(function(){
     $("#app_cont").empty();
     car_S = new p5(convSim,'app_cont');
@@ -476,7 +476,7 @@ function loadGame2(){
 function loadGame3(){
   closeGame();
   closeSidenav();
-  animateActivityArrow(); 
+  animateActivityArrow();
 
   $(function(){
     $("#app_cont").empty();
@@ -501,7 +501,7 @@ function loadTemplate(){
 
   $("#app_cont").load("content/template.html");
   $("#pageTitle").text("Templates");
-  animateArrow(); 
+  animateArrow();
 }
 
 function loadHandbook(){
@@ -553,13 +553,13 @@ function animateArrow()
 function animateActivityArrow()
 {
   $("#menuButton").hide();
-  $("#backActivityButton").show(); 
+  $("#backActivityButton").show();
 
-  var topPatty = document.getElementById("patAct1"); 
-  var bottomPatty = document.getElementById("patAct3"); 
-  topPatty.style="height:4px; width:24px; position:absolute; top:45%; left:15%"; 
-  
-  topPatty.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"; 
+  var topPatty = document.getElementById("patAct1");
+  var bottomPatty = document.getElementById("patAct3");
+  topPatty.style="height:4px; width:24px; position:absolute; top:45%; left:15%";
+
+  topPatty.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;";
   bottomPatty.style="transform:rotate(45deg);width:15px; top:63%;";
 
 }
@@ -579,13 +579,13 @@ function clickBackToResources()
 
 function clickBackToActivity()
 {
-  
-  var burger1 = document.getElementById("bur1"); 
-  var burger3 = document.getElementById("bur3"); 
+
+  var burger1 = document.getElementById("bur1");
+  var burger3 = document.getElementById("bur3");
   burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"
-  burger3.style="transform:rotate(45deg);width:15px; top:63%;";   
-  loadActivityPage(); 
-  resetActivityArrow(); 
+  burger3.style="transform:rotate(45deg);width:15px; top:63%;";
+  loadActivityPage();
+  resetActivityArrow();
   burger1.style="tranform:rotate(45deg); width:24px; top:20%; left:15%;";
   burger3.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%;";
 }
@@ -600,10 +600,10 @@ function resetArrow()
 
 function resetActivityArrow()
 {
-  var topPatty = document.getElementById("patAct1"); 
-  var bottomPatty = document.getElementById("patAct3"); 
-  topPatty.style="transform:rotate(45deg);width:24px; top:45%; left:15%;"; 
-  bottomPatty.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%";  
+  var topPatty = document.getElementById("patAct1");
+  var bottomPatty = document.getElementById("patAct3");
+  topPatty.style="transform:rotate(45deg);width:24px; top:45%; left:15%;";
+  bottomPatty.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%";
 }
 
 
