@@ -50,33 +50,35 @@ var convSim = function(sketch) {
     fSlider.size(sliderSize);
 
     let pointerList = [];
-    pointerList.push({posX : (sketch.width/10), posY : 40, text : "Welcome to the Littles Law Simulator. This demonstration is intended to explain the basic concepts of Littles Law", textPos: "right"}); //Littles Law Intro
-    pointerList.push({posX : (sketch.width/10), posY : 40, text : "Little’s law is an equation showing that the average number of items in a queueing system is equal to their average throughput multiplied by the average amount of time they spend in the system", textPos: "right"}); //Littles Law Intro
-    pointerList.push({posX : (sketch.width/10), posY : 40, text : "To begin using Littles Law lets first identify our process machine...", textPos: "right"}); //Littles Law Intro
-    pointerList.push({posX : (sketch.width/10), posY : 40, text : "We can assume that our process machine is this hangar right here...", textPos: "right"}); //Littles Law Intro
-    pointerList.push({posX : (sketch.width/10), posY : 40, text : "Its input is boxes of parts  ", textPos: "right"}); //Littles Law Intro
-    pointerList.push({posX : (sketch.width/10), posY : 40, text : "Its output is airplanes", textPos: "right"}); //Littles Law Intro
+    pointerList.push({posX : (sketch.width/10), posY : 40, text : "Welcome to the Littles Law Simulator. This demonstration is intended to explain the basic concepts of Littles Law", pointerPos: "left"}); //Littles Law Intro
+    pointerList.push({posX : (sketch.width/10), posY : 40, text : "Little’s law is an equation showing that the average number of items in a queueing system is equal to their average throughput multiplied by the average amount of time they spend in the system", pointerPos: "left"}); //Littles Law Intro
+    pointerList.push({posX : (sketch.width/10), posY : 40, text : "To begin using Littles Law lets first identify our process machine...", pointerPos: "left"}); //Littles Law Intro
+    pointerList.push({posX : 40, posY : 250, text : "We can assume that our process machine is this hangar right here...", pointerPos: "center", pointerRotation:"down"}); //Littles Law Intro
+    pointerList.push({posX : (sketch.width/10), posY : 290, text : "Its input is boxes of parts  ", pointerPos: "left", pointerRotation:"down"}); //Littles Law Intro
+    pointerList.push({posX : 70, posY : 290, text : "Its output is airplanes", pointerPos: "right", pointerRotation:"down"}); //Littles Law Intro
 
-    pointerList.push({posX : 100, posY : 140, text : "The time that it takes for our machine (hangar) to turn a box of parts into an airplane is our Flowtime", textPos: "right"}); //Flowtime
-    pointerList.push({posX : 100, posY : 80, text : "The rate at which airplaines come out of our machine (hangar) is known as the Throughput"}); //Throughput
-    pointerList.push({posX : 100, posY : 80, text : "The number of units being worked on (boxes being turned into airplanes) that are inside our machine (hangar) is known as our Work in Process (WIP)"}); //WIP
+    pointerList.push({posX : 65, posY : 350, text : "The time that it takes for our machine (hangar) to turn a box of parts into an airplane is our Flowtime", pointerPos: "center", pointerYOffset: 25, pointerRotation:"left"}); //Flowtime
+    pointerList.push({posX : 65, posY : 275, text : "The rate at which airplaines come out of our machine (hangar) is known as the Throughput", pointerPos: "right", pointerRotation: "down"}); //Throughput
+    pointerList.push({posX : 0, posY : 275, text : "The number of units being worked on (boxes being turned into airplanes) that are inside our machine (hangar) is known as our Work in Process (WIP)", pointerPos: "center", pointerXOffset: -20, pointerYOffset: 50, pointerRotation: "right"}); //WIP
 
     pointerList.push({posX : 50, posY : 80, text : "How do we improve the speed of our process?"}); //Speed
     pointerList.push({posX : 50, posY : 80, text : "There are two ways to do this"});
     pointerList.push({posX : 50, posY : 80, text : "One way is to reduce the WIP"});
 
-    pointerList.push({posX : 50, posY : 80, text : "To do this we can reduce our Flowtime"}); //Reduce Flowtime
+    pointerList.push({posX : 40, posY : 395, text : "To do this we can reduce our Flowtime"});
+    pointerList.push({posX : 40, posY : 395, text : "Try reducing the Flowtime to 3.4 or below", pointerXOffset: 80, pointerYOffset: -10, pointerPos: "left", pointerRotation: "down", onCheckStep: true, checkFor: "flowtime"}); //Reduce Flowtime
     //add Flowtime check
-    pointerList.push({posX : 50, posY : 80, text : "Notice that the WIP is reduced"}); //Reduce Flowtime
+    pointerList.push({posX : 50, posY : 360, text : "Notice that the WIP is reduced", pointerRotation: "right", pointerXOffset: -65, pointerYOffset: -14, pointerPos: "center"}); //Reduce Flowtime
 
     pointerList.push({posX : 50, posY : 80, text : "The other way is to increase our throughput"});
+    pointerList.push({posX : 50, posY : 80, text : "Try increasing the throughput to 0.7 or above", onCheckStep: true, checkFor: "throughput"});
     //add Throughput check
-    pointerList.push({posX : 50, posY : 80, text : "Notice that the rate at which the maching is producing airplanes has increased"}); //Increase throughput
+    pointerList.push({posX : 50, posY : 80, text : "Notice that the rate at which the machine is producing airplanes has increased"}); //Increase throughput
 
 
 
 
-    pointer = new Pointer(sketch, pointerList);
+    pointer = new Pointer(sketch, pointerList, tSlider, fSlider);
   }
 
   sketch.draw = function() {
@@ -157,7 +159,8 @@ var convSim = function(sketch) {
 
   sketch.mouseClicked = function()
   {
-    pointer.advance();
+    if(!pointer.onCheckStep)
+      pointer.advance();
   }
 
 }
