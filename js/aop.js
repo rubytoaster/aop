@@ -336,7 +336,7 @@ function closeGame() {
 function loadGame(){
   closeGame();
   closeSidenav();
-
+animateActivityArrow();
   $(function(){
     $("#app_cont").empty();
     car_S = new p5(carSim,'app_cont');
@@ -347,6 +347,7 @@ function loadGame(){
 function loadGame2(){
   closeGame();
   closeSidenav();
+  animateActivityArrow();
    $(function(){
     $("#app_cont").empty();
     car_S = new p5(convSim,'app_cont');
@@ -357,7 +358,7 @@ function loadGame2(){
 function loadGame3(){
   closeGame();
   closeSidenav();
-
+animateActivityArrow();
   $(function(){
     $("#app_cont").empty();
     car_S = new p5(cPathSim,'app_cont');
