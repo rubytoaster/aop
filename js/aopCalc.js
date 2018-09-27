@@ -459,7 +459,7 @@ function openDatabase(){
 }
 
 function saveResults(){
-  if(enableCalc){
+  if(enableCalc && $("#fld_save_name").val()){
     var myName = $("#fld_save_name").val();
     var myGroup = $("#fld_save_group").val();
     myCalcDBObject = buildCalcObj(myName, myGroup, calcObj);
