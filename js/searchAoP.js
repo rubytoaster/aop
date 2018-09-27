@@ -25,24 +25,30 @@ function openSearchDB() {
 
 var searchDomain = [];
 
-function saveSearch(terms) {
+function saveSearch() {
   let acrnm = document.getElementById("acrnm");
   let gloss = document.getElementById("gloss");
   let handbook = document.getElementById("aop-handbook");
+  let terms = document.getElementById("autocomplete-input").value;
 
-  //create item to save to database.
-  let thisSearch = {
-    "terms": terms,
-    "domains": {
-      "acronyms": acrnm.checked,
-      "glossary": gloss.checked,
-      "handbook": handbook.checked
-    }
-  };
+  if (terms === "") {
+    console.log("Search Terms Required. Save cancelled.");
+    return false;
+  } else {
+    //create item to save to database.
+    let thisSearch = {
+      "terms": terms,
+      "domains": {
+        "acronyms": acrnm.checked,
+        "glossary": gloss.checked,
+        "handbook": handbook.checked
+      }
+    };
 
-  itemDB.createItem(searchTermsDS, thisSearch, () => {
-    console.log(terms + " search saved successfully...");
-  });
+    itemDB.createItem(searchTermsDS, thisSearch, () => {
+      console.log(terms + " search saved successfully...");
+    });
+  }
 }
 
 function getSearches() {
