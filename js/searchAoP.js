@@ -25,10 +25,11 @@ function openSearchDB() {
 
 var searchDomain = [];
 
-function saveSearch(terms) {
+function saveSearch() {
   let acrnm = document.getElementById("acrnm");
   let gloss = document.getElementById("gloss");
   let handbook = document.getElementById("aop-handbook");
+  let terms = document.getElementById("autocomplete-input").value;
 
   //create item to save to database.
   let thisSearch = {
