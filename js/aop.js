@@ -1,8 +1,6 @@
 var slideIndex = 1;
 var total = 146;
 
-// var searchDomain = [];
-
 function initalLoad(){
 
   $(".drag-target").on("swipeleft", function () {

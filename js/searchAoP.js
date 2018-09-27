@@ -1,5 +1,60 @@
+/* SearchTerm DB Structure
+* databaseName - string name of the databaseName
+* datastoreName - string name of the datastores
+* version - version of the database, must be integer values
+* properties - all of the attributes for a SearchTerm DB objectStore
+* [ terms - the string of values searched for
+*   domains - a list of domains searched through.
+*    [  acronyms - true/false
+*       glossary - true/false
+*       handbook - true/false
+*       *** may modify amount of domains in future ***
+*    ]
+* ]
+*/
+const searchTermsDB = "SearchTerms";
+const searchTermsDS = "searchTerms";
+const searchTermVersion = 1;
+const searchTermProp = ["terms", "domains"];
+
+function openSearchDB() {
+  itemDB.open(searchTermsDB, searchTermVersion, searchTermsDS, "", searchTermProp, true, () => {
+    console.log("SearchTerms Database opened...");
+  });
+}
 
 var searchDomain = [];
+
+function saveSearch(terms) {
+  let acrnm = document.getElementById("acrnm");
+  let gloss = document.getElementById("gloss");
+  let handbook = document.getElementById("aop-handbook");
+
+  //create item to save to database.
+  let thisSearch = {
+    "terms": terms,
+    "domains": {
+      "acronyms": acrnm.checked,
+      "glossary": gloss.checked,
+      "handbook": handbook.checked
+    }
+  };
+
+  itemDB.createItem(searchTermsDS, thisSearch, () => {
+    console.log(terms + " search saved successfully...");
+  });
+}
+
+function getSearches() {
+  //let viewResults = document.getElementById("");
+
+  itemDb.fetchAll(searchTermsDS, (results) => {
+    results.forEach( (result) => {
+      //put results in viewResults.
+      console.log(JSON.stringify(result));
+    });
+  });
+}
 
 function searchInKey(nameKey, myArray){
   for (var i=0; i < myArray.length; i++) {
@@ -128,3 +183,5 @@ function getIndex(type) {
   }
 
 }
+
+openSearchDB();
