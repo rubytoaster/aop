@@ -1,12 +1,25 @@
-function notesFetchAllGroups(){
-  itemDB.simpleOpen("Calculations", 1, "calculations", function() {
-    itemDB.fetchAll("calculations", function(myRecords){
-      buildGroups(myRecords, "group");
+const databaseName = "Calculations";
+const datastoreName = "calculations";
+const version = 1;
+const groupPropertyName = "group";
+
+/**
+* Calls the database that stores all of the calculations saved by the client
+* and creates a list of records.
+*/
+function notesFetchAllCalcGroups(){
+  itemDB.simpleOpen(databaseName, version, datastoreName, function() {
+    itemDB.fetchAll(datastoreName, function(myRecords){
+      buildCalcGroups(myRecords, groupPropertyName);
     });
   });
 }
 
-function buildGroups(collection, property){
+/**
+* Sorts the collection using the given property.
+* This builds a 2d array sorted by the property.
+*/
+function buildCalcGroups(collection, property){
   var i = 0, val, index,
   values = [], result = [];
   for (; i < collection.length; i++) {
@@ -19,10 +32,13 @@ function buildGroups(collection, property){
       result.push([collection[i]]);
     }
   }
-  displayGroups(result);
+  displayCalcGroups(result);
 }
 
-function buildFormula(record){
+/**
+* Creates a string containing the formula built using the given record
+*/
+function buildCalcFormula(record){
   var str = "";
   switch(record.cType){
     case("wip_w_thruput"):
@@ -47,7 +63,11 @@ function buildFormula(record){
   return str;
 }
 
-function displayGroups(records){
+/**
+* Runs through a list of records and displays the calculations
+* on the html page using Jquery
+*/
+function displayCalcGroups(records){
   if(records[0] != null){
     document.getElementById("calculationsBlurb").style.display = "none";
   }
@@ -71,7 +91,8 @@ function displayGroups(records){
 }).append( $('<ul>', {				//<ul class="collapsible " style="background-color:#eeeeee;">
     class: "collapsible ",
     style: "background-color:#eeeeee;"
-}).append( $('<li>', {				//<li>
+}).append( $('<li>', {        //<li>
+  	id: records[0][i].group
 }).append( $('<div>', {				//<div id="groupA" class="col s10 collapsible-header"><b>All</b></div>
     id: "group" + i,
     class: "col s10 collapsible-header",
@@ -99,30 +120,40 @@ function displayGroups(records){
 }))))).appendTo('#calculations');
     $('.collapsible').collapsible();
     for(var j = 0; j < records[i].length; j++){
-      createListElement(records[i][j], groupID);
+      createCalcListElement(records[i][j], groupID);
     }
   }
 
 }
 
-// document.getElementById("calculations").addEventListener("click",function(e) {
-//   if(e.target && e.target.nodeName == "LI") {
-//     console.log(e.target.innerText + " was clicked");
-//   }
-// });
-
-function createListElement(record, ulID){
+/**
+* Creates a single list element containing the calculation for a specific
+* calculation group.
+*/
+function createCalcListElement(record, ulID){
   var ul = document.getElementById(ulID);
   //var candidate = document.getElementById("candidate");
   var li = document.createElement("li");
   //li.setAttribute('id',candidate.value);
-  var formula = buildFormula(record);
-  var innerDiv = document.createElement("div");
-  li.appendChil
+  var formula = buildCalcFormula(record);
   li.appendChild(document.createTextNode(record.name+ "     " + formula));
   ul.appendChild(li);
 }
 
+/**
+* Builds the event listener for the list items. Makes them clickable
+*/
+function createCalcResultsEventListener(){
+  var el = document.getElementById("calculations");
+  if(el){
+    el.addEventListener("click", function(e) {
+      if(e.target && e.target.nodeName == "LI") {
+        console.log(e.target.innerText + " was clicked");
+      }
+    });
+  }
+}
+
 function displayAlert(){
-  alert("We've have clickoff");
+  alert("We have clickoff!");
 }
