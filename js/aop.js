@@ -1,10 +1,6 @@
 var slideIndex = 1;
 var total = 146;
 
-let script = document.createElement("script");
-script.src = "js/searchDomain.js";
-document.head.appendChild(script);
-
 var searchDomain = [];
 
 function initalLoad(){
