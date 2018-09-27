@@ -172,16 +172,6 @@ $(document).ready(function(){
       "Visual Managment " : null,
       "Wall Walk " : null//,
 
-      // "1. Chapter 1" : null,
-      // "1.1. What is Art of the Possible (AoP)?" : null,
-      // "1.2. Why does AFSC practice AoP?" : null,
-      // "1.3. The Concept of Speed." : null,
-      // "1.4. What are the Core Tenets of AoP" : null,
-      // "1.5. How Do I Implement AoP?" : null,
-      // "2. Chapter 2" : null,
-      // "2.1. Introduction: AFSC has developed a Leadership Model" : null,
-      // "2.2. Leadership Model Breakdown" : null
-
     },
     onAutocomplete: function(txt, val, val) {
       // let pdfSearch = (text, searchDomain) => {
@@ -195,15 +185,4 @@ $(document).ready(function(){
   });
 });
 
-function searchTerm() {
-  //let results = searchInValue(term, searchDomain);
-  let term = document.getElementById("autocomplete-input");
-
-  if (term.value != '') {
-    $("#search_title").html(term.value);
-    $("#search_result").html( searchInValue(term.value, searchDomain) );
-  } else {
-    $("#search_result").html("Search Term Required.");
-  }
-}
 </script>
