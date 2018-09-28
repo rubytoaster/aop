@@ -139,11 +139,15 @@ var convSim = function(sketch) {
         let velocity = 1;
 
         this.widgetList[i].update(velocity);
-
       }
+      
+      //remove non rendered widgets
+      if(typeof this.widgetList[this.widgetList.length-1] != 'undefined' && this.widgetList[0].posX >= sketch.width)
+      {
+        this.widgetList.shift();
+      }
+      
     }
-
-
 
     buildingShift = this.building.width - this.building.width * (1/5 * fSlider.value())
     sketch.image(this.building, sketch.width/2 - this.building.width/2 + (buildingShift/2), sketch.height/2 + sketch.height/5 - this.building.height + 30, this.building.width * (1/5 * fSlider.value()), this.building.height);
