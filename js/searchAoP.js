@@ -194,8 +194,8 @@ function getIndex(type) {
 }
 
 function displaySearchesInBinder() {
-  let viewResults = document.getElementById("searches");
-  // viewResults.innerHTML = "";
+  document.getElementById("savedSearches").innerHTML = "";
+  //viewResults.innerHTML = "";
 
 
   getAllSearches( (results) => {
@@ -205,7 +205,7 @@ function displaySearchesInBinder() {
       document.getElementById("searchesBlurb").style.display = "none";
     }
 
-    if (!$('#searches').find('#collapseSearch' + results[0].id).length) {
+    // if (!$('#searches').find('#collapseSearch' + results[0].id).length) {
 
       results.forEach( (result) => {
 
@@ -233,12 +233,13 @@ function displaySearchesInBinder() {
         }).append( $('<img>', {
           src: "css/svg/trash.svg",
           id: "trashImg",
-          style: "vertical-align:middle; width: 20px; height: 20px;"
+          style: "vertical-align:middle; width: 20px; height: 20px;",
+          onclick: "deleteSearchItem(" + result.id + ");"
         }))).append( $('<div>', {
           class: "col 12 collapsible-body collapseBody"
         }).append( $('<ul>', {
            id: "searchDomains" + result.id
-        }))))).appendTo('#searches');
+        }))))).appendTo('#savedSearches');
         $('.collapsible').collapsible();
         var ul = document.getElementById("searchDomains" + result.id);
         result.domains.forEach( (domain) =>{
@@ -249,8 +250,16 @@ function displaySearchesInBinder() {
           ul.appendChild(li);
         })
       });
-    }
+    //}
   });
 }
+
+function deleteSearchItem(searchId) {
+  itemDB.deleteItem(searchTermsDS, searchId, (e) => {
+    console.log("Deleted Search Item '" + searchId + "'");
+    displaySearchesInBinder();
+  });
+}
+
 
 openSearchDB();
