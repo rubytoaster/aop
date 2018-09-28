@@ -203,37 +203,52 @@ function displaySearchesInBinder() {
       document.getElementById("searchesBlurb").style.display = "block";
     } else {
       document.getElementById("searchesBlurb").style.display = "none";
+    }
 
-      let searchUl = document.getElementById("searchList");
-      if (searchUl == null) {
-        searchUl = document.createElement("ul");
-        searchUl.setAttribute("id", "searchList");
-      } else {
-        searchUl.innerHTML = "";
-      }
-
-
+    if (!$('#searches').find('#collapseSearch' + results[0].id).length) {
 
       results.forEach( (result) => {
-        let termLi = document.createElement("li");
-        let text = '"' + result.terms + '" in domains:';
-        result.domains.forEach( (domain) => {
-          text += ' "' + domain + '"';
-        });
 
-        text += ".";
-
-        let record = document.createTextNode(text);
-        termLi.appendChild(record);
-        searchUl.appendChild(termLi);
-
+        $('<div>', {
+          id: "collapseSearch" + result.id,
+          class: "row collapseGroup"
+        }).append( $('<ul>', {
+          class: "collapsible",
+          style: "background-color:#eeeeee;"
+        }).append( $('<li>', {
+        }).append( $('<div>', {
+          id: result.id,
+          class:  "col s10 collapsible-header",
+          text: result.terms
+        })).append( $('<div>', {
+          class: "col s1 headerCollapsible",
+          style: "padding:0"
+        }).append( $('<img>', {
+          src: "css/svg/mail.svg",
+          id: "mailImg",
+          style: "vertical-align:middle; width: 20px; height: 20px;"
+        }))).append( $('<div>', {
+          class: "col s1 headerCollapsible",
+          style: "padding:0"
+        }).append( $('<img>', {
+          src: "css/svg/trash.svg",
+          id: "trashImg",
+          style: "vertical-align:middle; width: 20px; height: 20px;"
+        }))).append( $('<div>', {
+          class: "col 12 collapsible-body collapseBody"
+        }).append( $('<ul>', {
+           id: "searchDomains" + result.id
+        }))))).appendTo('#searches');
+        $('.collapsible').collapsible();
+        var ul = document.getElementById("searchDomains" + result.id);
+        result.domains.forEach( (domain) =>{
+          //var candidate = document.getElementById("candidate");
+          var li = document.createElement("li");
+          //li.setAttribute('id',candidate.value);
+          li.appendChild(document.createTextNode(domain));
+          ul.appendChild(li);
+        })
       });
-
-      if (!$('searches').find('#searchList').length) {
-
-        viewResults.appendChild(searchUl);
-      }
-
     }
   });
 }
