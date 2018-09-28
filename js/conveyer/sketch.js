@@ -30,11 +30,15 @@ var convSim = function(sketch) {
   let textSpacing;
 
   let pointer;
+  
+  let rotateMessage = "Please Rotate Screen \nto Portrait Mode"
 
   let headerOffset = $("#topNav").outerHeight();
 
   let mouseSlower = false;//This is to prevent mouse bounces since we cant use mouse clicked
   let mouseSlowerCtr = 0;
+  
+  let portraitMode = true;
 
   sketch.setup = function() {
     sketch.frameRate(30);
@@ -61,12 +65,13 @@ var convSim = function(sketch) {
     fSlider.position(((sketch.width/4) + 25) * xFactor, (425 * yFactor) + headerOffset);
     fSlider.size(sliderSize);
 
+    
     let pointerList = [];
     pointerList.push({posX : 15, posY : 40, text : "        To advance tap the screen                                                                                                                                                                                                                                                                                                                                                 ", pointerPos: "left"}); //Littles Law Intro
     pointerList.push({posX : (sketch.width/12), posY : 40, text : "Welcome to the Littles Law Simulator. This demonstration is intended to explain the basic concepts of Littles Law", pointerPos: "left"}); //Littles Law Intro
     pointerList.push({posX : (sketch.width/12), posY : 40, text : "Little’s law is an equation showing that the average number of items in a queueing system is equal to their average throughput multiplied by the average amount of time they spend in the system", pointerPos: "left"}); //Littles Law Intro
     pointerList.push({posX : (sketch.width/12), posY : 40, text : "To begin using Littles Law lets first identify our process machine...", pointerPos: "left"}); //Littles Law Intro
-    pointerList.push({posX : 40, posY : 250, text : "We can assume that our process machine is this hangar right here...", pointerPos: "center", pointerRotation:"down"}); //Littles Law Intro
+    pointerList.push({posX : 40, posY : 240, text : "We can assume that our process machine is this hangar right here...", pointerPos: "center", pointerRotation:"down"}); //Littles Law Intro
     pointerList.push({posX : (sketch.width/12), posY : 290, text : "Its input is boxes of parts  ", pointerPos: "left", pointerRotation:"down"}); //Littles Law Intro
     pointerList.push({posX : 70, posY : 290, text : "Its output is airplanes", pointerPos: "right", pointerRotation:"down"}); //Littles Law Intro
 
@@ -84,10 +89,13 @@ var convSim = function(sketch) {
     pointerList.push({posX : 50, posY : 360, text : "Notice that the WIP is reduced", pointerRotation: "right", pointerXOffset: -65, pointerYOffset: -14, pointerPos: "center"}); //Reduce Flowtime
 
     pointerList.push({posX : 50, posY : 80, text : "The other way is to increase our throughput"});
-    pointerList.push({posX : 50, posY : 80, text : "Try increasing the throughput to 0.7 or above", onCheckStep: true, checkFor: "throughput"});
+    pointerList.push({posX : 30, posY : 130, text : "Try increasing the throughput to 0.7 ", onCheckStep: true, checkFor: "throughput", pointerXOffset: -55, pointerYOffset: -10, pointerPos: "right", pointerRotation: "down"});
     //add Throughput check
     pointerList.push({posX : 50, posY : 80, text : "Notice that the rate at which the machine is producing airplanes has increased"}); //Increase throughput
+    pointerList.push({posX : 50, posY : 80, text : "Play with the sliders and see how changing the Throughput and Flowtime affect WIP"}); //Increase throughput
+    pointerList.push({endText : true}); //Increase throughput
 
+    
     pointer = new Pointer(sketch, pointerList, tSlider, fSlider);
 
     conveyer1  = new ConveyerBelt(sketch, 0);
@@ -99,6 +107,8 @@ var convSim = function(sketch) {
   sketch.draw = function() {
     sketch.background(this.bgImg);
 
+
+    
     sketch.textFont(proFontWindows);
     sketch.textSize(12);
 
@@ -169,6 +179,18 @@ var convSim = function(sketch) {
         mouseSlowerCtr = 0;
       }
     }
+    
+    if(window.outerWidth > window.outerHeight)
+    {
+      portraitMode = false;
+      sketch.textSize(20);
+      sketch.rect(20, 20, 300, 70, 10);
+      sketch.text(rotateMessage, 30, 40);
+      
+    }
+    else {
+      portraitMode = true;
+    }
 
   }
 
@@ -181,7 +203,7 @@ var convSim = function(sketch) {
 
   sketch.mousePressed = function()
   {
-    if(mouseSlower == false)
+    if(mouseSlower == false && portraitMode == true)
     {
       mouseSlower = true;
       if(!pointer.onCheckStep)

@@ -16,14 +16,31 @@ function Pointer(sketch, positionList, tSlider, fSlider)
   this.handRightImg = sketch.loadImage("images/game/conveyerImgs/handRight.png");
 
   this.textBubble = new TextBubble(sketch);
-
+  this.bounceCtr = 1;
+  
+  this.bounceUp = true;
+  this.endAnim = false;
+  
   this.update = function()
   {
-    if(typeof positionList != "undefined")
+    if(typeof this.endAnim == "undefined")
+      this.endAnim = false;
+      
+    if(typeof positionList != "undefined" && this.endAnim == false)
     {
       let handPosX = this.posX;
       let handPosY = this.posY;
-
+      
+      if(this.bounceCtr == 10)
+        this.bounceUp = false;
+      else if(this.bounceCtr == 0)
+        this.bounceUp = true;
+        
+      if(this.bounceUp)
+        this.bounceCtr++;
+      else
+        this.bounceCtr--;
+                
       if(this.pointerPosition == "left")
       {
         handPosX = this.posX;
@@ -43,13 +60,13 @@ function Pointer(sketch, positionList, tSlider, fSlider)
         this.pointerXOffset = 0;
 
       if(this.pointerRotation === "down")
-        sketch.image(this.handDownImg, handPosX + this.pointerXOffset, this.posY + this.pointerYOffset, 50, 50);
+        sketch.image(this.handDownImg, handPosX + this.pointerXOffset, this.posY + this.pointerYOffset - this.bounceCtr, 50, 50);
       else if(this.pointerRotation === "up")
-        sketch.image(this.handUpImg, handPosX + this.pointerXOffset, this.posY + this.pointerYOffset, 50, 50);
+        sketch.image(this.handUpImg, handPosX + this.pointerXOffset, this.posY + this.pointerYOffset + this.bounceCtr, 50, 50);
       else if(this.pointerRotation === "left")
-        sketch.image(this.handLeftImg, handPosX + this.pointerXOffset, this.posY + this.pointerYOffset, 50, 50);
+        sketch.image(this.handLeftImg, handPosX + this.pointerXOffset + this.bounceCtr, this.posY + this.pointerYOffset, 50, 50);
       else if(this.pointerRotation === "right")
-        sketch.image(this.handRightImg, handPosX + this.pointerXOffset, this.posY + this.pointerYOffset, 50, 50);
+        sketch.image(this.handRightImg, handPosX + this.pointerXOffset - this.bounceCtr, this.posY + this.pointerYOffset, 50, 50);
 
       if(this.onCheckStep == true)
       {
@@ -94,6 +111,7 @@ function Pointer(sketch, positionList, tSlider, fSlider)
     this.textBubble.textAnimIndex = 0;
     if(this.ctr < positionList.length)
     {
+      this.endAnim = positionList[this.ctr].endAnim;
       this.posX = positionList[this.ctr].posX;
       this.posY = positionList[this.ctr].posY;
       this.pointerPosition = positionList[this.ctr].pointerPos;
