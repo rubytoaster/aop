@@ -88,15 +88,19 @@ var cPathSim = function(sketch) {
       {
         if(sketch.mouseX >= gateBoxList[i].posX && sketch.mouseX < gateBoxList[i].posX+gateBoxList[i].w && sketch.mouseY >= gateBoxList[i].posY && sketch.mouseY < gateBoxList[i].posY+gateBoxList[i].h)
         {
-          if(!gateBoxList[i].clicked)
+          if(!gateBoxList[i].hasPower)
           {
             flowTotal += gateBoxList[i].flow;
-            gateBoxList[i].click();
+            gateBoxList[i].powerOn();
+            setTimeout(function() {
+              gateBoxList[i].powerOff();
+            }, gateBoxList[i].flow * 1000);
           }
-          else {
+        /*  else {
             flowTotal -= gateBoxList[i].flow;
             gateBoxList[i].unclick();
-          }
+            gateBoxList[i].powerOff();
+          }*/
 
         }
       }
