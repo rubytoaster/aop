@@ -205,52 +205,52 @@ function displaySearchesInBinder() {
       document.getElementById("searchesBlurb").style.display = "none";
     }
 
-    // if (!$('#searches').find('#collapseSearch' + results[0].id).length) {
 
-      results.forEach( (result) => {
+    results.forEach( (result) => {
 
-        $('<div>', {
-          id: "collapseSearch" + result.id,
-          class: "row collapseGroup"
-        }).append( $('<ul>', {
-          class: "collapsible",
-          style: "background-color:#eeeeee;"
-        }).append( $('<li>', {
-        }).append( $('<div>', {
-          id: result.id,
-          class:  "col s10 collapsible-header",
-          text: result.terms
-        })).append( $('<div>', {
-          class: "col s1 headerCollapsible",
-          style: "padding:0"
-        }).append( $('<img>', {
-          src: "css/svg/mail.svg",
-          id: "mailImg",
-          style: "vertical-align:middle; width: 20px; height: 20px;"
-        }))).append( $('<div>', {
-          class: "col s1 headerCollapsible",
-          style: "padding:0"
-        }).append( $('<img>', {
-          src: "css/svg/trash.svg",
-          id: "trashImg",
-          style: "vertical-align:middle; width: 20px; height: 20px;",
-          onclick: "deleteSearchItem(" + result.id + ");"
-        }))).append( $('<div>', {
-          class: "col 12 collapsible-body collapseBody"
-        }).append( $('<ul>', {
-           id: "searchDomains" + result.id
-        }))))).appendTo('#savedSearches');
-        $('.collapsible').collapsible();
-        var ul = document.getElementById("searchDomains" + result.id);
-        result.domains.forEach( (domain) =>{
-          //var candidate = document.getElementById("candidate");
-          var li = document.createElement("li");
-          //li.setAttribute('id',candidate.value);
-          li.appendChild(document.createTextNode(domain));
-          ul.appendChild(li);
-        })
-      });
-    //}
+      $('<div>', {
+        id: "collapseSearch" + result.id,
+        class: "row collapseGroup"
+      }).append( $('<ul>', {
+        class: "collapsible",
+        style: "background-color:#eeeeee;"
+      }).append( $('<li>', {
+      }).append( $('<div>', {
+        id: result.id,
+        class:  "col s10 collapsible-header",
+        text: result.terms
+      })).append( $('<div>', {
+        class: "col s1 headerCollapsible",
+        style: "padding:0"
+      }).append( $('<input>', {
+        type: "checkbox",
+        id: "searchBox" + result.id
+      })).append( $('<label>', {
+        for: "searchBox" + result.id,
+        style: "vertical-align:middle;"
+      }))).append( $('<div>', {
+        class: "col s1 headerCollapsible",
+        style: "padding:0"
+      }).append( $('<img>', {
+        src: "css/svg/trash.svg",
+        id: "trashImg",
+        style: "vertical-align:middle; width: 20px; height: 20px;",
+        onclick: "deleteSearchItem(" + result.id + ");"
+      }))).append( $('<div>', {
+        class: "col 12 collapsible-body collapseBody"
+      }).append( $('<ul>', {
+         id: "searchDomains" + result.id
+      }))))).appendTo('#savedSearches');
+      $('.collapsible').collapsible();
+      var ul = document.getElementById("searchDomains" + result.id);
+      result.domains.forEach( (domain) =>{
+        //var candidate = document.getElementById("candidate");
+        var li = document.createElement("li");
+        //li.setAttribute('id',candidate.value);
+        li.appendChild(document.createTextNode(domain));
+        ul.appendChild(li);
+      })
+    });
   });
 }
 
