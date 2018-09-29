@@ -106,7 +106,7 @@ var cPathSim = function(sketch) {
   }
 
   sketch.draw = function() {
-    sketch.background(255);
+    sketch.background(178, 223, 218);
     
     for(let i = 0; i < gateBoxList.length; i++)
     {
