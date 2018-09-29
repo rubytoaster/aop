@@ -1,4 +1,4 @@
-function GateBox(sketch, posX, posY, description, flow, afterBoxList)
+function GateBox(sketch, posX, posY, description, flow, afterBoxList, gateBoxList)
 {
   this.hasPower = false;
     
@@ -59,12 +59,39 @@ function GateBox(sketch, posX, posY, description, flow, afterBoxList)
   
   this.powerOn = function()
   {
+    /*if(!gateBoxList[i].hasPower)
+    {
+      flowTotal += gateBoxList[i].flow;
+      gateBoxList[i].powerOn();
+      setTimeout(function() {
+        gateBoxList[i].powerOff();
+      }, gateBoxList[i].flow * 1000);
+    }*/
+    var refThis = this;
+    console.log("power on");
     this.hasPower = true;
+    
+    setTimeout(function(){
+      refThis.powerOff(refThis, afterBoxList);
+    }, this.flow * 1000);
   }
   
-  this.powerOff = function()
+  this.powerOff = function(refThis, afterBoxList)
   {
-    this.hasPower = false;
+    console.log("power off");
+    refThis.hasPower = false;
+    
+    if(typeof afterBoxList != 'undefined')
+    if($.isArray(afterBoxList))
+    {
+      for(let i = 0; i < afterBoxList.length; i++)
+      {
+        afterBoxList[i].powerOn();
+      }
+    }
+    else {
+      afterBoxList.powerOn();
+    }
   }
 
   this.drawLines = function(afterBox)

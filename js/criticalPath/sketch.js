@@ -16,16 +16,16 @@ var cPathSim = function(sketch) {
     var centerBox = sketch.width/2 - defaultWidth/2;
 
     //box list needs to be constructed backwards
-    var sendBox = new GateBox(sketch, centerBox, 400, "Send", 10);
+    var sendBox = new GateBox(sketch, centerBox, 400, "Send", 2);
     gateBoxList.push(sendBox);
 
-    var paintBox = new GateBox(sketch, centerBox, sendBox.posY - defaultBoxSpacing, "Painting", 5, sendBox);
+    var paintBox = new GateBox(sketch, centerBox, sendBox.posY - defaultBoxSpacing, "Painting", 2, sendBox);
     gateBoxList.push(paintBox);
 
-    var sandingBox = new GateBox(sketch, centerBox,paintBox.posY - defaultBoxSpacing, "Sanding", 18, paintBox);
+    var sandingBox = new GateBox(sketch, centerBox,paintBox.posY - defaultBoxSpacing, "Sanding", 3, paintBox);
     gateBoxList.push(sandingBox);
 
-    var washBox = new GateBox(sketch, centerBox, sandingBox.posY - defaultBoxSpacing, "Washing", 12, sandingBox);
+    var washBox = new GateBox(sketch, centerBox, sandingBox.posY - defaultBoxSpacing, "Washing", 1, sandingBox);
     gateBoxList.push(washBox);
 
     var rootPathList = [];
@@ -34,22 +34,22 @@ var cPathSim = function(sketch) {
     //Not critical path boxes
     var hammeringBox = new GateBox(sketch, centerBox-defaultBoxSpacingWidth, paintBox.posY - defaultBoxSpacing, "Nailing", 5, sendBox);
     gateBoxList.push(hammeringBox);
-    var flatteningBox = new GateBox(sketch, centerBox-defaultBoxSpacingWidth, hammeringBox.posY - defaultBoxSpacing, "Flattening", 20, hammeringBox);
+    var flatteningBox = new GateBox(sketch, centerBox-defaultBoxSpacingWidth, hammeringBox.posY - defaultBoxSpacing, "Flattening", 4, hammeringBox);
     gateBoxList.push(flatteningBox);
 
     rootPathList.push(flatteningBox);
 
     //Critical Path Boxes
-    var rivetingBox = new GateBox(sketch, centerBox+defaultBoxSpacingWidth, sendBox.posY - defaultBoxSpacing, "Welding", 18, sendBox);
+    var rivetingBox = new GateBox(sketch, centerBox+defaultBoxSpacingWidth, sendBox.posY - defaultBoxSpacing, "Welding", 1, sendBox);
     gateBoxList.push(rivetingBox);
-    var weldingBox = new GateBox(sketch, centerBox+defaultBoxSpacingWidth, rivetingBox.posY - defaultBoxSpacing, "Riveting", 20, rivetingBox);
+    var weldingBox = new GateBox(sketch, centerBox+defaultBoxSpacingWidth, rivetingBox.posY - defaultBoxSpacing, "Riveting", 2, rivetingBox);
     gateBoxList.push(weldingBox);
-    var gluingBox = new GateBox(sketch, centerBox+defaultBoxSpacingWidth, weldingBox.posY - defaultBoxSpacing, "Gluing", 19, weldingBox);
+    var gluingBox = new GateBox(sketch, centerBox+defaultBoxSpacingWidth, weldingBox.posY - defaultBoxSpacing, "Gluing", 5, weldingBox);
     gateBoxList.push(gluingBox);
 
     rootPathList.push(gluingBox);
 
-    var receiveBox = new GateBox(sketch, centerBox, washBox.posY - defaultBoxSpacing, "Receive", 5, rootPathList);
+    var receiveBox = new GateBox(sketch, centerBox, washBox.posY - defaultBoxSpacing, "Receive", 2, rootPathList);
     gateBoxList.push(receiveBox);
 
 
@@ -77,6 +77,15 @@ var cPathSim = function(sketch) {
       }
     }
   }
+  
+  function startFlow()
+  {
+    //go backwards through list
+    for(let i = gateBoxList.length; i > 0; i--)
+    {
+      
+    }
+  }
 
   sketch.mousePressed = function()
   {
@@ -92,9 +101,7 @@ var cPathSim = function(sketch) {
           {
             flowTotal += gateBoxList[i].flow;
             gateBoxList[i].powerOn();
-            setTimeout(function() {
-              gateBoxList[i].powerOff();
-            }, gateBoxList[i].flow * 1000);
+            
           }
         /*  else {
             flowTotal -= gateBoxList[i].flow;
