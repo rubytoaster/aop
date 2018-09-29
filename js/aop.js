@@ -313,6 +313,8 @@ function loadGame3(){
   animateActivityArrow();
   $(function(){
     $("#app_cont").empty();
+    $("html").css('background-color', '#B2DFDA');
+    $("#app_cont").css('background-color', '#B2DFDA');
     car_S = new p5(cPathSim,'app_cont');
   });
   $("#pageTitle").text("Activity");
@@ -424,7 +426,6 @@ function animateActivityArrow()
 
 function clickBackToActivity()
 {
-
   var burger1 = document.getElementById("bur1");
   var burger3 = document.getElementById("bur3");
   burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"
