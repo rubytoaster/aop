@@ -100,9 +100,21 @@ var cPathSim = function(sketch) {
     pointerList.push({posX : (sketch.width/12), posY : 40, text : "In other words its the time it takes for the machine to take one unit input and produce one unit of output", pointerPos: "left"});
     pointerList.push({posX : (sketch.width/12), posY : 140, text : "In our process map the lines indicate which processes need to be completed before others can start", pointerPos: "center", pointerXOffset: -26, pointerYOffset: 50, pointerRotation:"right"});
     pointerList.push({posX : (sketch.width/12), posY : 40, text : "Try touching any process to observe how the flow occurs", pointerPos: "left"});
-    pointerList.push({posX : (sketch.width/12), posY : 340, text : "In some cases a process may not be able to start unless other processes have already finished", pointerPos: "center", pointerXOffset: -26, pointerYOffset: 25, pointerRotation:"right"}); // Point to converging processes
-    pointerList.push({posX : (sketch.width/12), posY : 40, text : "Try to identify the Critical Path in our process map, remember it will be the path with the longest total flow time", pointerPos: "left"});
-    pointerList.push({endText : true}); //Increase throughput
+    pointerList.push({posX : (sketch.width/12), posY : 340, text : "In some cases a process may not be able to start unless many other processes have already finished", pointerPos: "center", pointerXOffset: -36, pointerYOffset: 25, pointerRotation:"right"}); // Point to converging processes
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "We can calculate to total flow of a particular path by adding up all of the flow values along that path", pointerPos: "left"});
+    pointerList.push({posX : (sketch.width/12), posY : 80, text : "2 sec", pointerPos: "center", pointerXOffset: -50, pointerYOffset: -10, pointerRotation:"right"});
+    pointerList.push({posX : (sketch.width/12), posY : 170, text : "2 + 1 = 3 sec",  pointerPos: "center", pointerXOffset: -50, pointerYOffset: -10, pointerRotation:"right"});
+    pointerList.push({posX : (sketch.width/12), posY : 260, text : "3 + (1 + 2) = 6 sec",  pointerPos: "center", pointerXOffset: -50, pointerYOffset: -10, pointerRotation:"right"});
+    pointerList.push({posX : (sketch.width/12), posY : 350, text : "2 + (3 + 1 + 2) = 8 sec",  pointerPos: "center", pointerXOffset: -50, pointerYOffset: -10, pointerRotation:"right"});
+    pointerList.push({posX : (sketch.width/12), posY : 440, text : "9 + (2 + 3 + 1 + 2) = 17 sec",  pointerPos: "center", pointerXOffset: -50, pointerYOffset: -10, pointerRotation:"right"});
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "Our total Flow time is: 17 seconds for this path down the center", pointerPos: "left"});
+
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "The critical path is going to be the path with the hightest total flow", pointerPos: "left"});
+
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "Try to identify the Critical Path in our process map below", pointerPos: "left"});
+    pointerList.push({endText : true});
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "Good Job! You have identified the Critical Path!", pointerPos: "left", endText: false});
+
 
     pointer = new Pointer(sketch, pointerList);
     
