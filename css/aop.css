@@ -609,7 +609,13 @@ nav a.button-collapse{
   background-repeat: no-repeat;
   background-size:100% auto; 
   background-position-y:bottom;
+}
 
+.critcalPathGameBackground{
+  background-image:url("svg/game3.png");
+  background-repeat: no-repeat;
+  background-size:100% auto; 
+  background-position-y:bottom;
 }
 
 .activityTitle{

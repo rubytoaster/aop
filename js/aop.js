@@ -300,6 +300,7 @@ function loadGame2(){
   $(function(){
     $("#app_cont").empty();
     $("html").css('background-color', '#39b54a');
+    $("#app_cont").css('background-color', '#39b54a');
     $("#app_cont").css('background-image', 'linear-gradient(180deg, #00e5ff 50%, #39b54a 50%)');
     car_S = new p5(convSim,'app_cont');
   });
@@ -436,6 +437,7 @@ function clickBackToActivity()
   $("html").css('background-color', 'unset');
   $("#app_cont").css('background-color', 'none');
   $("#app_cont").css('background-image', 'none');
+  
 }
 
 function clickBackToResources()
