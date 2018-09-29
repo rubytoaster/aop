@@ -1,5 +1,6 @@
 var cPathSim = function(sketch) {
   var gateBoxList = [];
+  var sendBoxWaitList = [];
   var defaultBoxSpacing = 90;
   var defaultBoxSpacingWidth = 120;
   var defaultWidth = 60;
@@ -16,11 +17,12 @@ var cPathSim = function(sketch) {
     var centerBox = sketch.width/2 - defaultWidth/2;
 
     //box list needs to be constructed backwards
-    var sendBox = new GateBox(sketch, centerBox, 400, "Send", 2);
+    var sendBox = new GateBox(sketch, centerBox, 400, "Send", 2, null, null);
     gateBoxList.push(sendBox);
 
     var paintBox = new GateBox(sketch, centerBox, sendBox.posY - defaultBoxSpacing, "Painting", 2, sendBox);
     gateBoxList.push(paintBox);
+    sendBoxWaitList.push(paintBox);
 
     var sandingBox = new GateBox(sketch, centerBox,paintBox.posY - defaultBoxSpacing, "Sanding", 3, paintBox);
     gateBoxList.push(sandingBox);
@@ -34,6 +36,8 @@ var cPathSim = function(sketch) {
     //Not critical path boxes
     var hammeringBox = new GateBox(sketch, centerBox-defaultBoxSpacingWidth, paintBox.posY - defaultBoxSpacing, "Nailing", 5, sendBox);
     gateBoxList.push(hammeringBox);
+    sendBoxWaitList.push(hammeringBox);
+
     var flatteningBox = new GateBox(sketch, centerBox-defaultBoxSpacingWidth, hammeringBox.posY - defaultBoxSpacing, "Flattening", 4, hammeringBox);
     gateBoxList.push(flatteningBox);
 
@@ -42,6 +46,8 @@ var cPathSim = function(sketch) {
     //Critical Path Boxes
     var rivetingBox = new GateBox(sketch, centerBox+defaultBoxSpacingWidth, sendBox.posY - defaultBoxSpacing, "Welding", 1, sendBox);
     gateBoxList.push(rivetingBox);
+    sendBoxWaitList.push(rivetingBox);
+
     var weldingBox = new GateBox(sketch, centerBox+defaultBoxSpacingWidth, rivetingBox.posY - defaultBoxSpacing, "Riveting", 2, rivetingBox);
     gateBoxList.push(weldingBox);
     var gluingBox = new GateBox(sketch, centerBox+defaultBoxSpacingWidth, weldingBox.posY - defaultBoxSpacing, "Gluing", 5, weldingBox);
@@ -51,6 +57,8 @@ var cPathSim = function(sketch) {
 
     var receiveBox = new GateBox(sketch, centerBox, washBox.posY - defaultBoxSpacing, "Receive", 2, rootPathList);
     gateBoxList.push(receiveBox);
+    
+    sendBox.setWaitForBoxList(sendBoxWaitList);
 
 
   }

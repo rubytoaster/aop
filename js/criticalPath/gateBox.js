@@ -1,6 +1,7 @@
-function GateBox(sketch, posX, posY, description, flow, afterBoxList, gateBoxList)
+function GateBox(sketch, posX, posY, description, flow, afterBoxList, waitForBoxList)
 {
   this.hasPower = false;
+  this.waitForBoxList;
     
   this.posX = posX;
   this.posY = posY;
@@ -43,7 +44,7 @@ function GateBox(sketch, posX, posY, description, flow, afterBoxList, gateBoxLis
     else
       sketch.image(this.beakerImgOff, this.posX + 14, this.posY, 25, 45);
 
-    if(typeof afterBoxList != 'undefined')
+    if(typeof afterBoxList != 'undefined' && afterBoxList != null)
     if($.isArray(afterBoxList))
     {
       for(let i = 0; i < afterBoxList.length; i++)
@@ -58,27 +59,33 @@ function GateBox(sketch, posX, posY, description, flow, afterBoxList, gateBoxLis
   }
   
   this.powerOn = function()
-  {
-    /*if(!gateBoxList[i].hasPower)
-    {
-      flowTotal += gateBoxList[i].flow;
-      gateBoxList[i].powerOn();
-      setTimeout(function() {
-        gateBoxList[i].powerOff();
-      }, gateBoxList[i].flow * 1000);
-    }*/
+  {    
     var refThis = this;
-    console.log("power on");
-    this.hasPower = true;
+    let startPower = true;
     
-    setTimeout(function(){
-      refThis.powerOff(refThis, afterBoxList);
-    }, this.flow * 1000);
+    if(this.waitForBoxList != null) 
+    {
+      for(let i = 0; i < this.waitForBoxList.length; i++)
+      {
+        if(this.waitForBoxList[i].hasPower)
+        {
+          startPower = false;
+        }
+      }
+    }
+  
+    if(startPower)
+    {
+      this.hasPower = true;
+
+      setTimeout(function(){
+        refThis.powerOff(refThis, afterBoxList);
+      }, this.flow * 1000);
+    }
   }
   
   this.powerOff = function(refThis, afterBoxList)
   {
-    console.log("power off");
     refThis.hasPower = false;
     
     if(typeof afterBoxList != 'undefined')
@@ -89,9 +96,14 @@ function GateBox(sketch, posX, posY, description, flow, afterBoxList, gateBoxLis
         afterBoxList[i].powerOn();
       }
     }
-    else {
+    else if(afterBoxList != null) {
       afterBoxList.powerOn();
     }
+  }
+  
+  this.setWaitForBoxList = function(waitForBoxList)
+  {
+    this.waitForBoxList = waitForBoxList;
   }
 
   this.drawLines = function(afterBox)
