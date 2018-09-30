@@ -707,6 +707,7 @@ ul#horizontal-list li{
 
 /*Background images for the template section*/
 .templateTitle{
+  margin-top:10px;
   font-weight: bold; 
   vertical-align: middle;
   line-height: 90%;
@@ -765,6 +766,20 @@ ul#horizontal-list li{
   background-position: center;
 }
 
+.timeQualityBackground{
+  background-image: url("../images/templates/time_qual_thmb.png");
+  background-repeat: no-repeat;
+  background-size:auto 100%;
+  background-position: center;
+}
+
+.timeRangeBackground{
+  background-image: url("../images/templates/time_range_thmb.png");
+  background-repeat: no-repeat;
+  background-size:auto 100%;
+  background-position: center;
+}
+
 .wallLayoutBackground{
   background-image: url("../images/templates/wall_layout_thmb.png");
   background-repeat: no-repeat;
@@ -780,10 +795,86 @@ ul#horizontal-list li{
   bottom:0px;
   right:0px;
 }
-/*.pdfIcon{
- image:url("images/docTypeIcons/pdf.png");
- background-size:40px 40px;
-        z-index: 5000; 
-        position: absolute;"
-}*/
+
+#gateTimeQualityCard{
+  position:relative;
+}
+#gateTimeQualityCard img{
+  position: absolute;
+  bottom:0px;
+  right:0px;
+}
+
+#instructionCard{
+  position:relative;
+}
+#instructionCard img{
+  position: absolute;
+  bottom:0px;
+  right:0px;
+}
+
+#leadershipCard{
+  position:relative;
+}
+#leadershipCard img{
+  position: absolute;
+  bottom:0px;
+  right:0px;
+}
+
+#metlCard{
+  position:relative;
+}
+#metlCard img{
+  position: absolute;
+  bottom:0px;
+  right:0px;
+}
+
+#oneGatePerPageCard{
+  position:relative;
+}
+#oneGatePerPageCard img{
+  position: absolute;
+  bottom:0px;
+  right:0px;
+}
+
+#projectGateOneCard{
+  position:relative;
+}
+#projectGateOneCard img{
+  position: absolute;
+  bottom:0px;
+  right:0px;
+}
+
+#timeRangeCard{
+  position:relative;
+}
+#timeRangeCard img{
+  position: absolute;
+  bottom:0px;
+  right:0px;
+}
+
+#twoGatesPerPageCard{
+  position:relative;
+}
+#twoGatesPerPageCard img{
+  position: absolute;
+  bottom:0px;
+  right:0px;
+}
+
+#wallLayoutCard{
+  position:relative;
+}
+#wallLayoutCard img{
+  position: absolute;
+  bottom:0px;
+  right:0px;
+}
+
 /*----------------------------------------------*/
