@@ -166,23 +166,23 @@ a.middle-indicator-text{
     /*height:60%;
     margin-top: 70px;*/
     background-size: cover;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-position:center;
-  width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-position:center;
+    width: 100%;
   }
 }
 @media screen and (orientation:landscape) and (max-width: 640px)
 {
   .imageStyle{
   /*  height:50%;
-    margin-top: 70px;*/
-    background-size: cover;
+  margin-top: 70px;*/
+  background-size: cover;
   height: 100%;
   background-repeat: no-repeat;
   background-position:center;
   width: 100%;
-  }
+}
 }
 
 
@@ -275,43 +275,6 @@ a.middle-indicator-text{
     position:absolute;
     top:40%;
   }
-
-  /*keylsey code*/
-/*  #mobileFooter{
-    display:none;
-  }*/
-
-/*  .footerTable td
-  {
-    display: none;
-  }*/
-  /*.footerIcons
-  {
-   display: none;
- }*/
-/* footer.page-footer
- {
-   dispay: none;
- }*/
-/* .imageStyle
- {
-  background-size: cover;
-  height: 100%;
-  background-repeat: no-repeat;
-  background-position:center;
-  width: 100%;
-}*/
-/*nav
-{
-  height: 10px;
-  transition: height .5s;
-}
-*/
-/*nav:hover
-{
-  height: 56px;
-}*/
-
 }
 
 .exitSlideButton{
@@ -363,7 +326,6 @@ a.middle-indicator-text{
 /* @media only screen and (max-width: 992px)*/
 @media only screen and (max-width: 1400px)
 {
-
   #app_cont{
     padding-top:70px !important;
     padding-bottom:60px;
@@ -390,7 +352,7 @@ a.middle-indicator-text{
   .imageStyle{
    /* height:85%;*/
    /* margin-top:65px;*/
-  }
+ }
 }
 
 .footerTable td{
@@ -743,9 +705,70 @@ ul#horizontal-list li{
   border-radius:10px;
 }
 
+/*Background images for the template section*/
+.templateTitle{
+  font-weight: bold; 
+  vertical-align: middle;
+  line-height: 90%;
+  font-size:25px;
+  color: #333333;
+  background: #FFFFFF;
+  text-shadow: 2px 2px 0px #FFFFFF, 5px 4px 0px rgba(0,0,0,0.15);
+}
+
 .burndownBackground{
-  background-image: url("../images/thumbnails/burndown_thmb.png");
+  background-image: url("../images/templates/burndown_thmb.png");
   background-repeat: no-repeat;
-  background-size:80% auto;
+  background-size:auto 100%;
   background-position: center;
 }
+
+.gateOneBackground{
+  background-image: url("../images/templates/gate_one_per_thmb.png");
+  background-repeat: no-repeat;
+  background-size:auto 100%;
+  background-position: center;
+}
+
+.instructionsBackground{
+  background-image: url("../images/templates/instructions_thmb.png");
+  background-repeat: no-repeat;
+  background-size:auto 100%;
+  background-position: center;
+}
+
+.leadershipBackground{
+  background-image: url("../images/templates/leadership_thmb.png");
+  background-repeat: no-repeat;
+  background-size:auto 100%;
+  background-position: center;
+}
+
+.metlBackground{
+  background-image: url("../images/templates/metl_thmb.png");
+  background-repeat: no-repeat;
+  background-size:auto 100%;
+  background-position: center;
+}
+
+.projectGateOneBackground{
+  background-image: url("../images/templates/proj_gate_one_thmb.png");
+  background-repeat: no-repeat;
+  background-size:auto 100%;
+  background-position: center;
+}
+
+.projectGateTwoBackground{
+  background-image: url("../images/templates/proj_gate_two_thmb.png");
+  background-repeat: no-repeat;
+  background-size:auto 100%;
+  background-position: center;
+}
+
+.wallLayoutBackground{
+  background-image: url("../images/templates/wall_layout_thmb.png");
+  background-repeat: no-repeat;
+  background-size:auto 100%;
+  background-position: center;
+}
+/*----------------------------------------------*/
