@@ -3,15 +3,23 @@ var barChartInput= {chartTitle:'',
                     xAxisCategories:[''],
                     yAxisTitle: '',
                     remainingDays:[0],
-                    actualDays:[0]
+                    actualDays:[0],
                     requirement:0,
                     last5Avg:[0]};
 
 
-
-function showChart() {
-	buildTable();
+function showChartClick() {
+	//alert('show chart button clicked');
+	$("#chart_status_msg").removeClass("hidden_toggle");
+	getData();
+	onReady(function() {
+	   show('container', true);
+	   show('containerData', true);
+	   show('loading', false);
+    }); 
+    buildTable();
 }
+
 
 function getData() {
 	barChartInput = {
@@ -133,11 +141,6 @@ function show(id, value) {
 	document.getElementById(id).style.visibility = value ? 'visible' : 'hidden';
 }
 
- onReady(function() {
-	show('container', true);
-	show('containerData', true);
-	show('loading', false);
-});
 
 function buildCharts(finishedChart) {
 	var chart = new Highcharts.Chart(
