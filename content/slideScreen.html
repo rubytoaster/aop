@@ -18,16 +18,16 @@ onload="javascript:(loadLandscapeSlide())">
   
 </div> 
 <script>
+
   $(document).ready(function() {
     console.log(orientation);
-    if(orientation === 90)
+    if(orientation === 90 && $("#pageTitle").text()==="AOP Slides" )
     {
       landscapeStyle();
     }
-
     $(window).on('orientationchange', function(event) {
-
-      if(orientation === 90)
+      console.log("script running");
+      if(orientation === 90 && $("#pageTitle").text()==="AOP Slides" )
       {
        landscapeStyle();
      }
@@ -36,9 +36,9 @@ onload="javascript:(loadLandscapeSlide())">
     }
   });
 
-function portraitStyle()
-{
-    $("#mobileFooter").css('display', 'unset');
+    function portraitStyle()
+    {
+      $("#mobileFooter").css('display', 'unset');
       $("#sliderScreen").css('margin-top', '0px');
       $(".footerIcons").css('display', 'unset');
       $(".page-footer").css('display', 'unset');
@@ -46,10 +46,10 @@ function portraitStyle()
       $("nav").css('transition', 'none');
       $(".imageStyle").css('background-size', 'contain');
       $(".myProgress").css('bottom', '65px');
-       $('nav').hover(function() {
-      $(this).stop().css('height','56px')
+      $('nav').hover(function() {
+        $(this).stop().css('height','56px')
       })
-}
+    }
 
     function landscapeStyle()
     {
