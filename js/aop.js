@@ -340,6 +340,7 @@ function loadLandscapeModal(){
 
 }
 
+
 function loadCharts()
 {
   clearColor();
