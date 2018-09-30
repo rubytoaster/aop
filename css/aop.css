@@ -771,4 +771,19 @@ ul#horizontal-list li{
   background-size:auto 100%;
   background-position: center;
 }
+
+#burndownCard{
+  position:relative;
+}
+#burndownCard img{
+  position: absolute;
+  bottom:0px;
+  right:0px;
+}
+/*.pdfIcon{
+ image:url("images/docTypeIcons/pdf.png");
+ background-size:40px 40px;
+        z-index: 5000; 
+        position: absolute;"
+}*/
 /*----------------------------------------------*/
