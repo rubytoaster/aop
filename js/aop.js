@@ -79,6 +79,8 @@ function loadSlide(n){
   clearColor();
   closeSidenav();
   $("#pageTitle").text('AOP Slides');
+  $("#app_cont").addClass("slideScreenHide");
+  
   animateArrow();
   $("#app_cont").load("content/slideScreen.html", function()
   {
@@ -278,8 +280,6 @@ function closeGame() {
   if(typeof exportRoot != 'undefined' && exportRoot !== null) {
     gameCleanup(exportRoot,'app_cont');
   }
-
-
 }
 
 function loadGame(){
@@ -451,6 +451,12 @@ function clickBackToResources()
   resetArrow();
   burger1.style="tranform:rotate(45deg); width:24px; top:20%; left:15%;";
   burger3.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%;";
+  $("nav").css('height', '56px');
+  $("nav").css('transition', 'none');
+  $('nav').hover(function() {
+    $(this).stop().css('height','56px')
+    })
+
 
 }
 
