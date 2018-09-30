@@ -348,6 +348,8 @@ function loadCharts()
   closeSidenav();
   $("#app_cont").load("content/gatebar.html");
   $("#pageTitle").text("Charts");
+  getData();
+  showChart();
 }
 
 function loadTemplate(){
