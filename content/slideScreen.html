@@ -32,7 +32,13 @@ onload="javascript:(loadLandscapeSlide())">
        landscapeStyle();
      }
      else{
-      $("#mobileFooter").css('display', 'unset');
+      portraitStyle();
+    }
+  });
+
+function portraitStyle()
+{
+    $("#mobileFooter").css('display', 'unset');
       $("#sliderScreen").css('margin-top', '0px');
       $(".footerIcons").css('display', 'unset');
       $(".page-footer").css('display', 'unset');
@@ -43,9 +49,7 @@ onload="javascript:(loadLandscapeSlide())">
        $('nav').hover(function() {
       $(this).stop().css('height','56px')
       })
-    }
-  });
-
+}
 
     function landscapeStyle()
     {

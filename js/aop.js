@@ -451,13 +451,24 @@ function clickBackToResources()
   resetArrow();
   burger1.style="tranform:rotate(45deg); width:24px; top:20%; left:15%;";
   burger3.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%;";
-  $("nav").css('height', '56px');
-  $("nav").css('transition', 'none');
-  $('nav').hover(function() {
-    $(this).stop().css('height','56px')
-    })
+  portraitStyle();
 
 
+}
+
+function portraitStyle()
+{
+    $("#mobileFooter").css('display', 'unset');
+      $("#sliderScreen").css('margin-top', '0px');
+      $(".footerIcons").css('display', 'unset');
+      $(".page-footer").css('display', 'unset');
+      $("nav").css('height', '56px');
+      $("nav").css('transition', 'none');
+      $(".imageStyle").css('background-size', 'contain');
+      $(".myProgress").css('bottom', '65px');
+       $('nav').hover(function() {
+      $(this).stop().css('height','56px')
+      })
 }
 
 function resetActivityArrow()
