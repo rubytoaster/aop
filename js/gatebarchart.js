@@ -1,5 +1,11 @@
 var finishedChart = false;
-var input;
+var barChartInput= {chartTitle:'',
+                    xAxisCategories:[''],
+                    yAxisTitle: '',
+                    remainingDays:[0],
+                    actualDays:[0]
+                    requirement:0,
+                    last5Avg:[0]};
 
 
 
@@ -8,7 +14,7 @@ function showChart() {
 }
 
 function getData() {
-	input = {
+	barChartInput = {
 			chartTitle : 'KC-135 Block 45 Mod Last Produced & A/C In-Work',
 			xAxisCategories : [ '62-3507', '63-7982', '61-0309', '60-0322', '60-0316', '58-0057', '62-3514', '60-0351', '62-3566' ],
 			yAxisTitle : '',
@@ -29,27 +35,27 @@ function getData() {
 	//		};
 
 
-	if (typeof (input.requirement) === 'number') {
-		var requirement = input.requirement;
+	if (typeof (barChartInput.requirement) === 'number') {
+		var requirement = barChartInput.requirement;
 		var extrapolatedRequirement = [];
-		for (let i = 0; i < input.xAxisCategories.length; i++) {
+		for (let i = 0; i < barChartInput.xAxisCategories.length; i++) {
 			extrapolatedRequirement.push(requirement);
 		}
-		input.requirement = extrapolatedRequirement;
+		barChartInput.requirement = extrapolatedRequirement;
 	}
 
 	var totalDays = [];
-	for (let i = 0; i < input.xAxisCategories.length; i++) {
-		totalDays.push(input.actualDays[i] + input.remainingDays[i]);
+	for (let i = 0; i < barChartInput.xAxisCategories.length; i++) {
+		totalDays.push(barChartInput.actualDays[i] + barChartInput.remainingDays[i]);
 	}
-	input.totalDays = totalDays;
+	barChartInput.totalDays = totalDays;
 
 }
 
 function buildTable() {
 	document.createElement('table');
 	var rowLegend = [ null, "Remaining Days", "Actual Days", "Total Days", "Last 5 Avg.", "Requirement" ];
-	var rowValues = [ input.xAxisCategories, input.remainingDays, input.actualDays, input.totalDays, input.last5Avg, input.requirement ];
+	var rowValues = [ barChartInput.xAxisCategories, barChartInput.remainingDays, barChartInput.actualDays, barChartInput.totalDays, barChartInput.last5Avg, barChartInput.requirement ];
 
 	legendTable = document.getElementById("legendTable");
 
@@ -68,7 +74,7 @@ function buildTable() {
 		legendTable.appendChild(row);
 	}
 
-	for (let i = 0; i < input.xAxisCategories.length; i++) {
+	for (let i = 0; i < barChartInput.xAxisCategories.length; i++) {
 		document.createElement('td');
 	}
 }
@@ -98,7 +104,7 @@ function appendTds(row, rowLabel, rowData, index) {
 	}
 	row.appendChild(rowLabelDetail);
 
-	for (let c = 0; c < input.xAxisCategories.length; c++) {
+	for (let c = 0; c < barChartInput.xAxisCategories.length; c++) {
 		let tempTd = document.createElement('td');
 		tempTd.style.border = "1px solid black";
 		tempTd.innerHTML = rowData[c];
@@ -143,19 +149,19 @@ function buildCharts(finishedChart) {
 				}
 			},
 			title : {
-				text : input.chartTitle
+				text : barChartInput.chartTitle
 			},
 			xAxis : {
 				tickLength : 0,
 				labels : {
 					enabled : false
 				},
-				categories : input.xAxisCategories
+				categories : barChartInput.xAxisCategories
 			},
 			yAxis : {
 				min : 0,
 				title : {
-					text : input.yAxisTitle
+					text : barChartInput.yAxisTitle
 				}
 			},
 			legend : {
@@ -169,17 +175,17 @@ function buildCharts(finishedChart) {
 			series : [ {
 				type : 'column',
 				name : 'Remaining Days',
-				data : input.remainingDays,
+				data : barChartInput.remainingDays,
 				color : 'DarkTurquoise'
 			}, {
 				type : 'column',
 				name : 'Actual Days',
-				data : input.actualDays,
+				data : barChartInput.actualDays,
 				color : 'SteelBlue'
 			}, {
 				type : 'line',
 				name : 'Requirement',
-				data : input.requirement,
+				data : barChartInput.requirement,
 				color : 'Green',
 				lineWidth : 3,
 				marker : {
@@ -188,7 +194,7 @@ function buildCharts(finishedChart) {
 			}, {
 				type : 'line',
 				name : 'Last 5 Avg.',
-				data : input.last5Avg,
+				data : barChartInput.last5Avg,
 				color : 'Red',
 				lineWidth : 3,
 				marker : {
