@@ -302,6 +302,24 @@ iDB.deleteItem = function(datastoreName, key, callback) {
   }
 };
 
+iDB.deleteWithoutKey = function (databaseName, datastoreName, property, value, callback) {
+  var db = datastores[datastoreName];
+  var transaction = db.transaction([datastoreName], "readwrite");
+  var store       = transaction.objectStore(datastoreName);
+  var index       = store.index(property);
+  var request     = index.openCursor(IDBKeyRange.only(value));
+
+  request.onsuccess = function() {
+    var cursor = request.result;
+
+    if (cursor) {
+        cursor.delete();
+        cursor.continue();
+    }
+  };
+  callback();
+}
+
 /**
 * Update Item.
 * Parameters:
