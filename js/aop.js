@@ -348,8 +348,12 @@ function loadCharts()
   closeSidenav();
   $("#app_cont").load("content/charts.html");
   $("#pageTitle").text("Charts");
-  getData();
-  showChart();
+}
+
+function loadBarChart() {
+  animateArrow();
+  $("#app_cont").load("content/gatebar.html");
+  $("#pageTitle").text("Process Machine Chart");
 }
 
 function loadTemplate(){
