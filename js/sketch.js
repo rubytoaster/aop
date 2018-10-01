@@ -67,6 +67,8 @@ var carSim = function(sketch) {
   let canvasElt;
 
   sketch.setup = function() {
+    openQuestionsNScores();
+
     sketch.frameRate(30);
     proFontWindows = sketch.loadFont("font/ProFontWindows.ttf")
     carsThroughCt = 0;

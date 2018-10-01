@@ -228,7 +228,7 @@ iDB.fetchAll = (datastoreName, callback) => {
     }
 
     items.push(cursor.value);
-    console.log("added to 'items' " + JSON.stringify(cursor.value));
+    //console.log("added to 'items' " + JSON.stringify(cursor.value));
     cursor.continue();
   };
 
