@@ -5,9 +5,9 @@
 * properties - all of the attributes for a SearchTerm DB objectStore
 * [ terms - the string of values searched for
 *   domains - a list of domains searched through.
-*    [  acronyms - true/false
-*       glossary - true/false
-*       handbook - true/false
+*    [  "acronyms",
+*       "glossary",
+*       "handbook"
 *       *** may modify amount of domains in future ***
 *    ]
 * ]
