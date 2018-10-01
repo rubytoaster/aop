@@ -4,7 +4,7 @@
       <div class="card-title" style="background-color:#F1F1F1 !important; padding:5px 2px 5px 10px;font-size:14px;font-weight:bold; color:#4B4B4B;">
         Choose chart to load or create a new chart:
       </div>
-      <div id="saved_charts">
+      <div id="saved_table_charts">
       </div>
       <div class="card-content" style="padding: 10px 20px 5px 20px">
         <div class="row" style="margin-bottom:0">
@@ -23,16 +23,25 @@
 
             <fieldset>
               <div class="chart_name_group">
-                <label for="barchart_name"> Chart Name: </label>
-                <input type="text"id="barchart_name_id" name="barchart_name" />
+                <label for="tablechart_name"> Chart Name: </label>
+                <input type="text"id="tablechart_name_id" name="tablechart_name" />
               </div>
               <div class="chart_gates_group">
                 <label for="num_gates"> # of Gates: </label>
                 <input id="num_gates_id" name="num_gates"/>
               </div>
-              <div class="chart_req_group">
-                <label for="num_reqs"> # of Requirements: </label>
-                <input id="num_req_id" name="num_reqs"/>
+              <div class="chart_avail_group">
+                <label for="avail_days"> # of Requirements: </label>
+                <input id="avail_day_id" name="avail_days"/>
+              </div>
+              <div class="chart_takt_group">
+                <label for="table_takt"> # of Requirements: </label>
+                <span id="table_takt_id" name="table_takt"></span>
+              </div>
+              <div class="chart_goal_group">
+                <label for="table_goal"> Goal: </label>
+                <input id="table_wip_goal" name="chart_goal_group"/>
+                <input id="table_flowdays_goal" name="chart_goal_group"/>
               </div>
             </fieldset>
           </form>
@@ -57,17 +66,10 @@
                 <label for="gate_title"> Gate Title: </label>
                 <input id="gate_title_id" name="gate_title" />
               </div>
-              <div class="gate_remaining_days_group">
-                <label for="gate_remaining_days"> Remaining Days: </label>
-                <input id="gate_remaining_id" name="gate_remaining_days" />
-              </div>
-              <div class="gate_actual_days_group">
-                <label for="gate_actual_days"> Actual Days: </label>
-                <input id="gate_actual_id" name="gate_actual_days" />
-              </div>
-              <div class="gate_last_avg_group">
-                <label for="gate_avg_days"> Last Avg Days: </label>
-                <input id="gate_avg_days_id" name="gate_avg_days" />
+              <div class="gate_goal_group">
+                <label for="gate_goal"> Goal: </label>
+                <input id="gate_wip_goal" name="gate_goal_group"/>
+                <input id="gate_flowdays_goal" name="gate_goal_group"/>
               </div>
               <div id="buttonContainer">
                 <div id="prev_gate_btn" class="col s6 m6 mouse_point waves-effect waves-light btn" disabled="disabled" style="background:#0EABDA; display:inline-block;" onclick="">Back</div>
