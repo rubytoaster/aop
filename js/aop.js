@@ -350,6 +350,12 @@ function loadCharts()
   $("#pageTitle").text("Charts");
 }
 
+function loadBarChart() {
+  animateArrow();
+  $("#app_cont").load("content/gatebar.html");
+  $("#pageTitle").text("Process Machine Chart");
+}
+
 function loadTemplate(){
   clearColor();
   closeGame();
