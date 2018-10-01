@@ -346,7 +346,7 @@ function loadCharts()
   clearColor();
   closeGame();
   closeSidenav();
-  $("#app_cont").load("content/gatebar.html");
+  $("#app_cont").load("content/charts.html");
   $("#pageTitle").text("Charts");
 }
 

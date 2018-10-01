@@ -8,7 +8,7 @@ var barChartInput= {chartTitle:'',
                     last5Avg:[0]};
 
 
-function showChartClick() {
+function showGateBarChart() {
 	//alert('show chart button clicked');
 	$("#chart_status_msg").removeClass("hidden_toggle");
 	getData();

@@ -30,7 +30,8 @@ function gateValues() {
 
 function showBarChart() {
   $("#gate_values").addClass("hidden_toggle");
-  $("#loading").removeClass("hidden_toggle");
+  $("#gate_chart").removeClass("hidden_toggle");
+  showGateBarChart();
 }
 
 function addChartGate() {
