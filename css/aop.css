@@ -863,6 +863,15 @@ ul#horizontal-list li{
   right:0px;
 }
 
+#gateTimeQualityCard{
+  position:relative;
+}
+#gateTimeQualityCard img{
+  position: absolute;
+  bottom:0px;
+  right:0px;
+}
+
 #timeRangeCard{
   position:relative;
 }
