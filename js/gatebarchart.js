@@ -143,69 +143,63 @@ function show(id, value) {
 
 
 function buildCharts(finishedChart) {
-	var chart = new Highcharts.Chart(
-		{
-			chart : {
-				renderTo : 'containerChart',
-				style : {
-					zIndex : -1
-				}
-			},
-			title : {
-				text : barChartInput.chartTitle
-			},
-			xAxis : {
-				tickLength : 0,
-				labels : {
-					enabled : false
-				},
-				categories : barChartInput.xAxisCategories
-			},
-			yAxis : {
-				min : 0,
-				title : {
-					text : barChartInput.yAxisTitle
-				}
-			},
-			legend : {
-				enabled : false
-			},
-			plotOptions : {
-				column : {
-					stacking : 'normal'
-				}
-			},
-			series : [ {
-				type : 'column',
-				name : 'Remaining Days',
-				data : barChartInput.remainingDays,
-				color : 'DarkTurquoise'
-			}, {
-				type : 'column',
-				name : 'Actual Days',
-				data : barChartInput.actualDays,
-				color : 'SteelBlue'
-			}, {
-				type : 'line',
-				name : 'Requirement',
-				data : barChartInput.requirement,
-				color : 'Green',
-				lineWidth : 3,
-				marker : {
-					enabled : false
-				}
-			}, {
-				type : 'line',
-				name : 'Last 5 Avg.',
-				data : barChartInput.last5Avg,
-				color : 'Red',
-				lineWidth : 3,
-				marker : {
-					enabled : false
-				}
-			} ]
-		});
 
-	document.getElementById("tableLegend");
-	finishedChart = true;
+ Highcharts.chart('containerChart', {
+            title : {
+                text : barChartInput.chartTitle
+            },
+            xAxis : {
+                tickLength : 0,
+                labels : {
+                    enabled : false
+                },
+                categories : barChartInput.xAxisCategories
+            },
+            yAxis : {
+                min : 0,
+                title : {
+                    text : barChartInput.yAxisTitle
+                }
+            },
+            legend : {
+                enabled : false
+            },
+            plotOptions : {
+                column : {
+                    stacking : 'normal'
+                }
+            },
+            series : [ {
+                type : 'column',
+                name : 'Remaining Days',
+                data : barChartInput.remainingDays,
+                color : 'DarkTurquoise'
+            }, {
+                type : 'column',
+                name : 'Actual Days',
+                data : barChartInput.actualDays,
+                color : 'SteelBlue'
+            }, {
+                type : 'line',
+                name : 'Requirement',
+                data : barChartInput.requirement,
+                color : 'Green',
+                lineWidth : 3,
+                marker : {
+                    enabled : false
+                }
+            }, {
+                type : 'line',
+                name : 'Last 5 Avg.',
+                data : barChartInput.last5Avg,
+                color : 'Red',
+                lineWidth : 3,
+                marker : {
+                    enabled : false
+                }
+            } ]
+        });
+
+    document.getElementById("tableLegend");
+    finishedChart = true;
 }
