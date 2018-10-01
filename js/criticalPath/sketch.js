@@ -7,6 +7,7 @@ var cPathSim = function(sketch) {
   var flowTotal = 0;
   var sendBox;
   this.startButton;
+  this.runButton;
   let mouseSlower = false;//This is to prevent mouse bounces since we cant use mouse clicked
   let mouseSlowerCtr = 0;
   let beakerImgOff;
@@ -22,6 +23,10 @@ var cPathSim = function(sketch) {
   let pathSelectionEnabled = false;
   let startBtnX = 50;
   let startBtnY = 50;
+  let runBtnX = 250;
+  let runBtnY = 50
+  
+  let critPathAnswerList = [];
   
   this.touchAppImg = sketch.loadImage("images/game/conveyerImgs/touch_app.png");
 
@@ -82,6 +87,11 @@ var cPathSim = function(sketch) {
     
     sendBox.setWaitForBoxList(sendBoxWaitList);
     
+    critPathAnswerList.push(sendBox);
+    critPathAnswerList.push(hammeringBox);
+    critPathAnswerList.push(flatteningBox);
+    critPathAnswerList.push(receiveBox);
+    
     
     ////////////
     
@@ -115,8 +125,10 @@ var cPathSim = function(sketch) {
     pointerList.push({posX : (sketch.width/12), posY : 40, text : "The critical path is going to be the path with the hightest total flow", pointerPos: "left"});
 
     pointerList.push({posX : (sketch.width/12), posY : 40, text : "Try to identify the Critical Path in our process map below", pointerPos: "left"});
-    pointerList.push({endText : true});
+    pointerList.push({endText : true, onCheckStep: true, checkFor: "correctCriticalPath"});
+    pointerList.push({posX : (sketch.width/12), posY : 40, text : "Incorrect Please Try Again...", pointerPos: "left", endText: false});
     pointerList.push({posX : (sketch.width/12), posY : 40, text : "Good Job! You have identified the Critical Path!", pointerPos: "left", endText: false});
+    pointerList.push({endText : true}); 
 
 
     pointer = new Pointer(sketch, pointerList);
@@ -124,6 +136,15 @@ var cPathSim = function(sketch) {
   }
 
   sketch.draw = function() {
+    
+    if(pointer.ctr == 15)
+    {
+      //clear wasPowered
+      for(let i = 0; i < gateBoxList.length; i++)
+      {
+        gateBoxList[i].wasPowered = false;
+      }
+    }
     
     if(pointer.ctr > 11 && pointer.ctr < 13)
       gateBoxesEnabled = true;
@@ -183,7 +204,6 @@ var cPathSim = function(sketch) {
   {
     if(mouseSlower == false)
     {
-      
         mouseSlower = true;
         
         for(let i = 0; i < gateBoxList.length; i++)
@@ -200,8 +220,6 @@ var cPathSim = function(sketch) {
             }
             if(pathSelectionEnabled)
             {
-              
-              
               if(gateBoxList[i].selected)
               {
                 flowTotal -= gateBoxList[i].flow;
@@ -210,20 +228,31 @@ var cPathSim = function(sketch) {
                 flowTotal += gateBoxList[i].flow;
               }
               gateBoxList[i].selectBox();
-              return;
               
+              return;
             }
           }
           if(pathSelectionEnabled)
           {
+            
             if(sketch.mouseX >= startBtnX && sketch.mouseX < startBtnX+100 && sketch.mouseY >= startBtnY && sketch.mouseY < startBtnY+40)
             {
-              gateBoxList[gateBoxList.length-1].powerOn();
+              if(checkCriticalPath())
+                gateBoxList[gateBoxList.length-1].powerOn();
+              return;
+
+            }
+            
+            if(sketch.mouseX >= runBtnX && sketch.mouseX < runBtnX+100 && sketch.mouseY >= runBtnY && sketch.mouseY < runBtnY+40)
+            {
+                gateBoxList[gateBoxList.length-1].powerOn();
               return;
             }
+
           }
       }
       
+      if(!pathSelectionEnabled)
       pointer.advance();
       
     }
@@ -242,12 +271,61 @@ var cPathSim = function(sketch) {
     this.startButton = sketch.rect(startBtnX, startBtnY, 100, 40, 10);
     sketch.textSize(15)
     sketch.fill(0);
-    sketch.text("Start", 85, 75);
+    sketch.text("Submit ", startBtnX + 25, 75);
+    
+    sketch.fill(255, 255, 0);
+    this.runButton = sketch.rect(runBtnX, runBtnY, 100, 40, 10);
+    sketch.textSize(15)
+    sketch.fill(0);
+    sketch.text("Watch", runBtnX + 30, runBtnY + 25);
   }
   
   function checkCriticalPath()
   {
+    //we should do this using recursion, 
+    //but for time stake there is only 
+    //one answer so gonna just hard code it for now
     
+    let critPathSelected = [];
+    
+    for(let i = 0; i < gateBoxList.length; i++)
+    {
+      if(gateBoxList[i].selected)
+        critPathSelected.push(gateBoxList[i]);
+    }
+    
+    if(critPathSelected.length != critPathAnswerList.length)
+    {
+      pointer.advance();
+      pointer.ctr--;
+      return false;
+    }
+    
+    for(let i = 0; i < critPathSelected.length; i++)
+    {
+      let doesExist = false;
+
+      for(let j = 0; j < critPathAnswerList.length; j++)
+      {
+        if(critPathSelected[i].description === critPathAnswerList[j].description)
+        {
+          doesExist = true;
+          break;
+        }
+      }
+      
+      if(!doesExist)
+      {
+        pointer.advance();
+        pointer.ctr--;
+        return false;
+      }
+    }
+
+    
+    pointer.successCriticalPath = true;
+    pointer.checkCriticalPath();
+    return true;
   }
   
   function loadImages()
