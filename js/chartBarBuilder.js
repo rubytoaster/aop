@@ -1,5 +1,4 @@
 var barchartNameFilled = false;
-var avgDaysFilled = false;
 var numGatesFilled = false
 var numReqsFilled = false;
 var gateTitleFilled = false;
@@ -8,13 +7,23 @@ var gateActualFilled = false;
 var gateAvgDaysFilled = false;
 
 var numOfGates;
-var currGateNum = 0;
+var currGateNum = 1;
 
 var chartProperties = [];
 var gates = [];
 
+function resetGlobalValues(){
+  currGateNum = 1;
+  chartProperties = [];
+  gates = [];
+}
 
+/**
+* Displays a list of saved charts and a New Chart
+* and
+*/
 function defineChart() {
+  resetGlobalValues();
   $("#chart_choice").addClass("hidden_toggle");
   $("#chart_define").removeClass("hidden_toggle");
   resetInputBooleanValues();
@@ -23,76 +32,46 @@ function defineChart() {
 
 function gateValues() {
   numOfGates = parseInt($("#num_gates_id").val());
-  chartProperties = [$("#barchart_name_id").val(), $("#avg_days_id").val(), $("#num_gates_id").val(), $("#num_req_id").val()];
+  chartProperties = [$("#barchart_name_id").val(), $("#num_gates_id").val(), $("#num_req_id").val()];
   $("#chart_define").addClass("hidden_toggle");
   $("#gate_values").removeClass("hidden_toggle");
 }
 
 function showBarChart() {
+  var chartObj = buildChartObject();
+  sendChartToDB(chartObj);
   $("#gate_values").addClass("hidden_toggle");
   $("#gate_chart").removeClass("hidden_toggle");
-  showGateBarChart();
+  showGateBarChart(chartObj);
 }
 
 function addChartGate() {
+  let oneGateObj = {
+    "title" : $("#gate_title_id").val(),
+    "remDays" : $("#gate_remaining_id").val(),
+    "actDays" : $("#gate_actual_id").val(),
+    "avgDays" : $("#gate_avg_days_id").val()
+  }
+  gates.push(oneGateObj);
   if(numOfGates === currGateNum){
     document.getElementById("next_gate_btn").style.display = 'none';
     document.getElementById("create_chart_btn").style.display = 'inline-block';
   }
   else{
-    gates.push([$("#gate_title_id").val(), $("#gate_remaining_id").val(), $("#gate_actual_id").val(), $("#gate_avg_days_id").val()]);
-    //gates.push[$("#gate_title_id").val()];
     currGateNum++;
   }
-      clearAllInputTextFields();
+  clearAllInputTextFields();
+  resetInputBooleanValues();
+  checkForAllGateChartInputs();
 }
 
-
-
-
-// $('#avg_days_id').on('input', function(e) {
-//   alert("made it here");
-// });
-
-// function allFilled(inputId) {
-//   switch(inputId){
-//     case(0):
-//     barchartNameFilled = true;
-//     break;
-//     case(1):
-//     avgDaysFilled = true;
-//     break;
-//     case(2):
-//     numGatesFilled = true;
-//     break;
-//     case(3):
-//     numReqsFilled = true;
-//     break;
-//   }
-//
-//   if(barchartNameFilled && avgDaysFilled && numGatesFilled && numReqsFilled){
-//     alert("Here we go");
-//   }
-// }
-
 function setupKeyEvents(){
-
   document.getElementById('barchart_name_id').onkeyup = function(event) {
     if (this.value.length === 0) {
       barchartNameFilled = false;
     }
     else{
       barchartNameFilled = true;
-    }
-    checkForAllBarChartInputs();
-  }
-
-  document.getElementById('avg_days_id').onkeyup = function(event) {
-    if (this.value.length === 0) {
-      avgDaysFilled = false;
-    }
-    else{
-      avgDaysFilled = true;
     }
     checkForAllBarChartInputs();
   }
@@ -160,13 +139,13 @@ function setupKeyEvents(){
 
 function resetInputBooleanValues(){
   barchartNameFilled = false;
-  avgDaysFilled = false;
   numGatesFilled = false
   numReqsFilled = false;
   gateTitleFilled = false;
   gateRemainingFilled = false;
   gateActualFilled = false;
   gateAvgDaysFilled = false;
+  $('#next_gate_btn').attr('disabled', 'disabled');
 }
 
 function clearAllInputTextFields(){
@@ -177,7 +156,7 @@ function clearAllInputTextFields(){
 }
 
 function checkForAllBarChartInputs(){
-  if(barchartNameFilled && avgDaysFilled && numGatesFilled && numReqsFilled){
+  if(barchartNameFilled && numGatesFilled && numReqsFilled){
     $('#save_chart_properties_btn').removeAttr('disabled');
     //$('#save_chart_properties_btn').addClass('col s6 m6 mouse_point waves-effect waves-light btn');
   }
@@ -196,4 +175,23 @@ function checkForAllGateChartInputs(){
     $('#next_gate_btn').attr('disabled', 'disabled');
     //$('#save_chart_properties_btn').removeClass('col s6 m6 mouse_point waves-effect waves-light btn');
   }
+}
+
+function buildChartObject(){
+  let chartDBObject = {
+    "name" : chartProperties[0],
+    "numGates" : chartProperties[1],
+    "numReq" : chartProperties[2],
+    "gates" : gates
+  };
+
+  return chartDBObject;
+
+}
+
+function sendChartToDB(chartDBObject){
+  chartIndexes = ["name", "numGates", "numReq"];
+  itemDB.open("BarChartDatabase", 1, "barchartDatastore", "", chartIndexes, true, function(){
+    itemDB.createItem("barchartDatastore", chartDBObject, function(){});
+  });
 }

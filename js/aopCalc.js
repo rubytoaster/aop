@@ -370,7 +370,7 @@ function setTTCalcHTML() {
     $("#eq_val2").text(thruput_txt);
   }
   else {
-   $("#eq_recipr").addClass("hidden_toggle"); 
+   $("#eq_recipr").addClass("hidden_toggle");
    $("#eq_val2").text(calcObj.lbl2);
   }
   $("#eq_opr").text(calcObj.opr);
@@ -493,7 +493,7 @@ function buildCalcObj(name, group, calcObj){
   return calcDBObject;
 }
 
-function openDatabase(){
+function openCalculationsDB(){
   itemDB.open(databaseName, version, databaseStore, "", properties, true, function() {});
 }
 
@@ -529,7 +529,7 @@ function setCalcType(cType) {
    case 0:
    calcObj = wip_w_thruput;
  }
- openDatabase();
+ openCalculationsDB();
  setCalcHTML();
 }
 
