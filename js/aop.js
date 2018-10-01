@@ -357,6 +357,12 @@ function loadBarChart() {
   $("#pageTitle").text("Process Machine Chart");
 }
 
+function loadTableChart() {
+  animateArrow();
+  $("#app_cont").load("content/machinetable.html");
+  $("#pageTitle").text("Gate Performance Chart");
+}
+
 function loadTemplate(){
   clearColor();
   closeGame();
