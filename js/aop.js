@@ -80,7 +80,7 @@ function loadSlide(n){
   closeSidenav();
   $("#pageTitle").text('AOP Slides');
   $("#app_cont").addClass("slideScreenHide");
-  
+
   animateArrow();
   $("#app_cont").load("content/slideScreen.html", function()
   {
@@ -346,7 +346,7 @@ function loadCharts()
   clearColor();
   closeGame();
   closeSidenav();
-  $("#app_cont").load("content/charts.html");
+  $("#app_cont").load("content/gatebar.html");
   $("#pageTitle").text("Charts");
 }
 
@@ -445,7 +445,7 @@ function clickBackToActivity()
   $("html").css('background-color', 'unset');
   $("#app_cont").css('background-color', 'none');
   $("#app_cont").css('background-image', 'none');
-  
+
 }
 
 function clickBackToResources()

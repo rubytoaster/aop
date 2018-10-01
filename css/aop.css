@@ -446,7 +446,7 @@ ul#horizontal-list li{
 @media only screen and (max-width:992px)
 {
   .modal{
-    width:95%; 
+    width:95%;
   }
 }
 @media only screen and (min-height: 569px)
@@ -508,24 +508,24 @@ ul#horizontal-list li{
     background-color:#eeeeee !important;
   }
   .tabs{
-    margin-top:10px !important; 
-    border-bottom:2px solid #40c4ff !important; 
-    color:#2E64D2 !important; 
+    margin-top:10px !important;
+    border-bottom:2px solid #40c4ff !important;
+    color:#2E64D2 !important;
   }
 
   .tabs .tab a{
-    color:#2E64D2 !important; 
+    color:#2E64D2 !important;
   }
 
   .tabs .tab  a.active{
-    background-color:#40c4ff !important; 
-    color:#fff !important; 
-    border: 1px solid #40c4ff !important;  
-    font-weight:bold; 
+    background-color:#40c4ff !important;
+    color:#fff !important;
+    border: 1px solid #40c4ff !important;
+    font-weight:bold;
   }
 
   .indicator{
-    display:none !important; 
+    display:none !important;
   }
 
   .resultTable{
@@ -535,95 +535,95 @@ ul#horizontal-list li{
 
   .tooltipped{
     border:1px solid #039be5;
-    border-radius:50%; 
-    padding:2px 5px;  
-    background-color: #039be5; 
-    color:#fff; 
-    font-weight:bold; 
-    margin-left:2px; 
+    border-radius:50%;
+    padding:2px 5px;
+    background-color: #039be5;
+    color:#fff;
+    font-weight:bold;
+    margin-left:2px;
   }
 
   div.burger{
-    height:35px; 
-    width:35px; 
+    height:35px;
+    width:35px;
     /*background-color:tan; */
-    border-radius:3px; 
-    position:relative; 
+    border-radius:3px;
+    position:relative;
   }
 
   span.patty1{
-    background-color:#fff; 
-    height:4px; 
-    width:24px; 
-    position:absolute; 
-    top:45%; 
-    left:15%; 
-    -webkit-transition:all .5s ease; 
+    background-color:#fff;
+    height:4px;
+    width:24px;
+    position:absolute;
+    top:45%;
+    left:15%;
+    -webkit-transition:all .5s ease;
   }
 
   span.patty0{
-    background-color:#fff; 
-    height:4px; 
-    width:24px; 
-    position:absolute; 
-    top:20%; 
-    left:15%; 
-    -webkit-transition:all .5s ease; 
+    background-color:#fff;
+    height:4px;
+    width:24px;
+    position:absolute;
+    top:20%;
+    left:15%;
+    -webkit-transition:all .5s ease;
   }
 
   span.patty2{
-    background-color:#fff; 
-    height:4px; 
-    width:24px; 
-    position:absolute; 
-    top:70%; 
-    left:15%; 
-    -webkit-transition:all .5s ease; 
+    background-color:#fff;
+    height:4px;
+    width:24px;
+    position:absolute;
+    top:70%;
+    left:15%;
+    -webkit-transition:all .5s ease;
   }
 
   nav a.button-collapse{
-    display:inline; 
-    float:none !important; 
-    position:initial !important; 
-    z-index: 1 !important; 
-    height:56px !important; 
-    margin:0 !important; 
+    display:inline;
+    float:none !important;
+    position:initial !important;
+    z-index: 1 !important;
+    height:56px !important;
+    margin:0 !important;
   }
 
   .iconTab{
-    padding:0px !important; 
-    text-align:center !important;   
+    padding:0px !important;
+    text-align:center !important;
   }
 
   .iconTabText{
-    padding-top:15px !important; 
-    text-align:center !important;   
+    padding-top:15px !important;
+    text-align:center !important;
     font-size:10px !important;
     padding-left:0px;
     padding-right:0px;
   }
 
   .headerCollapsible{
-    display:block; 
-    cursor:pointer; 
-    min-height:3rem; 
-    line-height:3rem; 
-    background-color:#fff; 
-    border-bottom:1px solid #ddd; 
+    display:block;
+    cursor:pointer;
+    min-height:3rem;
+    line-height:3rem;
+    background-color:#fff;
+    border-bottom:1px solid #ddd;
   }
 
   .collapseGroup{
-    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2); 
+    box-shadow: 0 2px 2px 0 rgba(0,0,0,0.14), 0 1px 5px 0 rgba(0,0,0,0.12), 0 3px 1px -2px rgba(0,0,0,0.2);
     margin: .5rem 0 1rem 0;
-    background-color:#eee; 
+    background-color:#eee;
   }
 
   .collapseBody{
-    width:100%; 
+    width:100%;
     padding:10px !important;
-    border-bottom:0px; 
+    border-bottom:0px;
     background-color:#eeeeee;
-  /*border-right:1px solid #ddd; 
+  /*border-right:1px solid #ddd;
   border-left: 1px solid #ddd; */
 }
 
@@ -636,19 +636,19 @@ ul#horizontal-list li{
 .conveyorBeltGameBackground{
   background-image:url("svg/game2.png");
   background-repeat: no-repeat;
-  background-size:100% auto; 
+  background-size:100% auto;
   background-position-y:bottom;
 }
 
 .critcalPathGameBackground{
   background-image:url("svg/game3.png");
   background-repeat: no-repeat;
-  background-size:100% auto; 
+  background-size:100% auto;
   background-position-y:bottom;
 }
 
 .activityTitle{
-  font-weight: bold; 
+  font-weight: bold;
   /*color:#000;*/
   vertical-align: middle;
   /* text-shadow: -3px 0px 6px rgba(150, 150, 150, 1);*/
@@ -666,7 +666,7 @@ ul#horizontal-list li{
 }
 
 .activityCard{
-  padding:5px; 
+  padding:5px;
   margin:0;
   height:150px;
   border-radius:10px;
@@ -683,7 +683,7 @@ ul#horizontal-list li{
 
 .input-field input[type=text]:focus, .input-field input[type=email]:focus  {
   border-bottom: 1px solid #0eabda;
-  box-shadow: 0 1px 0 0 #0eabda;     
+  box-shadow: 0 1px 0 0 #0eabda;
 }
 
 [type="radio"]:checked + label::after, [type="radio"].with-gap:checked + label::after {
@@ -699,7 +699,7 @@ ul#horizontal-list li{
 
 
 .templateCard{
-  padding:5px; 
+  padding:5px;
   margin:0;
   height:100px;
   border-radius:10px;
@@ -707,8 +707,12 @@ ul#horizontal-list li{
 
 /*Background images for the template section*/
 .templateTitle{
+<<<<<<< HEAD
+  font-weight: bold;
+=======
   margin-top:10px;
   font-weight: bold; 
+>>>>>>> 32aba1bf21f8706f7a5849ae141c59facb12e72a
   vertical-align: middle;
   line-height: 90%;
   font-size:25px;
@@ -795,6 +799,15 @@ ul#horizontal-list li{
   bottom:0px;
   right:0px;
 }
+<<<<<<< HEAD
+/*.pdfIcon{
+ image:url("images/docTypeIcons/pdf.png");
+ background-size:40px 40px;
+        z-index: 5000;
+        position: absolute;"
+}*/
+/*----------------------------------------------*/
+=======
 
 #gateTimeQualityCard{
   position:relative;
@@ -878,3 +891,4 @@ ul#horizontal-list li{
 }
 
 /*----------------------------------------------*/
+>>>>>>> 32aba1bf21f8706f7a5849ae141c59facb12e72a
