@@ -33,7 +33,7 @@ var carSim = function(sketch) {
   let question2Complete = false;
 
   let imageNameList = [];
-  imageNameList.push('images/game/batmobile.png');
+  //imageNameList.push('images/game/batmobile.png');
   imageNameList.push('images/game/cop car.png');
   imageNameList.push('images/game/truck2.png');
   imageNameList.push('images/game/yellow car.png');

@@ -245,6 +245,7 @@ function loadNewsletter(){
   closeSidenav();
   $("#app_cont").load("content/newsletter.html");
   $("#pageTitle").text("Archived Newsletters");
+  animateArrow();
 }
 
 function loadAboutUs(){

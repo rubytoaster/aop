@@ -122,8 +122,18 @@ var cPathSim = function(sketch) {
 
   sketch.draw = function() {
     
-    if(pointer.ctr > 11)
+    if(pointer.ctr > 11 && pointer.ctr < 13)
       gateBoxesEnabled = true;
+    else {
+      gateBoxesEnabled = false;
+
+    }
+      
+    if(pointer.ctr > 22 && pointer.ctr < 24)
+      pathSelectionEnabled = true;
+    else {
+      pathSelectionEnabled = false;
+    }
       
     sketch.background(178, 223, 218);
     
@@ -191,12 +201,16 @@ var cPathSim = function(sketch) {
             }
             if(pathSelectionEnabled)
             {
-              if(!gateBoxList[i].hasPower)
+              if(gateBoxList[i].selected)
               {
-                flowTotal += gateBoxList[i].flow;
-                gateBoxList[i].selectBox();
-                return;
+                flowTotal -= gateBoxList[i].flow;
               }
+              else {
+                flowTotal += gateBoxList[i].flow;
+              }
+              gateBoxList[i].selectBox();
+              return;
+              
             }
           }
         
@@ -205,6 +219,11 @@ var cPathSim = function(sketch) {
       pointer.advance();
       
     }
+  }
+  
+  function checkCriticalPath()
+  {
+    
   }
   
   function loadImages()
