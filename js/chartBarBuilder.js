@@ -1,5 +1,4 @@
 var barchartNameFilled = false;
-var avgDaysFilled = false;
 var numGatesFilled = false
 var numReqsFilled = false;
 var gateTitleFilled = false;
@@ -33,16 +32,17 @@ function defineChart() {
 
 function gateValues() {
   numOfGates = parseInt($("#num_gates_id").val());
-  chartProperties = [$("#barchart_name_id").val(), $("#avg_days_id").val(), $("#num_gates_id").val(), $("#num_req_id").val()];
+  chartProperties = [$("#barchart_name_id").val(), $("#num_gates_id").val(), $("#num_req_id").val()];
   $("#chart_define").addClass("hidden_toggle");
   $("#gate_values").removeClass("hidden_toggle");
 }
 
 function showBarChart() {
-  buildChartObject();
+  var chartObj = buildChartObject();
+  sendChartToDB(chartObj);
   $("#gate_values").addClass("hidden_toggle");
   $("#gate_chart").removeClass("hidden_toggle");
-  showGateBarChart();
+  showGateBarChart(chartObj);
 }
 
 function addChartGate() {
@@ -72,16 +72,6 @@ function setupKeyEvents(){
     }
     else{
       barchartNameFilled = true;
-    }
-    checkForAllBarChartInputs();
-  }
-
-  document.getElementById('avg_days_id').onkeyup = function(event) {
-    if (this.value.length === 0) {
-      avgDaysFilled = false;
-    }
-    else{
-      avgDaysFilled = true;
     }
     checkForAllBarChartInputs();
   }
@@ -149,7 +139,6 @@ function setupKeyEvents(){
 
 function resetInputBooleanValues(){
   barchartNameFilled = false;
-  avgDaysFilled = false;
   numGatesFilled = false
   numReqsFilled = false;
   gateTitleFilled = false;
@@ -167,7 +156,7 @@ function clearAllInputTextFields(){
 }
 
 function checkForAllBarChartInputs(){
-  if(barchartNameFilled && avgDaysFilled && numGatesFilled && numReqsFilled){
+  if(barchartNameFilled && numGatesFilled && numReqsFilled){
     $('#save_chart_properties_btn').removeAttr('disabled');
     //$('#save_chart_properties_btn').addClass('col s6 m6 mouse_point waves-effect waves-light btn');
   }
@@ -191,12 +180,17 @@ function checkForAllGateChartInputs(){
 function buildChartObject(){
   let chartDBObject = {
     "name" : chartProperties[0],
-    "avgDays" : chartProperties[1],
-    "numGates" : chartProperties[2],
-    "numReq" : chartProperties[3],
+    "numGates" : chartProperties[1],
+    "numReq" : chartProperties[2],
     "gates" : gates
   };
-  chartIndexes = ["name", "avgDays", "numGates", "numReq"];
+
+  return chartDBObject;
+
+}
+
+function sendChartToDB(chartDBObject){
+  chartIndexes = ["name", "numGates", "numReq"];
   itemDB.open("BarChartDatabase", 1, "barchartDatastore", "", chartIndexes, true, function(){
     itemDB.createItem("barchartDatastore", chartDBObject, function(){});
   });
