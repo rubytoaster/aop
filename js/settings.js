@@ -55,7 +55,7 @@ function createUserInfo() {
 
 function getUserInfo(callback) {
   itemDB.fetchAll(userInfoDSName, (results) => {
-    callback(results);
+    callback(results[0]);
   });
 }
 
