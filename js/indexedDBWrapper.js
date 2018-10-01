@@ -320,6 +320,25 @@ iDB.deleteWithoutKey = function (databaseName, datastoreName, property, value, c
   callback();
 }
 
+iDB.updateItemById = (datastoreName, id, item, callback) => {
+  console.log("updating item by ID");
+  let db = datastores[datastoreName];
+  let transaction = db.transaction([datastoreName], 'readwrite');
+  let objStore = transaction.objectStore(datastoreName);
+
+  item.id = id;
+
+  let request = objStore.put(item);
+
+  request.onsuccess = () => {
+    callback();
+  };
+
+  request.onerror = (e) => {
+    console.log(e);
+  };
+};
+
 /**
 * Update Item.
 * Parameters:
