@@ -262,4 +262,4 @@ function deleteSearchItem(searchId) {
 }
 
 
-openSearchDB();
+//openSearchDB();
