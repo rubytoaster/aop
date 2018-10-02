@@ -98,13 +98,37 @@ properties = ["name", "cType", "wip", "throughput", "flowtime", "takt", "thrTime
  var isRounded = false;
  var enableCalc = false;
 
+ let precision = 1000;
+
+ function setPrecision() {
+   getUserInfo( (info) => {
+     switch (info.decimalPrecision) {
+       case "precision0":
+       precision = 1;
+       break;
+       case "precision1":
+       precision = 10;
+       break;
+       case "precision2":
+       precision = 100;
+       break;
+       case "precision3":
+       default:
+       precision = 1000;
+       break;
+     }
+     console.log("Rounding Precision set to: " + precision);
+   });
+ }
+
+ setPrecision();
 
  function roundScientific(value) {
   let numArray = value.toString().split("e");
 
   let numberToRound = Number(numArray[0]);
 
-  let numberToReturn = Math.round(numberToRound * 1000) / 1000;
+  let numberToReturn = Math.round(numberToRound * precision) / precision;
 
   return numberToReturn + "e" + numArray[1];
 }
@@ -117,7 +141,7 @@ properties = ["name", "cType", "wip", "throughput", "flowtime", "takt", "thrTime
   if (value.toString().includes("e")) {
     // raw scientific  value rounding
     isRounded = true;
-  return roundScientific(value);
+    return roundScientific(value);
   } else if (value.toString().length > 10) {
     if (value.toString().split(".")[0].length > 7) {
       //pre decimal rounding
@@ -126,7 +150,7 @@ properties = ["name", "cType", "wip", "throughput", "flowtime", "takt", "thrTime
     } else {
       //post decimal rounding
       isRounded = true;
-    return Math.round(value * 1000) / 1000;
+    return Math.round(value * precision) / precision;
     }
   } else {
     // Small (non scientific) values under total length 10

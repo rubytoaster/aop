@@ -105,6 +105,7 @@ function updateUserInfo(id) {
 
   itemDB.updateItemById(userInfoDSName, id, updatedInfo, () => {
     console.log("Updated user Information");
+    setPrecision();
   });
 }
 
