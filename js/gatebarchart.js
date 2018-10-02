@@ -78,7 +78,7 @@ function buildBarChartTable() {
 
 
   legendTable = document.getElementById("barchart_legendTable");
-    legendTable.innerHTML = "";
+  legendTable.innerHTML = "";
 
   for (let r = 0; r < rowLegend.length; r++) {
     let row;

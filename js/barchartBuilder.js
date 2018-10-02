@@ -178,6 +178,10 @@ function clearAllBarInputTextFields(){
   $("#barchart_gate_remaining_id").val("");
   $("#barchart_gate_actual_id").val("");
   $("#barchart_gate_avg_days_id").val("");
+
+  $("#barchart_name_id").val("");
+  $("#barchart_num_gates_id").val("");
+  $("#barchart_num_req_id").val("");
 }
 
 /*
@@ -268,6 +272,9 @@ function buildBarChartFromDatabase(id){
 function returnToBarChartList(){
   $("#barchart_gate_chart").addClass("hidden_toggle");
   $("#bar_chart_choice").removeClass("hidden_toggle");
+  document.getElementById("bar_saved_charts").innerHTML = "";
+  clearAllBarInputTextFields();
+  getAllBarChartObjects();
 }
 /*
 * Displays the list of charts received in the first window of the charts page

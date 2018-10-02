@@ -370,6 +370,9 @@ function buildTableChartFromDatabase(id){
 function returnToTableChartList(){
   $("#gate_chart").addClass("hidden_toggle");
   $("#table_chart_choice").removeClass("hidden_toggle");
+  document.getElementById("saved_table_charts").innerHTML = "";
+  clearAllTableInputTextFields();
+  getAllTableChartObjects();
 }
 
 /*
