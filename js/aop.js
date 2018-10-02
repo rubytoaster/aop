@@ -384,7 +384,7 @@ function loadBarChart() {
 }
 
 function loadTableChart() {
-  animateArrow();
+  animateChartArrow();
   $("#app_cont").load("content/machinetable.html");
   $("#pageTitle").text("Gate Performance Chart");
 }
