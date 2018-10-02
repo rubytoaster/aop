@@ -63,27 +63,32 @@ function createUserInfo() {
 
 function getUserInfo(callback) {
   itemDB.fetchAll(userInfoDSName, (results) => {
-    callback(results[0]);
+    if (results[0] != null) {
+      callback(results[0]);
+    } else {
+      console.log("User info not found...");
+      callback(results[0]);
+    }
   });
 }
 
-function getPrecision() {
-  itemDB.fetchAll(userInfoDSName, (results) => {
-    return results[0].decimalPrecision;
-  });
-}
-
-function getPrimaryEmail() {
-  itemDB.fetchAll(userInfoDSName, (results) => {
-    return results[0].primaryEmail;
-  });
-}
-
-function getSecondaryEmail() {
-  itemDB.fetchAll(userInfoDSName, (results) => {
-    return results[0].secondaryEmail;
-  });
-}
+// function getPrecision() {
+//   itemDB.fetchAll(userInfoDSName, (results) => {
+//     return results[0].decimalPrecision;
+//   });
+// }
+//
+// function getPrimaryEmail() {
+//   itemDB.fetchAll(userInfoDSName, (results) => {
+//     return results[0].primaryEmail;
+//   });
+// }
+//
+// function getSecondaryEmail() {
+//   itemDB.fetchAll(userInfoDSName, (results) => {
+//     return results[0].secondaryEmail;
+//   });
+// }
 
 function updateUserInfo(id) {
   let name = document.getElementById("name").value;
