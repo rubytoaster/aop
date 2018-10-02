@@ -41,7 +41,7 @@ function GateBox(sketch, posX, posY, description, flow, imageOnList, imageOff, i
     sketch.fill(0);
     sketch.textSize(12);
     sketch.text("Flow: " + this.flow + " s", this.posX + 5, this.posY + this.h-4);
-    
+
     if(sketch.frameCount % 5 == 0)
     {
       this.animIndex++;

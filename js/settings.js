@@ -20,6 +20,7 @@ function openUserInfoDB() {
         document.getElementById("name").value = results[0].name;
         document.getElementById("email_primary").value = results[0].primaryEmail;
         document.getElementById("email_secondary").value = results[0].secondaryEmail;
+        Materialize.updateTextFields();
       }
     })
   });
