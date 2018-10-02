@@ -27,9 +27,12 @@ function openUserInfoDBset() {
   });
 }
 
-function openUserInfoDB() {
+function openUserInfoDB(callback) {
   itemDB.open(userInfoDBName, userInfoVersion, userInfoDSName, "", userInfoProp, true, () => {
     console.log(userInfoDBName + " database opened...");
+    if (callback) {
+      callback();
+    }
   });
 }
 
@@ -105,6 +108,7 @@ function updateUserInfo(id) {
 
   itemDB.updateItemById(userInfoDSName, id, updatedInfo, () => {
     console.log("Updated user Information");
+    setPrecision();
   });
 }
 
