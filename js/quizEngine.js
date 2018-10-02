@@ -1,6 +1,6 @@
 const questionDBName = "Questions";
 const questionDSName = "questions";
-const questionVersion = 1;
+const questionVersion = 2;
 const questionIndecies = ["Subject", "Topic", "Question", "Answers", "CorrectAnswers"]; // TODO: test to see if you can access a question by 'id'
 
 const scoreDBName = "QuizScores";
