@@ -121,8 +121,6 @@ properties = ["name", "cType", "wip", "throughput", "flowtime", "takt", "thrTime
    });
  }
 
- setPrecision();
-
  function roundScientific(value) {
   let numArray = value.toString().split("e");
 
@@ -526,7 +524,9 @@ function saveResults(){
     var myName = $("#fld_save_name").val();
     var myGroup = $("#fld_save_group").val();
     myCalcDBObject = buildCalcObj(myName, myGroup, calcObj);
-    itemDB.createItem(databaseStore, myCalcDBObject, function() {});
+    itemDB.createItem(databaseStore, myCalcDBObject, function() {
+      //console.log(myName + " calculation saved...");
+    });
     //document.getElementById('btn_display_results').style.display="block";
   }
 }
