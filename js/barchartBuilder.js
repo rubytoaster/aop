@@ -49,8 +49,8 @@ function barGateValues() {
 * the chart the user has just built or pulled from the database.
 */
 function showBarChart() {
-  var chartObj = buildChartObject();
-  sendChartToDB(chartObj);
+  var chartObj = buildBarChartObject();
+  sendBarChartToDB(chartObj);
   $("#barchart_gate_values").addClass("hidden_toggle");
   $("#barchart_gate_chart").removeClass("hidden_toggle");
   showGateBarChart(chartObj);
@@ -255,6 +255,20 @@ function sendBarChartToDB(chartDBObject){
   });
 }
 
+function buildBarChartFromDatabase(id){
+  itemDB.open("BarChartDatabase", 1, "barchartDatastore", "", barchartIndexes, true, function(){
+    itemDB.fetchOneByKey("barchartDatastore", id, function(result){
+      $("#bar_chart_choice").addClass("hidden_toggle");
+      $("#barchart_gate_chart").removeClass("hidden_toggle");
+      showGateBarChart(result);
+    });
+  });
+}
+
+function returnToBarChartList(){
+  $("#barchart_gate_chart").addClass("hidden_toggle");
+  $("#bar_chart_choice").removeClass("hidden_toggle");
+}
 /*
 * Displays the list of charts received in the first window of the charts page
 * Parameters:
@@ -270,18 +284,11 @@ function displayListOfBarCharts(charts){
       style: "background-color:#eeeeee;",
       id: "chartList"
     }).append( $('<div>', {
-      class: "col s10 collapsible-header",
+      class: "barChartItem col s11 collapsible-header",
       text: chart.name,
       id: chart.id
     })).append( $('<li>', {
     }).append( $('<div>', {
-      class: "col s1 headerCollapsible",
-      style: "padding:0"
-    }).append( $('<img>', {
-      src: "css/svg/mail.svg",
-      id: "mailImg",
-      style: "vertical-align:middle; width: 20px; height: 20px;"
-    }))).append( $('<div>', {
       class: "col s1 headerCollapsible",
       style: "padding:0"
     }).append( $('<img>', {
@@ -301,8 +308,10 @@ function createBarChartsListEventListener(){
   if(el){
     el.addEventListener("click", function(e) {
       console.log(e.path[0]);
-      if(e.target && e.target.nodeName == "LI") {
-        console.log(e.target.id + " was clicked");
+      if(e.target && e.target.classList[0] == "barChartItem") {
+        var strId = e.target.id;
+        var numId = parseInt(strId);
+        buildBarChartFromDatabase(numId);
       }
       else if(e.target && e.target.nodeName == "IMG"){
         console.log("image was clicked");
