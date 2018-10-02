@@ -538,10 +538,18 @@ function saveResults(){
     });
     //document.getElementById('btn_display_results').style.display="block";
   }
+  $("#saveCalcButton").addClass("hidden_toggle");
+  $("#save_sect").addClass("hidden_toggle");
+  $("#openSaveButton").removeClass("hidden_toggle");
+  
 }
 
 function openSave() {
-  $("#save_sect").removeClass("hidden_toggle");
+  if(enableCalc) {
+    $("#openSaveButton").addClass("hidden_toggle");
+    $("#save_sect").removeClass("hidden_toggle");
+    $("#saveCalcButton").removeClass("hidden_toggle");
+  }
 }
 
 function setCalcType(cType) {
