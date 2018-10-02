@@ -40,7 +40,7 @@
 			<div id="calc_sect" class="hidden_toggle col s12" style="padding:0;">
 				<div class="card">
 					<div class="card-title" style="background-color:#F1F1F1 !important; padding:5px 2px 5px 10px;font-size:14px; color:#4B4B4B; font-weight:bold">
-						
+
 						<!--<input type="button" value="1/x" id="one_x" onclick="toggleReciprocal()" class="onexCalcButton">-->
 						<table>
 							<tr>
@@ -48,7 +48,7 @@
 								<td style="padding:0px;"><a id="one_x" href="javascript:toggleReciprocal()" class="btn waves-effect waves-light btn-small darken-1" style="padding:0 .8rem;float:right;color:black;font-size:12px;background-color:lightsteelblue;">1/x</a></td>
 							</tr>
 						</table>
-						
+
 					</div>
 					<div class="card-content" style="padding: 10px 20px 5px 20px">
 						<div class="row" style="margin-bottom:0">
@@ -117,29 +117,7 @@
 						Result
 					</div>
 					<div class="card-content" style="padding: 5px 20px 5px 20px">
-						<div class="row" style="text-align:center; margin-bottom:0;">
-							<span id="result2" style="color:#651fa9;text-align:center; font-weight:bold; font-size:8vw">0</span>
-							<span id="result2units" style="color:#651fa9;padding:5px;text-align:center; font-weight:bold; font-size:8vw"></span>
-							<div class="row hidden_toggle" >
-								<form class="col s12">
-									<div class="row">
-										<div class="col">
-											<div class="input-field col s6">
-												<input id="fld_save_name" type="text" class="validate" required />
-												<label for="fld_save_name">Name</label>
-											</div>
-											<div class="input-field col s6">
-												<input id="fld_save_group" type="text" class="validate"/>
-												<label for="fld_save_group">Group</label>
-											</div>
-										</div>
-										<div class="input-field col s6">
-											<button class="btn waves-effect waves-light blue darken-1" id="btn_save" onclick="saveResults()" style="width:100%;">Save Results</button>
-										</div>
-									</div>
-								</form>
-							</div>
-						</div>
+						
 						<div class="row" style="border-top:1px solid lightgray; margin-bottom:5px;">
 							<table style="border-spacing: 0px;border-bottom:none; text-align:center;" class="calcResultTable calcResults centered">
 								<thead style="border-bottom:none;">
@@ -162,6 +140,39 @@
 								</tbody>
 							</table>
 						</div>
+
+						
+						<div class="row" style="text-align:center; margin-bottom:0;">
+							<span id="result2" style="color:#651fa9;text-align:center; font-weight:bold; font-size:8vw">0</span>
+							<span id="result2units" style="color:#651fa9;padding:5px;text-align:center; font-weight:bold; font-size:8vw"></span>
+						</div>
+						<div id="save_sect" class="row hidden_toggle">
+							<form class="col s12">
+								<div class="row">
+									<div class="col">
+										<div class="input-field col s6">
+											<input id="fld_save_name" type="text" class="validate" required />
+											<label for="fld_save_name">Name</label>
+										</div>
+										<div class="input-field col s6">
+											<input id="fld_save_group" type="text" class="validate"/>
+											<label for="fld_save_group">Group</label>
+										</div>
+									</div>
+									<!-- <div class="input-field col s6">
+										<button class="btn waves-effect waves-light blue darken-1" id="btn_save" onclick="saveResults()" style="width:100%;">Save Results</button>
+									</div> -->
+								</div>
+							</form>
+						</div>
+						
+						<div class="row">
+							<i class="col s12" style="float:right; ">
+								<a class='btn' href="javascript:openSave()" style="font-weight:bold;width:100%">
+									Click To Save
+								</a>
+							</i>
+						</div>	
 					</div>
 				</div>
 
@@ -244,4 +255,9 @@
 
 			</div>
 		</div>
+		<script>
+			openUserInfoDB( () => {
+				setPrecision();
+			});
+		</script>
 	</div>

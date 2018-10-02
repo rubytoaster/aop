@@ -1,5 +1,5 @@
 var slideIndex = 1;
-var total = 146;
+var total = 50;
 
 function initalLoad(){
 
@@ -293,9 +293,17 @@ function closeGame() {
   if(typeof car_S != 'undefined' && car_S !== null) {
     gameCleanup(car_S,'app_cont');
   }
+  
+  if(typeof conv_Sim != 'undefined' && conv_Sim !== null) {
+    gameCleanup(conv_Sim,'app_cont');
+  }
+  
+  if(typeof c_PathSim != 'undefined' && c_PathSim !== null) {
+    gameCleanup(c_PathSim,'app_cont');
+  }
 
   if(typeof exportRoot != 'undefined' && exportRoot !== null) {
-    gameCleanup(exportRoot,'app_cont');
+    gameCleanupCar(exportRoot,'app_cont');
   }
 }
 
@@ -319,7 +327,7 @@ function loadGame2(){
     $("html").css('background-color', '#39b54a');
     $("#app_cont").css('background-color', '#39b54a');
     $("#app_cont").css('background-image', 'linear-gradient(180deg, #00e5ff 50%, #39b54a 50%)');
-    car_S = new p5(convSim,'app_cont');
+    conv_Sim = new p5(convSim,'app_cont');
   });
   $("#pageTitle").text("Activity");
 }
@@ -332,7 +340,7 @@ function loadGame3(){
     $("#app_cont").empty();
     $("html").css('background-color', '#B2DFDA');
     $("#app_cont").css('background-color', '#B2DFDA');
-    car_S = new p5(cPathSim,'app_cont');
+    c_PathSim = new p5(cPathSim,'app_cont');
   });
   $("#pageTitle").text("Activity");
 }
@@ -365,10 +373,12 @@ function loadCharts()
   closeSidenav();
   $("#app_cont").load("content/charts.html");
   $("#pageTitle").text("Charts");
+  $("#menuButton").show();
+  $("#backChartsButton").hide();
 }
 
 function loadBarChart() {
-  animateArrow();
+  animateChartArrow();
   $("#app_cont").load("content/gatebar.html");
   $("#pageTitle").text("Process Machine Chart");
 }
@@ -451,7 +461,19 @@ function animateActivityArrow()
 
   topPatty.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;";
   bottomPatty.style="transform:rotate(45deg);width:15px; top:63%;";
+}
 
+function animateChartArrow()
+{
+  $("#menuButton").hide();
+  $("#backChartsButton").show();
+
+  var topPatty = document.getElementById("patChart1");
+  var bottomPatty = document.getElementById("patChart3");
+  topPatty.style="height:4px; width:24px; position:absolute; top:45%; left:15%";
+
+  topPatty.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;";
+  bottomPatty.style="transform:rotate(45deg);width:15px; top:63%;";
 }
 
 function clickBackToActivity()
@@ -477,13 +499,23 @@ function clickBackToResources()
   var burger3 = document.getElementById("bur3");
   burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"
   burger3.style="transform:rotate(45deg);width:15px; top:63%;";
-  loadResources();
+  loadResources(); 
   resetArrow();
   burger1.style="tranform:rotate(45deg); width:24px; top:20%; left:15%;";
   burger3.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%;";
   portraitStyle();
+}
 
-
+function clickBackToCharts()
+{
+  var burger1 = document.getElementById("patChart1");
+  var burger3 = document.getElementById("patChart3");
+  burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"
+  burger3.style="transform:rotate(45deg);width:15px; top:63%;";
+  loadCharts();
+  resetChartArrow();
+  burger1.style="tranform:rotate(45deg); width:24px; top:20%; left:15%;";
+  burger3.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%;";
 }
 
 function portraitStyle()
@@ -513,6 +545,14 @@ function resetArrow()
 {
   var topPatty = document.getElementById("pat1");
   var bottomPatty = document.getElementById("pat3");
+  topPatty.style="transform:rotate(45deg);width:24px; top:45%; left:15%;";
+  bottomPatty.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%";
+}
+
+function resetChartArrow()
+{
+  var topPatty = document.getElementById("patChart1");
+  var bottomPatty = document.getElementById("patChart3");
   topPatty.style="transform:rotate(45deg);width:24px; top:45%; left:15%;";
   bottomPatty.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%";
 }
