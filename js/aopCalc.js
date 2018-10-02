@@ -507,6 +507,10 @@ function saveResults(){
   }
 }
 
+function openSave() {
+  $("#save_sect").removeClass("hidden_toggle");
+}
+
 function setCalcType(cType) {
   $("#calc_sect").removeClass("hidden_toggle");
   $("#tab_sect").removeClass("hidden_toggle");
