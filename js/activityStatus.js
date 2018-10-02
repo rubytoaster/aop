@@ -17,11 +17,12 @@ function deleteScore(id) {
   itemDB.deleteItem(scoreDSName, id, (e) => {
     console.log("Deleted Score item '" + id + "'");
     //refresh the display of activityStatus.
+    displayScoresInBinder();
   });
 }
 
 function displayScoresInBinder() {
-  document.getElementById("");
+  document.getElementById("savedScores").innerHTML = "";
 
   getAllScores( (results) => {
     if (results.length === 0) {
