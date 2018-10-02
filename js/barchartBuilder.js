@@ -12,6 +12,8 @@ var currBarGateNum = 1;
 var barChartProperties = [];
 var barGates = [];
 
+
+
 var isBarChartEventListenerOn = false;
 
 const barchartIndexes = ["name", "numGates", "numReq"];
@@ -76,8 +78,9 @@ function addBarChartGate() {
   }
   else{
     currBarGateNum++;
+    clearAllBarInputTextFields();
   }
-  clearAllBarInputTextFields();
+
   resetBarInputBooleanvalues();
   checkForAllBarGateChartInputs();
 }
