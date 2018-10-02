@@ -138,21 +138,26 @@ for(var j = 0; j < records[i].length; j++){
 function createCalculationsEmail(groupId) {
   let mailString = "mailto:";
 
-  setP2ToS2To( (emails) => {
-    mailString += emails;
+  getUserInfo( (info) => {
+    if (info != null && (info.primaryEmail != null && info.secondaryEmail != null)) {
+      setP2ToS2To( (emails) => {
+        mailString += emails;
 
-    console.log(mailString);
+        console.log(mailString);
 
-    itemDB.fetchAllByQuery(datastoreName, groupPropertyName, groupId, (results) => {
-      mailString += setSubjectCalc(results[0]);
-      mailString += "&body=" + results[0].group + " Calculations: %0D%0A";
-      results.forEach( (result) => {
-        mailString += buildCalcFormula(result) + '%0D%0A';
+        itemDB.fetchAllByQuery(datastoreName, groupPropertyName, groupId, (results) => {
+          mailString += setSubjectCalc(results[0]);
+          mailString += "&body=" + results[0].group + " Calculations: %0D%0A";
+          results.forEach( (result) => {
+            mailString += buildCalcFormula(result) + '%0D%0A';
+          });
+
+          window.open(mailString);
+        });
       });
-
-      window.open(mailString);
-    })
+    }
   });
+
 }
 
 function removeGroup(groupID){
