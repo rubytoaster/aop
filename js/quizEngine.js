@@ -199,6 +199,8 @@ function createQuiz (questions) {
 	submitButton = document.createElement("button");
 	submitButton.setAttribute("type", "button");
 	submitButton.setAttribute("id", "submitQuestionButton");
+	submitButton.setAttribute("class", "btn");
+	submitButton.setAttribute("style", "width:45%");
 	//submitButton.setAttribute("value", "Submit");
 	let submitText = document.createTextNode("Check Answer");
 	//submitButton.disabled = true;
@@ -210,6 +212,8 @@ function createQuiz (questions) {
 	nextButton.setAttribute("type", "button");
 	nextButton.setAttribute("id", "nextButton");
 	nextButton.setAttribute("value", "Next");
+	nextButton.setAttribute("class", "btn");
+	nextButton.setAttribute("style", "margin-left:10px; width:45%;");
 	nextButton.disabled = true;
 	let nextText = document.createTextNode("Next Question");
 	//put the right function in there
@@ -234,7 +238,7 @@ function createQuiz (questions) {
 		} else if(counter < numQuestions){
 			let submitQuizButton = document.getElementById("nextButton");
       submitQuizButton.innerText = "Submit Quiz";
-      submitQuizButton.setAttribute("class", "modal-close waves-effect ");
+      submitQuizButton.setAttribute("class", "modal-close waves-effect btn");
 			nextQuestion(questions[counter].id);
 		}
 		else{
@@ -268,13 +272,13 @@ function nextQuestion(questionId) {
 		answerForm.innerHTML = "";
 		var currentAnswer, answerText, answerLabel;
 		//create input elements
-		for(var i = 0; i < question.Answers.length; i++){
+		for(var i = 1; i <= question.Answers.length; i++){
 			//create the input element and set attributes
 			currentAnswer = document.createElement("input");
 			currentAnswer.setAttribute("id", i);
 			currentAnswer.setAttribute("type", "radio");
 			currentAnswer.setAttribute("name", "answerGroup");
-			currentAnswer.setAttribute("value", question.Answers[i]);
+			currentAnswer.setAttribute("value", question.Answers[i - 1]);
 
       answerLabel = document.createElement("label");
       answerLabel.setAttribute("for", i);
@@ -283,7 +287,7 @@ function nextQuestion(questionId) {
 			let answerContainer = document.createElement("div");
 			answerContainer.setAttribute("id", "answer" + i);
       // answerContainer.setAttribute("for", i);
-			answerText = document.createTextNode(question.Answers[i]);
+			answerText = document.createTextNode(question.Answers[i - 1]);
 			answerContainer.appendChild(currentAnswer);
 			answerLabel.appendChild(answerText);
       answerContainer.appendChild(answerLabel);
