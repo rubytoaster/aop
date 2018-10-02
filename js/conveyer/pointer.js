@@ -1,6 +1,8 @@
 //this file holds the logic and draws the pointer handDown
 function Pointer(sketch, positionList, tSlider, fSlider)
 {
+  this.successCriticalPath = false;
+  
   this.ctr = 0;
   this.posX = positionList[this.ctr].posX;
   this.posY = positionList[this.ctr].posY;
@@ -78,6 +80,10 @@ function Pointer(sketch, positionList, tSlider, fSlider)
         {
           this.isThroughputAbove();
         }
+        if(this.checkFor === "correctCriticalPath")
+        {
+          this.checkCriticalPath();
+        }
       }
 
       if(typeof this.text != 'undefined')
@@ -104,10 +110,38 @@ function Pointer(sketch, positionList, tSlider, fSlider)
       this.advance();
     }
   }
+  
+  this.checkCriticalPath = function()
+  {
+    if(this.successCriticalPath)
+    {
+      this.ctr++;
+      this.advance();
+    }
+  }
 
   this.advance = function()
   {
     this.ctr++;
+    this.textBubble.textAnimIndex = 0;
+    if(this.ctr < positionList.length)
+    {
+      this.endAnim = positionList[this.ctr].endAnim;
+      this.posX = positionList[this.ctr].posX;
+      this.posY = positionList[this.ctr].posY;
+      this.pointerPosition = positionList[this.ctr].pointerPos;
+      this.text = positionList[this.ctr].text;
+      this.pointerRotation = positionList[this.ctr].pointerRotation;
+      this.pointerYOffset = positionList[this.ctr].pointerYOffset;
+      this.pointerXOffset = positionList[this.ctr].pointerXOffset;
+      this.onCheckStep = positionList[this.ctr].onCheckStep;
+      this.checkFor = positionList[this.ctr].checkFor;
+    }
+  }
+  
+  this.backup = function()
+  {
+    this.ctr--;
     this.textBubble.textAnimIndex = 0;
     if(this.ctr < positionList.length)
     {

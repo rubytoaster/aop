@@ -217,18 +217,9 @@ function displaySearchesInBinder() {
       }).append( $('<li>', {
       }).append( $('<div>', {
         id: result.id,
-        class:  "col s10 collapsible-header",
+        class:  "col s11 collapsible-header",
         text: result.terms
       })).append( $('<div>', {
-        class: "col s1 headerCollapsible",
-        style: "padding:0"
-      }).append( $('<input>', {
-        type: "checkbox",
-        id: "searchBox" + result.id
-      })).append( $('<label>', {
-        for: "searchBox" + result.id,
-        style: "vertical-align:middle;"
-      }))).append( $('<div>', {
         class: "col s1 headerCollapsible",
         style: "padding:0"
       }).append( $('<img>', {

@@ -216,6 +216,22 @@ function loadSearchModal(){
 
   }
 
+  function loadQuizModal() {
+
+    $("#quiz_content").load("content/quiz.html");
+    $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
+    $("#quiz_content").css('padding-top','0px');
+
+    $(document).ready(function(){
+      $('#quizModal').modal();
+    });
+
+    $('#quizModal').modal({
+      dismissible:false
+    });
+    $('#quizModal').modal('open');
+  }
+
   function loadResources(){
     clearColor();
     closeGame();
