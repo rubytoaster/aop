@@ -1,5 +1,5 @@
 var slideIndex = 1;
-var total = 146;
+var total = 50;
 
 function initalLoad(){
 
