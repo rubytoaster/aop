@@ -32,13 +32,18 @@ function resetTableGlobalValues(){
   tableGates = [];
 }
 
+function helpTableSwitch(){
+  $("#table_chart_choice").addClass("hidden_toggle");
+  $("#tablechart_help_start").removeClass("hidden_toggle");
+}
+
 /**
 * Closes the window that displays the list of charts and displays a list of
 * chart properties to input for the user
 */
 function defineTableChart() {
   resetTableGlobalValues();
-  $("#table_chart_choice").addClass("hidden_toggle");
+  $("#tablechart_help_start").addClass("hidden_toggle");
   $("#table_chart_define").removeClass("hidden_toggle");
   resetTableInputBooleanValues();
   setupTableKeyEvents();
