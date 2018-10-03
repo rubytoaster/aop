@@ -102,7 +102,7 @@ function loadSlide(n){
       progressBar.appendChild(myBar);
       numberListValue.setAttribute("id", "slide" + i);
       numberListValue.setAttribute("class","imageStyle" );
-      numberListValue.setAttribute("style", "background-image: url(/images/IntermediateLevelAoP/Slide"+i+".jpg)");
+      numberListValue.setAttribute("style", "background-image: url(images/IntermediateLevelAoP/Slide"+i+".jpg)");
       pageNumber.setAttribute("id", "pageNumber");
       pageNumber.innerHTML = i + ' of ' + total;
       pageNumber.setAttribute("class", "positionNumber");

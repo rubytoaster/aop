@@ -24,6 +24,11 @@ function resetBarGlobalValues(){
   barGates = [];
 }
 
+function helpBarSwitch(){
+  $("#bar_chart_choice").addClass("hidden_toggle");
+  $("#barchart_help_start").removeClass("hidden_toggle");
+}
+
 /**
 * Closes the window that displays the list of charts and displays a list of
 * chart properties to input for the user
@@ -31,7 +36,7 @@ function resetBarGlobalValues(){
 function defineBarChart() {
   resetBarGlobalValues();
   //displaySavedCharts();
-  $("#bar_chart_choice").addClass("hidden_toggle");
+  $("#barchart_help_start").addClass("hidden_toggle");
   $("#bar_chart_define").removeClass("hidden_toggle");
   resetBarInputBooleanvalues();
   setupBarKeyEvents();
