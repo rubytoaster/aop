@@ -18,6 +18,8 @@ var tableGates = [];
 var currTableGateNum = 1;
 var numOfTableGates;
 
+var builtExampleTableChart = false;
+
 
 const tablechartIndexes = ["name", "availDays", "reqOutput", "takt", "wip", "flowdays"];
 
@@ -472,4 +474,43 @@ function createTableChartsListEventListener(){
       }
     });
   }
+}
+
+function buildExampleTableChart(){
+  if(!builtExampleTableChart){
+  exampleGates = [{
+    title : "Init Inv",
+    wip : "1.3",
+    flowdays: "1"
+  },{
+    title : "Classify",
+    wip : "7.9",
+    flowdays: "6"
+  },{
+    title : "Inv",
+    wip : "6.6",
+    flowdays: "5"
+  },{
+    title : "Report",
+    wip : "6.6",
+    flowdays: "5"
+  },{
+    title : "Rel of Rep",
+    wip : "6.6",
+    flowdays: "5"
+  }];
+
+  let chartDBObject = {
+    "name" : "Gated Machine Example #2",
+    "wip" : "29",
+    "availDays": "365",
+    "flowdays" : "22",
+    "reqOutput" : "480",
+    "takt" : ".76",
+    "gates" : exampleGates
+  }
+
+  builtExampleTableChart = true;
+  sendTableChartToDB(chartDBObject);
+}
 }

@@ -14,6 +14,8 @@ var currBarGateNum = 1;
 var barChartProperties = [];
 var barGates = [];
 
+var builtExampleBarChart = false;
+
 const barchartIndexes = ["name", "numGates", "numReq"];
 
 function resetBarGlobalValues(){
@@ -361,20 +363,63 @@ function createBarChartsListEventListener(){
 }
 
 function buildExampleBarChart(){
-  barChartInput = {
-    chartTitle : chartObj.name,
-    xAxisCategories : gateTitles,
-    yAxisTitle : '',
-    remainingDays : gateRem,
-    actualDays : gateAct,
-    requirement : chartObj.numReq,
-    last5Avg : gateAvg
-    // chartTitle : chartObj.name,
-    // xAxisCategories : [ '62-3507', '63-7982', '61-0309', '60-0322', '60-0316', '58-0057', '62-3514', '60-0351', '62-3566' ],
-    // yAxisTitle : '',
-    // remainingDays : [ 0, 0, 0, 0, 0, 15, 27, 40, 50 ],
-    // actualDays : [ 76, 65, 63, 51, 47, 40, 28, 15, 5 ],
-    // requirement : 45,
-    // last5Avg : [ 60.8, 64.4, 62.8, 61.8, 60.4, null, null, null, null ]
+  if(!builtExampleBarChart){
+  exampleGates = [{
+    title : "62-3507",
+    remDays : 0,
+    actDays: 76,
+    avgDays: 60.8
+  },{
+    title : "63-7982",
+    remDays : 0,
+    actDays: 65,
+    avgDays: 64.4
+  },{
+    title : "61-0309",
+    remDays : 0,
+    actDays: 63,
+    avgDays: 62.8
+  },{
+    title : "60-0322",
+    remDays : 0,
+    actDays: 51,
+    avgDays: 61.8
+  },{
+    title : "60-0316",
+    remDays : 0,
+    actDays: 47,
+    avgDays: 60.4
+  },{
+    title : "58-057",
+    remDays : 15,
+    actDays: 40,
+    avgDays: "null"
+  },{
+    title : "62-3514",
+    remDays : 27,
+    actDays: 28,
+    avgDays: "null"
+  },{
+    title : "60-0351",
+    remDays : 40,
+    actDays: 15,
+    avgDays: "null"
+  },{
+    title : "62-3566",
+    remDays : 50,
+    actDays: 5,
+    avgDays: "null"
+  }];
+
+  let chartDBObject = {
+    "name" : "KC-135 Block 45 Mod Last 5 Produced & A/C In-Work",
+    "numGates" : 9,
+    "numReq" : 45,
+    "gates" : exampleGates
+    //["62-3507", 0, 76, 60.8], ["63-7982", 0, 65, 64.4], ["61-0309", 0, 63, 62.8], ["60-0322", 0, 51, 61.8],
+    //["60-0316", 0, 47, 60.4], ["58-0057", 15, 40, null], ["62-3514", 27, 28, null], ["60-0351", 40, 15, null], ["62-3566", 50, 5, null]]
   };
+  builtExampleBarChart = true;
+  sendBarChartToDB(chartDBObject);
+}
 }
