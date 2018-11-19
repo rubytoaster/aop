@@ -616,6 +616,7 @@ function resetQuizArrow()
 function loadQuiz(name){
   clearColor();
   closeGame();
+ /* testing*/
 
   $("#app_cont").load("content/quizPage.html");
   $("#pageTitle").text(name + " Quiz");
