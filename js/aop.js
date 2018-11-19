@@ -628,6 +628,7 @@ function loadQuizList(){
   clearColor();
   closeGame();
   openQuestionsNScores();
+}
 
 function loadQuiz(name, datastoreName){
   clearColor();
@@ -749,4 +750,4 @@ function loadTraining(){
 });
 $("#pageTitle").text("Training");
 }
-}
+
