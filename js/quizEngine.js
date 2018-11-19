@@ -1,7 +1,7 @@
 const questionDBName = "Questions";
 const questionDSName = "questions";
-const questionVersion = 2;
-const questionIndecies = ["Subject", "Topic", "Question", "Answers", "CorrectAnswers"]; // TODO: test to see if you can access a question by 'id'
+const questionVersion = 3;
+const questionIndecies = ["Subject", "Topic", "Question", "Answers", "CorrectAnswers", "Justifications"]; // TODO: test to see if you can access a question by 'id'
 
 const scoreDBName = "QuizScores";
 const scoreDSName = "quizScores";
@@ -28,6 +28,7 @@ function openQuestionsNScores() {
 
   itemDB.open(scoreDBName, scoreVersion, scoreDSName, "", scoreIndecies, true, () => {
 		console.log("QuizScores Database opened...");
+		
 	});
 }
 
@@ -43,7 +44,13 @@ function dummyQuestions () {
 			"The amount of time it takes to complete a product.",
 			"A rule that must be upheld in order to maintain safety."
 		],
-		"CorrectAnswers": ["The gate with the lowest throughput."]
+		"CorrectAnswers": ["The gate with the lowest throughput."],
+		"Justifications": [
+			"Yes! A gate with the lowest throughput constrains the system capacity.",
+			"No! A gate with the lowest throughput constrains the system capacity.",
+			"No! A gate with the lowest throughput constrains the system capacity.",
+			"No! A gate with the lowest throughput constrains the system capacity."
+		]
 	});
 
 	quizQuestions.push({
@@ -56,7 +63,13 @@ function dummyQuestions () {
 			"How often a single unit must be produced from a machine.",
 			"The hours in a day that can be used for manufacturing."
 		],
-		"CorrectAnswers": ["How often a single unit must be produced from a machine."]
+		"CorrectAnswers": ["How often a single unit must be produced from a machine."],
+		"Justifications": [
+			"No",
+			"no",
+			"Yes",
+			"no"
+		]
 	});
 
 	quizQuestions.push({
@@ -69,7 +82,13 @@ function dummyQuestions () {
 			"An established frequent review of WIP.",
 			"A recurring, process-focused review to understand the machine."
 		],
-		"CorrectAnswers": ["A recurring, process-focused review to understand the machine."]
+		"CorrectAnswers": ["A recurring, process-focused review to understand the machine."],
+		"Justifications": [
+			"No",
+			"no",
+			"Yes",
+			"no"
+		]
 	});
 
 	quizQuestions.push({
@@ -82,7 +101,13 @@ function dummyQuestions () {
 			"Takt Time = products to be produced / production days",
 			"Takt Time = production days * products to be produced"
 		],
-		"CorrectAnswers": ["Takt Time = total time / number of products to be produced"]
+		"CorrectAnswers": ["Takt Time = total time / number of products to be produced"],
+		"Justifications": [
+			"No",
+			"no",
+			"Yes",
+			"no"
+		]
 	});
 
 	quizQuestions.push({
@@ -95,7 +120,13 @@ function dummyQuestions () {
 			"Bad: queue is waste",
 			"Both: It does create waste, but it also identifies a constraint"
 		],
-		"CorrectAnswers": ["Both: It does create waste, but it also identifies a constraint"]
+		"CorrectAnswers": ["Both: It does create waste, but it also identifies a constraint"],
+		"Justifications": [
+			"No",
+			"no",
+			"Yes",
+			"no"
+		]
 	});
 
 	quizQuestions.push({
@@ -107,7 +138,13 @@ function dummyQuestions () {
 			"Open another gate to allow more cars to get through",
 			"There is nothing you can do to improve flow time"
 		],
-		"CorrectAnswers": ["Open another gate to allow more cars to get through"]
+		"CorrectAnswers": ["Open another gate to allow more cars to get through"],
+		"Justifications": [
+			"No",
+			"no",
+			"Yes",
+			"no"
+		]
 	});
 
   quizQuestions.push({
@@ -120,7 +157,13 @@ function dummyQuestions () {
 			"It decreases",
       "It will decrease or increase depending on something else"
 		],
-		"CorrectAnswers": ["It decreases"]
+		"CorrectAnswers": ["It decreases"],
+		"Justifications": [
+			"No",
+			"no",
+			"Yes",
+			"no"
+		]
 	});
 
   quizQuestions.push({
@@ -132,7 +175,13 @@ function dummyQuestions () {
       "Decrease flow time",
       "Have no affect"
     ],
-    "CorrectAnswers": ["Decrease flow time"]
+    "CorrectAnswers": ["Decrease flow time"],
+		"Justifications": [
+			"No",
+			"no",
+			"Yes",
+			"no"
+		]
   });
 
 	return quizQuestions;
@@ -140,20 +189,20 @@ function dummyQuestions () {
 // NOT WORKING YET!!!
 // function shuffle(array) {  // NOT WORKING YET!!!
 //   var currentIndex = array.length, temporaryValue, randomIndex;
-//
+
 //   // While there remain elements to shuffle...
 //   while (0 !== currentIndex) {
-//
+
 //     // Pick a remaining element...
 //     randomIndex = Math.floor(Math.random() * currentIndex);
 //     currentIndex -= 1;
-//
+
 //     // And swap it with the current element.
 //     temporaryValue = array[currentIndex];
 //     array[currentIndex] = array[randomIndex];
 //     array[randomIndex] = temporaryValue;
 //   }
-//
+
 //   return array;
 // }
 
@@ -175,77 +224,64 @@ function createQuiz (questions) {
 	score = {"Subject": questions[0].Subject,
 		"Topic": questions[0].Topic,
 		"TotalPossible": questions.length,
-		"ActualScore": 0
+		"ActualScore": 0,
+		"currentQuestion": 0
 	};
 
 	let numQuestions = questions.length;
 	counter = 0;
 
 	// display questions 1 at a time.
-	var quizContainer = document.getElementById("quizContainer");
+	document.getElementById("quizContainer").display = "block";
+	document.getElementById("quizSubject").innerHTML = score.Subject;
+	document.getElementById("quizTopic").innerHTML = score.Topic;
 
 	// display question as the title
-	var currentQuestion = document.createElement("h5");
-	currentQuestion.setAttribute("id", "currentQuestion");
-	quizContainer.appendChild(currentQuestion);
+	var currentQuestion = document.getElementById('quizQuestion');
+	document.getElementById("finishQuiz").display = "none";
 
 	//create form element
-	var answerForm = document.createElement("form");
-	answerForm.setAttribute("id", "answerForm");
-	quizContainer.appendChild(answerForm);
+	var answerForm = document.getElementById("answerForm");
 
-	//create two buttons: one submit and one next
+	// display quiz score status.
+	// display the current status of the quiz
+	document.getElementById("questionNumber").innerHTML = "1 of " + numQuestions;
 
-	submitButton = document.createElement("button");
-	submitButton.setAttribute("type", "button");
-	submitButton.setAttribute("id", "submitQuestionButton");
-	submitButton.setAttribute("class", "btn");
-	submitButton.setAttribute("style", "width:45%");
-	//submitButton.setAttribute("value", "Submit");
-	let submitText = document.createTextNode("Check Answer");
-	//submitButton.disabled = true;
-	submitButton.appendChild(submitText);
-	//console.log();
-	//submitButton.setAttribute("onclick", "checkAnswer(" + questions[counter].id + ")");
+	document.getElementById("currentScore").innerHTML = "Score: 0/" + numQuestions;
 
-	nextButton = document.createElement("button");
-	nextButton.setAttribute("type", "button");
-	nextButton.setAttribute("id", "nextButton");
-	nextButton.setAttribute("value", "Next");
-	nextButton.setAttribute("class", "btn");
-	nextButton.setAttribute("style", "margin-left:10px; width:45%;");
+	//get the two buttons
+	submitButton = document.getElementById("submitQuestionButton");
+	nextButton = document.getElementById("nextButton");
+	closeQuizButton = document.getElementById("closeQuizButton");
+
 	nextButton.disabled = true;
-	let nextText = document.createTextNode("Next Question");
-	//put the right function in there
-	nextButton.appendChild(nextText);
-
-	//append the buttons to the form
-	quizContainer.appendChild(submitButton);
-	quizContainer.appendChild(nextButton);
-
 
 	//determine answers and update score.
 	//console.log(JSON.stringify(questions[counter]));
-	nextQuestion(questions[counter].id);
+	nextQuestion(questions[counter].id, counter, numQuestions);
 
-	document.getElementById("submitQuestionButton").addEventListener("click", function(){
-		checkAnswer(questions[counter].id);
+	submitButton.addEventListener("click", function(){
+		checkAnswer(questions[counter].id, numQuestions);
 	});
-	document.getElementById("nextButton").addEventListener("click", function(){
+
+	closeQuizButton.addEventListener("click", () => {
+		saveAndCloseQuiz();
+	});
+
+	nextButton.addEventListener("click", function(){
 		counter++;
 		if (counter < numQuestions-1) {
-			nextQuestion(questions[counter].id);
+			nextQuestion(questions[counter].id, counter, numQuestions);
 		} else if(counter < numQuestions){
 			let submitQuizButton = document.getElementById("nextButton");
       submitQuizButton.innerText = "Submit Quiz";
-      submitQuizButton.setAttribute("class", "modal-close waves-effect btn");
-			nextQuestion(questions[counter].id);
+      // submitQuizButton.setAttribute("class", "modal-close waves-effect btn");
+			nextQuestion(questions[counter].id, counter, numQuestions);
 		}
 		else{
 			submitQuiz();
 
-      $('#quizModal').modal('close');
-      clearColor();
+      
 			// let submitQuiz = document.createElement("button");
 			// submitQuiz.setAttribute("id", "submitQuizButton");
 			// submitQuiz.setAttribute("value", "Submit Quiz");
@@ -258,14 +294,15 @@ function createQuiz (questions) {
 
 }
 
-function nextQuestion(questionId) {
+function nextQuestion(questionId, counter, numQuestions) {
 	itemDB.fetchOneByKey(questionDSName, questionId, (question) => {
 		//Put current question into html
-		var currentQuestion = document.getElementById("currentQuestion");
+		document.getElementById("questionNumber").innerHTML = (counter+1) + " of " + numQuestions;
+		var quizQuestion = document.getElementById("quizQuestion");
 		var questionText = document.createTextNode(question.Question);
 		//console.log(questionText);
-		currentQuestion.innerHTML = "";
-		currentQuestion.appendChild(questionText);
+		quizQuestion.innerHTML = "";
+		quizQuestion.appendChild(questionText);
 
 
 		var answerForm = document.getElementById("answerForm");
@@ -309,11 +346,12 @@ function nextQuestion(questionId) {
 
 }
 
-function checkAnswer(questionId) {
+function checkAnswer(questionId, numQuestions) {
 	itemDB.fetchOneByKey(questionDSName, questionId, (question) => {
+		
 		if (question.CorrectAnswers.length > 1) {
 			// TODO: checkboxes
-
+			
 
 		} else {
 			// get list of radio buttons with specified name
@@ -326,6 +364,8 @@ function checkAnswer(questionId) {
 				if (button.checked) {
 					 if (button.value === question.CorrectAnswers[0]) {
 						 score.ActualScore++;
+						 document.getElementById("currentScore").innerHTML = "Score: " + score.ActualScore + "/" + numQuestions;
+
 					 } else {
 						 //answerContainer.style.color = "red";
              answerLabel.style.color = "red";
@@ -347,14 +387,26 @@ function checkAnswer(questionId) {
 	});
 }
 
-function submitQuiz(){
+function saveAndCloseQuiz(){
 	itemDB.createItem(scoreDSName, score, () => {
 		console.log("Score has been submitted");
 
+
+		$('#quizModal').modal('close');
+      clearColor();
     // close the quiz modal.
-    document.getElementById("quizContainer").innerHTML = "";
+    // document.getElementById("quizContainer").innerHTML = "";
 
 	});
+}
+
+function submitQuiz(){
+	quizContainer = document.getElementById("quizContainer");
+
+	quizContainer.style.display = "none";
+	
+	document.getElementById("finishQuiz").style.display = "block";
+	
 }
 
 function getCheckedBoxes() {
