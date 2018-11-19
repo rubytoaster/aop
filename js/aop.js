@@ -629,7 +629,6 @@ function loadQuizList(){
   closeGame();
   openQuestionsNScores();
 
-
 function loadQuiz(name, datastoreName){
   clearColor();
   closeGame();
@@ -641,6 +640,7 @@ function loadQuiz(name, datastoreName){
   $("#backQuizButton").show();
   animateQuizArrow();
 }
+
 
 function loadTraining(){
   clearColor();
@@ -748,4 +748,5 @@ function loadTraining(){
   }
 });
 $("#pageTitle").text("Training");
+}
 }
