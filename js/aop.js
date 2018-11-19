@@ -250,18 +250,6 @@ function loadSearchModal(){
 }
 
 
-function loadQuizList(){
-  console.log("loadquizlist");
-  clearColor();
-  closeGame();
-
-  closeSidenav();
-  $("#app_cont").load("content/quizList.html");
-  $("#pageTitle").text("Quizzes");
-  $("#menuButton").show();
-  $("#backQuizButton").hide();
-
-}
 
 
 function loadGettingStarted(){
@@ -624,9 +612,18 @@ function clickBackToQuiz()
   burger3.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%;";
 }
 
+
 function loadQuizList(){
+  console.log("loadquizlist");
   clearColor();
   closeGame();
+
+  closeSidenav();
+  $("#app_cont").load("content/quizList.html");
+  $("#pageTitle").text("Quizzes");
+  $("#menuButton").show();
+  $("#backQuizButton").hide();
+
   openQuestionsNScores();
 }
 
