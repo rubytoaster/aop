@@ -10,6 +10,10 @@ function initalLoad(){
 
   $("#backButton").hide();
   $("#menuButton").hide();
+  $("#backActivityButton").hide();
+  $("#backChartsButton").hide();
+  $("#backQuizButton").hide();
+
 
   loadSidenav();
 }
@@ -243,8 +247,22 @@ function loadSearchModal(){
     $("#menuButton").show();
     $("#backButton").hide();
   //add a transform for the lines.
+}
+
+
+function loadQuizList(){
+  console.log("loadquizlist");
+  clearColor();
+  closeGame();
+
+  closeSidenav();
+  $("#app_cont").load("content/quizList.html");
+  $("#pageTitle").text("Quizzes");
+  $("#menuButton").show();
+  $("#backQuizButton").hide();
 
 }
+
 
 function loadGettingStarted(){
   clearColor();
@@ -294,11 +312,11 @@ function closeGame() {
   if(typeof car_S != 'undefined' && car_S !== null) {
     gameCleanup(car_S,'app_cont');
   }
-  
+
   if(typeof conv_Sim != 'undefined' && conv_Sim !== null) {
     gameCleanup(conv_Sim,'app_cont');
   }
-  
+
   if(typeof c_PathSim != 'undefined' && c_PathSim !== null) {
     gameCleanup(c_PathSim,'app_cont');
   }
@@ -477,6 +495,21 @@ function animateChartArrow()
   bottomPatty.style="transform:rotate(45deg);width:15px; top:63%;";
 }
 
+
+function animateQuizArrow()
+{
+  $("#menuButton").hide();
+  $("#backQuizButton").show();
+
+  var topPatty = document.getElementById("patQuiz1");
+  var bottomPatty = document.getElementById("patQuiz3");
+  topPatty.style="height:4px; width:24px; position:absolute; top:45%; left:15%";
+
+  topPatty.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;";
+  bottomPatty.style="transform:rotate(45deg);width:15px; top:63%;";
+}
+
+
 function clickBackToActivity()
 {
   var burger1 = document.getElementById("bur1");
@@ -500,7 +533,7 @@ function clickBackToResources()
   var burger3 = document.getElementById("bur3");
   burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"
   burger3.style="transform:rotate(45deg);width:15px; top:63%;";
-  loadResources(); 
+  loadResources();
   resetArrow();
   burger1.style="tranform:rotate(45deg); width:24px; top:20%; left:15%;";
   burger3.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%;";
@@ -515,6 +548,19 @@ function clickBackToCharts()
   burger3.style="transform:rotate(45deg);width:15px; top:63%;";
   loadCharts();
   resetChartArrow();
+  burger1.style="tranform:rotate(45deg); width:24px; top:20%; left:15%;";
+  burger3.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%;";
+}
+
+function clickBackToQuiz()
+{
+  console.log("clickBackToQuiz");
+  var burger1 = document.getElementById("patQuiz1");
+  var burger3 = document.getElementById("patQuiz3");
+  burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"
+  burger3.style="transform:rotate(45deg);width:15px; top:63%;";
+  loadQuizList();
+  resetQuizArrow();
   burger1.style="tranform:rotate(45deg); width:24px; top:20%; left:15%;";
   burger3.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%;";
 }
@@ -560,7 +606,7 @@ function resetChartArrow()
 
 function resetQuizArrow()
 {
- var topPatty = document.getElementById("patQuiz1");
+  var topPatty = document.getElementById("patQuiz1");
   var bottomPatty = document.getElementById("patQuiz3");
   topPatty.style="transform:rotate(45deg);width:24px; top:45%; left:15%;";
   bottomPatty.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%";
@@ -583,11 +629,6 @@ function loadQuizList(){
   closeGame();
   openQuestionsNScores();
 
-  $("#app_cont").load("content/quizList.html");
-  $("#pageTitle").text("Quizzes");
-   $("#menuButton").show();
-  $("#backQuizButton").hide();
-}
 
 function loadQuiz(name, datastoreName){
   clearColor();
@@ -598,7 +639,7 @@ function loadQuiz(name, datastoreName){
   $("#pageTitle").text(name + " Quiz");
    $("#menuButton").hide();
   $("#backQuizButton").show();
-
+  animateQuizArrow();
 }
 
 function loadTraining(){
