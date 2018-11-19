@@ -556,6 +556,15 @@ function resetChartArrow()
   topPatty.style="transform:rotate(45deg);width:24px; top:45%; left:15%;";
   bottomPatty.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%";
 }
+
+function loadQuizList(){
+  clearColor();
+  closeGame();
+
+  $("#app_cont").load("content/quizList.html");
+  $("#pageTitle").text("Quizzes");
+}
+
 function loadTraining(){
   clearColor();
   closeSidenav();
