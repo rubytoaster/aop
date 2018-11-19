@@ -420,7 +420,7 @@ iDB.updateItem = (datastoreName, key_path, key, item, callback) => {
       if(cursor.value[key_path] === key){
         var request = cursor.update(item);
         request.onsuccess = () => {
-          //console.log('Update Successful');
+          console.log('Update Successful');
           callback("Update");
         };
         request.onerror = (e) => {
@@ -431,6 +431,7 @@ iDB.updateItem = (datastoreName, key_path, key, item, callback) => {
     }
   }
 };
+
 
   // Export the iDB object.
   return iDB;

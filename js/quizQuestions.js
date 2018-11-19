@@ -39,10 +39,8 @@ let littlesLaw = () => {
 			"No",
 			"yes"
 		]
-	}];
-}
-
-	/*littlesLawQuestions.push({
+  },
+  {
 		"Subject": "Little's Law",
 		"Topic": "Art of the Possible",
 		"Question": "What is takt time?",
@@ -59,9 +57,8 @@ let littlesLaw = () => {
 			"Yes",
 			"no"
 		]
-	});
-
-	littlesLawQuestions.push({
+  }, 
+  {
 		"Subject": "Little's Law",
 		"Topic": "Wall Walks",
 		"Question": "What is a Wall Walk?",
@@ -78,9 +75,8 @@ let littlesLaw = () => {
 			"Yes",
 			"no"
 		]
-	});
-
-	littlesLawQuestions.push({
+  }, 
+  {
 		"Subject": "Little's Law",
 		"Topic": "Art of the Possible",
 		"Question": "What is the equation for evaluating Takt Time?",
@@ -97,9 +93,8 @@ let littlesLaw = () => {
 			"Yes",
 			"no"
 		]
-	});
-
-	littlesLawQuestions.push({
+  }, 
+  {
 		"Subject": "Little's Law",
 		"Topic": "The Process Machine",
 		"Question": "Are queued assets good or bad for the machine? Why?",
@@ -116,9 +111,10 @@ let littlesLaw = () => {
 			"Yes",
 			"no"
 		]
-	});
+	}];
+}
 
-	leadershipQuestions.push({
+	/*leadershipQuestions.push({
 		"Subject": "Little's Law",
 		"Topic": "Flow Time",
 		"Question": "Given that there is a set amount of cars queued in front of the gate.  How would you reduce the flow time of each car?",

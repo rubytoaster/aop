@@ -341,6 +341,23 @@ iDB.updateItemById = (datastoreName, id, item, callback) => {
   };
 };
 
+iDB.updateItemByUniqueProperty = (datastoreName, property, value, item, callback) => {
+
+  let db = datastores[datastoreName];
+  let transaction = db.transaction([datastoreName], 'readwrite');
+  let objStore = transaction.objectStore(datastoreName);
+
+  let request = objStore.index(property).put(item);
+
+    transaction.oncomplete = function(e) {
+      callback(request.result);
+    };
+    transaction.onsuccess = function(e) {
+      //console.log('Request successful...');
+    };
+    request.onerror = iDB.onerror;
+};
+
 /**
 * Update Item.
 * Parameters:

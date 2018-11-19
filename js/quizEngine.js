@@ -60,9 +60,8 @@ function openQuestionsNScores() {
 		
 	})
 
-  itemDB.open(scoreDBName, scoreVersion, scoreDSName, "", scoreIndecies, true, () => {
+  itemDB.open(scoreDBName, scoreVersion, scoreDSName, "Subject", scoreIndecies, false, () => {
 		console.log("QuizScores Database opened...");
-
 	});
 }
 
@@ -94,24 +93,38 @@ function readQuestions (datastoreName) {
 	quizEngineDB.fetchAll(datastoreName, null, (results) => {
 	 	//TODO: shuffle the results.
 
-
-		createQuiz(results);
+		createScore(results);
+		
 	});
 }
 
+function createScore(questions)
+{
+//Grab score from db if exists
+itemDB.fetchOneByIndex(scoreDSName, "Subject", questions[0].Subject, (result) => {
+	if (result != null){
+		score = result;
+		createQuiz(questions);
+	}
+	else {
+		score = {"Subject": questions[0].Subject,
+			"Topic": questions[0].Topic,
+			"TotalPossible": questions.length,
+			"ActualScore": 0,
+			"currentQuestion": 0
+		};
+		itemDB.createItem(scoreDSName, score, () => {
+			createQuiz(questions);
+		});
+	}
+});
+}
+
 function createQuiz (questions) {
-	//console.log("In createQuiz");
-	//console.log(questions);
-	// local score variables
-	score = {"Subject": questions[0].Subject,
-		"Topic": questions[0].Topic,
-		"TotalPossible": questions.length,
-		"ActualScore": 0,
-		"currentQuestion": 0
-	};
+	
 
 	let numQuestions = questions.length;
-	counter = 0;
+	counter = score.currentQuestion;
 
 	// display questions 1 at a time.
 	document.getElementById("quizContainer").display = "block";
@@ -230,6 +243,7 @@ function nextQuestion(questionId, counter, numQuestions) {
 
 		submitButton.disabled = false;
 		nextButton.disabled = true;
+		saveQuizScore();
 		// counter++;
 	});
 
@@ -278,7 +292,11 @@ function checkAnswer(questionId, numQuestions) {
 
 		//let nextButton = document.getElementById("nextButton");
 		nextButton.disabled = false;
+
+		saveQuizScore();
 	});
+
+
 }
 
 function saveAndCloseQuiz(){
@@ -290,6 +308,12 @@ function saveAndCloseQuiz(){
     // close the quiz modal.
     // document.getElementById("quizContainer").innerHTML = "";
 
+	});
+}
+
+function saveQuizScore(){
+	itemDB.updateItem(scoreDSName, "Subject", score.Subject, score, () => {
+		console.log("updated score " + score.Subject);
 	});
 }
 
