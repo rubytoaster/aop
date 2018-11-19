@@ -87,7 +87,7 @@ function openQuestionsNScores() {
 //   return array;
 // }
 
-function readQuestions (datastoreName, numQuestions, callback) {
+function readQuestions (datastoreName) {
 	// grab all questions from
 	//console.log("In setupQuestions");
 	currentDatastore = datastoreName;
@@ -115,7 +115,7 @@ function createQuiz (questions) {
 
 	// display questions 1 at a time.
 	document.getElementById("quizContainer").display = "block";
-	document.getElementById("quizSubject").innerHTML = score.Subject;
+	// document.getElementById("quizSubject").innerHTML = score.Subject;
 	document.getElementById("quizTopic").innerHTML = score.Topic;
 
 	// display question as the title
@@ -129,7 +129,7 @@ function createQuiz (questions) {
 	// display the current status of the quiz
 	document.getElementById("questionNumber").innerHTML = "1 of " + numQuestions;
 
-	document.getElementById("currentScore").innerHTML = "Score: 0/" + numQuestions;
+	document.getElementById("currentScore").innerHTML = "Score: 0%";
 
 	//get the two buttons
 	submitButton = document.getElementById("submitQuestionButton");
@@ -201,7 +201,13 @@ function nextQuestion(questionId, counter, numQuestions) {
 
       answerLabel = document.createElement("label");
       answerLabel.setAttribute("for", i);
-      answerLabel.setAttribute("id", "label" + i);
+			answerLabel.setAttribute("id", "label" + i);
+			
+			let answerJustification = document.createElement('div');
+			answerJustification.setAttribute('id', "justification" + i);
+			answerJustification.setAttribute('style', 'display: none');
+			let justificationText = document.createTextNode(question.Justifications[i - 1]);
+			answerJustification.appendChild(justificationText);
 
 			let answerContainer = document.createElement("div");
 			answerContainer.setAttribute("id", "answer" + i);
@@ -209,7 +215,8 @@ function nextQuestion(questionId, counter, numQuestions) {
 			answerText = document.createTextNode(question.Answers[i - 1]);
 			answerContainer.appendChild(currentAnswer);
 			answerLabel.appendChild(answerText);
-      answerContainer.appendChild(answerLabel);
+			answerContainer.appendChild(answerLabel);
+			answerContainer.appendChild(answerJustification);
 			//currentAnswer.innerHTML = "Test";
 			//currentAnswer.appendChild(answerText);
 			var breakElement = document.createElement("br");
@@ -242,23 +249,28 @@ function checkAnswer(questionId, numQuestions) {
 	    // loop through list of radio buttons
 	    radios.forEach( (button) => {
 				//let answerContainer = document.getElementById("answer" + button.id);
-        let answerLabel = document.getElementById("label" + button.id);
+				let answerLabel = document.getElementById("label" + button.id);
+				let justification = document.getElementById('justification' + button.id);
 				if (button.checked) {
 					 if (button.value === question.CorrectAnswers[0]) {
 						 score.ActualScore++;
-						 document.getElementById("currentScore").innerHTML = "Score: " + score.ActualScore + "/" + numQuestions;
-
+						 document.getElementById("currentScore").innerHTML = "Score: " + (score.ActualScore / numQuestions) * 100 + '%';
+						 
 					 } else {
 						 //answerContainer.style.color = "red";
-             answerLabel.style.color = "red";
+						 answerLabel.style.color = "red";
+						 justification.style.display = 'block';
+
 					 }
 				}
 				if (button.value === question.CorrectAnswers[0]) {
 					//answerContainer.style.color = "green";
-          answerLabel.style.color = "green";
+					answerLabel.style.color = "green";
+					justification.style.display = 'block';
 				}
 			});
 		}
+
 
 
 		//let submitButton = document.getElementById("submitButton");
@@ -274,8 +286,7 @@ function saveAndCloseQuiz(){
 		console.log("Score has been submitted");
 
 
-		$('#quizModal').modal('close');
-      clearColor();
+		loadQuizList();
     // close the quiz modal.
     // document.getElementById("quizContainer").innerHTML = "";
 
@@ -288,6 +299,7 @@ function submitQuiz(){
 	quizContainer.style.display = "none";
 	
 	document.getElementById("finishQuiz").style.display = "block";
+	document.getElementById("currentScore").style.display = "block";
 	
 }
 

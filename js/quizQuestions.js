@@ -36,8 +36,8 @@ let littlesLaw = () => {
 		"Justifications": [
 			"No",
 			"no",
-			"Yes",
-			"no"
+			"No",
+			"yes"
 		]
 	}];
 }

@@ -1,5 +1,6 @@
 var slideIndex = 1;
 var total = 50;
+let currentQuiz;
 
 function initalLoad(){
 
@@ -216,21 +217,21 @@ function loadSearchModal(){
 
   }
 
-  function loadQuizModal() {
+  // function loadQuizModal() {
 
-    $("#quiz_content").load("content/quiz.html");
-    $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
-    $("#quiz_content").css('padding-top','0px');
+  //   $("#quiz_content").load("content/quiz.html");
+  //   $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
+  //   $("#quiz_content").css('padding-top','0px');
 
-    $(document).ready(function(){
-      $('#quizModal').modal();
-    });
+  //   $(document).ready(function(){
+  //     $('#quizModal').modal();
+  //   });
 
-    $('#quizModal').modal({
-      dismissible:false
-    });
-    $('#quizModal').modal('open');
-  }
+  //   $('#quizModal').modal({
+  //     dismissible:false
+  //   });
+  //   $('#quizModal').modal('open');
+  // }
 
   function loadResources(){
     clearColor();
@@ -580,6 +581,7 @@ function clickBackToQuiz()
 function loadQuizList(){
   clearColor();
   closeGame();
+  openQuestionsNScores();
 
   $("#app_cont").load("content/quizList.html");
   $("#pageTitle").text("Quizzes");
@@ -587,14 +589,16 @@ function loadQuizList(){
   $("#backQuizButton").hide();
 }
 
-function loadQuiz(name){
+function loadQuiz(name, datastoreName){
   clearColor();
   closeGame();
+  currentQuiz = datastoreName;
 
   $("#app_cont").load("content/quizPage.html");
   $("#pageTitle").text(name + " Quiz");
    $("#menuButton").hide();
   $("#backQuizButton").show();
+
 }
 
 function loadTraining(){
