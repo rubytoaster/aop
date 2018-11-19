@@ -199,7 +199,7 @@ var quizEngineDB = ( function() {
   * callback - function to call once the database has been opened.
   */
   iDB.fetchAllByQuery = (datastoreName, property, value, callback) => {
-      let db = datastores[datastoreName];
+      let db = database;
       let transaction = db.transaction([datastoreName], 'readwrite');
       let objStore = transaction.objectStore(datastoreName);
 
@@ -248,7 +248,7 @@ var quizEngineDB = ( function() {
  * callback - function to call once the database has been opened.
  */
 iDB.fetchOneByKey = function(datastoreName, key, callback) {
-  let db = datastores[datastoreName];
+  let db = database;
   let transaction = db.transaction([datastoreName], 'readwrite');
   let objStore = transaction.objectStore(datastoreName);
 
@@ -271,8 +271,8 @@ iDB.fetchOneByKey = function(datastoreName, key, callback) {
 * datastoreName - string name of the datastore in the database.
 * callback - function to call once the database has been opened.
 */
-iDB.fetchAll = (datastoreName, callback) => {
-  let db = datastores[datastoreName];
+iDB.fetchAll = (datastoreName, index, callback) => {
+  let db = database;
   let transaction = db.transaction([datastoreName], 'readwrite');
   let objStore = transaction.objectStore(datastoreName);
 
@@ -294,7 +294,7 @@ iDB.fetchAll = (datastoreName, callback) => {
 
   transaction.oncomplete = function(e) {
     // Execute the callback function.
-    callback(items);
+    callback(items, index);
   };
 
   transaction.onerror = (e) => {

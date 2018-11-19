@@ -2,8 +2,8 @@ var carSim = function(sketch) {
   
   loadQuizModal();
 
-  setupQuestions('Flow Time', 3, (questions) => {
-    createQuiz(questions);
+  readQuestions('littlesLaw', 3, (questions) => {
+    // createQuiz(questions);
   });
   
   var bgcolor;

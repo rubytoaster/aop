@@ -1,5 +1,10 @@
-function littlesLawQuestions () {
-	return littlesLawQuestions = [{
+let leadershipDiagram = () => {
+  return [];
+}
+
+
+let littlesLaw = () => {
+	return [{
 		"Subject": "Little's Law",
 		"Topic": "Wall Walks",
 		"Question": "What is a constraint?",
@@ -16,11 +21,28 @@ function littlesLawQuestions () {
 			"No! A gate with the lowest throughput constrains the system capacity.",
 			"No! A gate with the lowest throughput constrains the system capacity."
 		]
-  }, 
+  },
+   {
+		"Subject": "Little's Law",
+		"Topic": "Wall Walks",
+		"Question": "What is a Wall Walk?",
+		"Answers": [
+			"A visual representation of a single process.",
+			"A method of analyzing a value stream map to determine value.",
+			"An established frequent review of WIP.",
+			"A recurring, process-focused review to understand the machine."
+		],
+		"CorrectAnswers": ["A recurring, process-focused review to understand the machine."],
+		"Justifications": [
+			"No",
+			"no",
+			"Yes",
+			"no"
+		]
+	}];
+}
 
-];
-
-	littlesLawQuestions.push({
+	/*littlesLawQuestions.push({
 		"Subject": "Little's Law",
 		"Topic": "Art of the Possible",
 		"Question": "What is takt time?",
@@ -151,5 +173,14 @@ function littlesLawQuestions () {
 		]
   });
 
-	return littlesLawQuestions;
+  return littlesLawQuestions;*/
+  
+
+let radiatorChart = () => {
+  return [];
 }
+let criticalPath = () => {
+  return [];
+}
+
+let questionFunctionNames = [leadershipDiagram, littlesLaw, radiatorChart, criticalPath];
