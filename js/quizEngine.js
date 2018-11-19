@@ -1,7 +1,8 @@
-const questionDBName = "Questions";
-const questionDSName = "questions";
-const questionVersion = 3;
-const questionIndecies = ["Subject", "Topic", "Question", "Answers", "CorrectAnswers", "Justifications"]; // TODO: test to see if you can access a question by 'id'
+const questionDBName = "quizEngineQuestions";
+// const questionDSName = "questions";
+const questionVersion = 1;
+const datastores = ["leadershipDiagram", "littlesLaw", "radiatorChart", "criticalPath"];
+const questionColumns = ["Subject", "Topic", "Question", "Answers", "CorrectAnswers", "Justifications"]; // TODO: test to see if you can access a question by 'id'
 
 const scoreDBName = "QuizScores";
 const scoreDSName = "quizScores";
@@ -13,28 +14,39 @@ let submitButton, nextButton;
 let counter = 0;
 
 function openQuestionsNScores() {
-  itemDB.open(questionDBName, questionVersion, questionDSName, "", questionIndecies, true, () => {
-		console.log("Questions Database opened...");
-    //determine if dummy questions are needed to test.
-    itemDB.fetchAll(questionDSName, (results) => {
-      if (results[0] == null) {
-        let questions = dummyQuestions();
-        questions.forEach( (question) => {
-          itemDB.createItem(questionDSName, question, () => {});
-        });
-      }
-    });
-	});
+  // itemDB.open(questionDBName, questionVersion, questionDSName, "", questionIndecies, true, () => {
+	// 	console.log("Questions Database opened...");
+  //   //determine if dummy questions are needed to test.
+  //   itemDB.fetchAll(questionDSName, (results) => {
+  //     if (results[0] == null) {
+  //       let questions = dummyQuestions();
+  //       questions.forEach( (question) => {
+  //         itemDB.createItem(questionDSName, question, () => {});
+  //       });
+  //     }
+  //   });
+	// });
+
+	quizEngineDB.openDB(questionDBName, questionVersion, datastores, questionColumns, () => {
+		console.log(questionDBName + " database opened...");
+
+		
+	})
 
   itemDB.open(scoreDBName, scoreVersion, scoreDSName, "", scoreIndecies, true, () => {
 		console.log("QuizScores Database opened...");
-		
+
 	});
 }
 
 function dummyQuestions () {
+	let leadershipQuestions = [];
+	let littlesLawQuestions = [];
+	let radiatorChartQuestions = [];
+	let criticalPathQuestions = [];
 	let quizQuestions = [];
-	quizQuestions.push({
+
+	littlesLawQuestions.push({
 		"Subject": "Little's Law",
 		"Topic": "Wall Walks",
 		"Question": "What is a constraint?",
@@ -53,7 +65,7 @@ function dummyQuestions () {
 		]
 	});
 
-	quizQuestions.push({
+	littlesLawQuestions.push({
 		"Subject": "Little's Law",
 		"Topic": "Art of the Possible",
 		"Question": "What is takt time?",
@@ -72,7 +84,7 @@ function dummyQuestions () {
 		]
 	});
 
-	quizQuestions.push({
+	littlesLawQuestions.push({
 		"Subject": "Little's Law",
 		"Topic": "Wall Walks",
 		"Question": "What is a Wall Walk?",
@@ -91,7 +103,7 @@ function dummyQuestions () {
 		]
 	});
 
-	quizQuestions.push({
+	littlesLawQuestions.push({
 		"Subject": "Little's Law",
 		"Topic": "Art of the Possible",
 		"Question": "What is the equation for evaluating Takt Time?",
@@ -110,7 +122,7 @@ function dummyQuestions () {
 		]
 	});
 
-	quizQuestions.push({
+	littlesLawQuestions.push({
 		"Subject": "Little's Law",
 		"Topic": "The Process Machine",
 		"Question": "Are queued assets good or bad for the machine? Why?",
@@ -129,7 +141,7 @@ function dummyQuestions () {
 		]
 	});
 
-	quizQuestions.push({
+	leadershipQuestions.push({
 		"Subject": "Little's Law",
 		"Topic": "Flow Time",
 		"Question": "Given that there is a set amount of cars queued in front of the gate.  How would you reduce the flow time of each car?",
@@ -147,7 +159,7 @@ function dummyQuestions () {
 		]
 	});
 
-  quizQuestions.push({
+  leadershipQuestions.push({
 		"Subject": "Little's Law",
 		"Topic": "Flow Time",
 		"Question": "Given that all the gates are open, what would happen to throughput if you close all but one gate?",
@@ -166,7 +178,7 @@ function dummyQuestions () {
 		]
 	});
 
-  quizQuestions.push({
+  leadershipQuestions.push({
     "Subject": "Little's Law",
     "Topic": "Flow Time",
     "Question": "Opening more gates will:",
