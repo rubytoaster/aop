@@ -557,12 +557,44 @@ function resetChartArrow()
   bottomPatty.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%";
 }
 
+function resetQuizArrow()
+{
+ var topPatty = document.getElementById("patQuiz1");
+  var bottomPatty = document.getElementById("patQuiz3");
+  topPatty.style="transform:rotate(45deg);width:24px; top:45%; left:15%;";
+  bottomPatty.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%";
+}
+
+function clickBackToQuiz()
+{
+  var burger1 = document.getElementById("patQuiz1");
+  var burger3 = document.getElementById("patQuiz3");
+  burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"
+  burger3.style="transform:rotate(45deg);width:15px; top:63%;";
+  loadQuizList();
+  resetQuizArrow();
+  burger1.style="tranform:rotate(45deg); width:24px; top:20%; left:15%;";
+  burger3.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%;";
+}
+
 function loadQuizList(){
   clearColor();
   closeGame();
 
   $("#app_cont").load("content/quizList.html");
   $("#pageTitle").text("Quizzes");
+   $("#menuButton").show();
+  $("#backQuizButton").hide();
+}
+
+function loadQuiz(name){
+  clearColor();
+  closeGame();
+
+  $("#app_cont").load("content/quizPage.html");
+  $("#pageTitle").text(name + " Quiz");
+   $("#menuButton").hide();
+  $("#backQuizButton").show();
 }
 
 function loadTraining(){
