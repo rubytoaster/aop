@@ -69,7 +69,7 @@ function displayScoresInBinder() {
   $('.collapsible').collapsible();
   let ul = document.getElementById(score.Topic + listCounter++);
   let li = document.createElement("li");
-  li.appendChild(document.createTextNode("Score: " + score.ActualScore + "/" + score.TotalPossible));
+  li.appendChild(document.createTextNode(displayPercentCorrect(score)));
   ul.appendChild(li);
   });
 });

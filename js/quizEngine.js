@@ -268,7 +268,7 @@ function checkAnswer(questionId, numQuestions) {
 				if (button.checked) {
 					if (button.value === question.CorrectAnswers[0]) {
 						score.ActualScore++;
-						document.getElementById("currentScore").innerHTML = displayPercentCorrect();
+						document.getElementById("currentScore").innerHTML = displayPercentCorrect(score);
 
 					} else {
 						//answerContainer.style.color = "red";
@@ -332,7 +332,7 @@ function displayQuizResults() {
 	document.getElementById("quizTopic").innerHTML = score.Topic;
 	document.getElementById("finishQuiz").style.display = "block";
 	document.getElementById("currentScore").style.display = "block";
-	document.getElementById("currentScore").innerHTML = displayPercentCorrect();
+	document.getElementById("currentScore").innerHTML = displayPercentCorrect(score);
 
 	closeQuizButton = document.getElementById("closeQuizButton");
 	closeQuizButton.addEventListener("click", () => {
@@ -349,6 +349,6 @@ function displayQuizRetake() {
 	document.getElementById("nextButton").innerHTML = "Next Question";
 }
 
-function displayPercentCorrect() {
+function displayPercentCorrect(score) {
 	return "Score: " + Math.round((score.ActualScore / score.TotalPossible) * 100) + '%';
 }
