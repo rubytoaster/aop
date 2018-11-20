@@ -10,11 +10,13 @@
         </div>
       </div>
     
-      <div id="finishQuiz" style="display: none;">
-        <button type="button" id="closeQuizButton" class="modal-close waves-effect btn"
+      <div id="finishQuiz" style="display: none;"> 
+        <button type="button" id="closeQuizButton" class="waves-effect btn"
         style="width:45%;">Close Quiz</button>
+        <button type="button" id="retakeQuizButton" class="waves-effect btn"
+        style="width:45%; margin-left:10px;" >Retake Quiz</button>
       </div>
-    
+
       <div id="quizContainer">
         <h5 id="quizQuestion"></h5>
         <form id="answerForm"></form>
@@ -23,6 +25,12 @@
           style="width:45%;">Check Answer</button>
         <button type="button" id="nextButton" value="Next"
           style="width: 45%; margin-left:10px;" class="btn">Next Question</button>
+      </div>
+
+      <div id="closeQuiz"> 
+        </br>
+        </br>
+        <a href="javascript: saveAndCloseQuiz();" id="closeQuizButton" class="">Save and Close Quiz</a>
       </div>
 <div class="row">
 
