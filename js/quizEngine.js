@@ -167,6 +167,10 @@ function createQuiz(questions) {
 
 }
 
+function clearCheckedDivs() {
+	document.getElementById("answer" + i);
+}
+
 function nextQuestion(questionId, numQuestions) {
 
 	//TODO: We already have our list of questions, why are we querying the db to retrieve them again

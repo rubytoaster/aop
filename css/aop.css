@@ -931,8 +931,25 @@ ul#horizontal-list li{
   color:gray;
 }
 
+#quizTopic{
+  font-weight:bold;
+  color:gray;
+}
+
+#quizQuestion{
+  font-weight: bold;
+}
+
 .btn-small {
     height: 24px;
     line-height: 24px;
     padding: 0 0.5rem;
+}
+
+[type="radio"]:checked+label{
+  color:blue; 
+}
+
+[type="radio"]:checked:parent{
+  background-color:red;
 }
