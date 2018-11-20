@@ -87,7 +87,7 @@ retakeQuizButton = document.getElementById("retakeQuizButton");
 
 
 
-// 
+//
 function addEventListenersToButtons(questions, numQuestions) {
 	submitButton.addEventListener("click", () => {
 		checkAnswer(questions[score.currentQuestion].id, numQuestions);
@@ -171,7 +171,7 @@ function createQuiz(questions) {
 
 	// display quiz score status.
 	// display the current status of the quiz
-	document.getElementById("questionNumber").innerHTML = "Question 1 of " + numQuestions;
+	document.getElementById("questionNumber").innerHTML = "1/" + numQuestions;
 
 	document.getElementById("currentScore").innerHTML = "Score: 0%";
 
@@ -190,7 +190,7 @@ function nextQuestion(questionId, numQuestions) {
 
 	quizEngineDB.fetchOneByKey(currentDatastore, questionId, (question) => {
 		//Put current question into html
-		document.getElementById("questionNumber").innerHTML = "Question " + (score.currentQuestion + 1) + " of " + numQuestions;
+		document.getElementById("questionNumber").innerHTML = (score.currentQuestion + 1) + "/" + numQuestions;
 		var quizQuestion = document.getElementById("quizQuestion");
 		var questionText = document.createTextNode(question.Question);
 		//console.log(questionText);
@@ -222,10 +222,13 @@ function nextQuestion(questionId, numQuestions) {
 
 			let answerContainer = document.createElement("div");
 			answerContainer.setAttribute("id", "answer" + i);
+
+			answerContainer.setAttribute("class", "answerStyle");
 			// answerContainer.setAttribute("for", i);
 			answerText = document.createTextNode(question.Answers[i - 1]);
 			answerContainer.appendChild(currentAnswer);
 			answerLabel.appendChild(answerText);
+			answerLabel.setAttribute("class", "answerText");
 			answerContainer.appendChild(answerLabel);
 			answerContainer.appendChild(answerJustification);
 			//currentAnswer.innerHTML = "Test";
