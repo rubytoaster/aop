@@ -15,40 +15,22 @@ let counter = 0;
 let currentDatastore;
 
 function openQuestionsNScores() {
-  // itemDB.open(questionDBName, questionVersion, questionDSName, "", questionIndecies, true, () => {
-	// 	console.log("Questions Database opened...");
-  //   //determine if dummy questions are needed to test.
-  //   itemDB.fetchAll(questionDSName, (results) => {
-  //     if (results[0] == null) {
-  //       let questions = dummyQuestions();
-  //       questions.forEach( (question) => {
-  //         itemDB.createItem(questionDSName, question, () => {});
-  //       });
-  //     }
-  //   });
-	// });
-
+	//Open connection to the quizEngineQuestions database and each of the datastores
 	quizEngineDB.openDB(questionDBName, questionVersion, datastores, questionColumns, () => {
 		console.log(questionDBName + " database opened...");
 
-		// let questions = [];
-		// datastores.forEach( (name) => {
-		// 	questions[name] = questionFunctionNames[name];
-		// });
-		// console.log(questions['littlesLaw']);
-
 		//load questions into db
-		for (index = 0; index < datastores.length; index++){
+		for (index = 0; index < datastores.length; index++) {
 			console.log(index);
 			quizEngineDB.fetchAll(datastores[index], index, (results, myIndex) => {
-				if (results[0] == null){
+				if (results[0] == null) {
 					console.log(myIndex);
 
 					// get questions from file.
 					let questions = questionFunctionNames[myIndex]();
 
 					//loop through questions to insert into database.
-					questions.forEach( (question) => {
+					questions.forEach((question) => {
 						quizEngineDB.createItem(datastores[myIndex], question, () => {
 							console.log("added question to " + datastores[myIndex]);
 						});
@@ -57,12 +39,12 @@ function openQuestionsNScores() {
 
 			});
 		}
-		
+
 	})
 
-  itemDB.open(scoreDBName, scoreVersion, scoreDSName, "", scoreIndecies, true, () => {
+	//Open connection the the QuizScores database and its quizScores datastore, using Subject as the key_path
+	itemDB.open(scoreDBName, scoreVersion, scoreDSName, "Subject", scoreIndecies, false, () => {
 		console.log("QuizScores Database opened...");
-
 	});
 }
 
@@ -87,31 +69,53 @@ function openQuestionsNScores() {
 //   return array;
 // }
 
-function readQuestions (datastoreName) {
-	// grab all questions from
-	//console.log("In setupQuestions");
+function readQuestions(datastoreName) {
+	// grab all questions from selected quiz defined by the button
 	currentDatastore = datastoreName;
 	quizEngineDB.fetchAll(datastoreName, null, (results) => {
-	 	//TODO: shuffle the results.
+		//TODO: shuffle the results.
 
+		createScore(results);
 
-		createQuiz(results);
 	});
 }
 
-function createQuiz (questions) {
-	//console.log("In createQuiz");
-	//console.log(questions);
-	// local score variables
-	score = {"Subject": questions[0].Subject,
-		"Topic": questions[0].Topic,
-		"TotalPossible": questions.length,
-		"ActualScore": 0,
-		"currentQuestion": 0
-	};
+function createScore(questions) {
+
+	itemDB.fetchOneByIndex(scoreDSName, "Subject", questions[0].Subject, (result) => {
+		//Grab score from db if exists
+		if (result != null) {
+			score = result;
+			//If the quiz has already been finished, display the results div showing the score received
+			if (score.currentQuestion == score.TotalPossible) {
+				displayQuizResults();
+			}
+			else{
+				createQuiz(questions);
+			}
+		}
+		//Create new score and add it to db
+		else {
+			score = {
+				"Subject": questions[0].Subject,
+				"Topic": questions[0].Topic,
+				"TotalPossible": questions.length,
+				"ActualScore": 0,
+				"currentQuestion": 0
+			};
+
+			itemDB.createItem(scoreDSName, score, () => { 
+				createQuiz(questions);
+			});
+		}
+
+		
+	});
+}
+
+function createQuiz(questions) {
 
 	let numQuestions = questions.length;
-	counter = 0;
 
 	// display questions 1 at a time.
 	document.getElementById("quizContainer").display = "block";
@@ -139,47 +143,37 @@ function createQuiz (questions) {
 	nextButton.disabled = true;
 
 	//determine answers and update score.
-	//console.log(JSON.stringify(questions[counter]));
-	nextQuestion(questions[counter].id, counter, numQuestions);
+	nextQuestion(questions[score.currentQuestion].id, numQuestions);
 
-	submitButton.addEventListener("click", function(){
-		checkAnswer(questions[counter].id, numQuestions);
+	submitButton.addEventListener("click", function () {
+		checkAnswer(questions[score.currentQuestion].id, numQuestions);
+
 	});
 
-	closeQuizButton.addEventListener("click", () => {
-		saveAndCloseQuiz();
-	});
-
-	nextButton.addEventListener("click", function(){
-		counter++;
-		if (counter < numQuestions-1) {
-			nextQuestion(questions[counter].id, counter, numQuestions);
-		} else if(counter < numQuestions){
+	nextButton.addEventListener("click", function () {
+		
+		if (score.currentQuestion < numQuestions - 1) {
+			nextQuestion(questions[score.currentQuestion].id, numQuestions);
+		} else if (score.currentQuestion < numQuestions) {
 			let submitQuizButton = document.getElementById("nextButton");
-      submitQuizButton.innerText = "Submit Quiz";
-      // submitQuizButton.setAttribute("class", "modal-close waves-effect btn");
-			nextQuestion(questions[counter].id, counter, numQuestions);
+			submitQuizButton.innerText = "Submit Quiz";
+			// submitQuizButton.setAttribute("class", "modal-close waves-effect btn");
+			nextQuestion(questions[score.currentQuestion].id, numQuestions);
 		}
-		else{
-			submitQuiz();
-
-      
-			// let submitQuiz = document.createElement("button");
-			// submitQuiz.setAttribute("id", "submitQuizButton");
-			// submitQuiz.setAttribute("value", "Submit Quiz");
-			// let submitQuizText = document.createTextNode("Submit Quiz");
-			// submitQuiz.appendChild(submitQuizText);
-			// quizContainer.appendChild(submitQuiz);
-
+		else {
+			displayQuizResults();
 		}
 	});
 
 }
 
-function nextQuestion(questionId, counter, numQuestions) {
+function nextQuestion(questionId, numQuestions) {
+
+	//TODO: We already have our list of questions, why are we querying the db to retrieve them again
+
 	quizEngineDB.fetchOneByKey(currentDatastore, questionId, (question) => {
 		//Put current question into html
-		document.getElementById("questionNumber").innerHTML = (counter+1) + " of " + numQuestions;
+		document.getElementById("questionNumber").innerHTML = (score.currentQuestion + 1) + " of " + numQuestions;
 		var quizQuestion = document.getElementById("quizQuestion");
 		var questionText = document.createTextNode(question.Question);
 		//console.log(questionText);
@@ -191,7 +185,7 @@ function nextQuestion(questionId, counter, numQuestions) {
 		answerForm.innerHTML = "";
 		var currentAnswer, answerText, answerLabel;
 		//create input elements
-		for(var i = 1; i <= question.Answers.length; i++){
+		for (var i = 1; i <= question.Answers.length; i++) {
 			//create the input element and set attributes
 			currentAnswer = document.createElement("input");
 			currentAnswer.setAttribute("id", i);
@@ -199,10 +193,10 @@ function nextQuestion(questionId, counter, numQuestions) {
 			currentAnswer.setAttribute("name", "answerGroup");
 			currentAnswer.setAttribute("value", question.Answers[i - 1]);
 
-      answerLabel = document.createElement("label");
-      answerLabel.setAttribute("for", i);
-			answerLabel.setAttribute("id", "label" + i);
-			
+			answerLabel = document.createElement("label");
+			answerLabel.setAttribute("for", i);
+			answerLabel.setAttribute("id", "label" + i); ``
+
 			let answerJustification = document.createElement('div');
 			answerJustification.setAttribute('id', "justification" + i);
 			answerJustification.setAttribute('style', 'display: none');
@@ -211,8 +205,9 @@ function nextQuestion(questionId, counter, numQuestions) {
 
 			let answerContainer = document.createElement("div");
 			answerContainer.setAttribute("id", "answer" + i);
+
 			answerContainer.setAttribute("class", "answerStyle");
-      // answerContainer.setAttribute("for", i);
+      		// answerContainer.setAttribute("for", i);
 			answerText = document.createTextNode(question.Answers[i - 1]);
 			answerContainer.appendChild(currentAnswer);
 			answerLabel.appendChild(answerText);
@@ -232,38 +227,38 @@ function nextQuestion(questionId, counter, numQuestions) {
 
 		submitButton.disabled = false;
 		nextButton.disabled = true;
-		// counter++;
+		saveQuizScore();
 	});
 
 }
 
 function checkAnswer(questionId, numQuestions) {
 	quizEngineDB.fetchOneByKey(currentDatastore, questionId, (question) => {
-		
+
 		if (question.CorrectAnswers.length > 1) {
 			// TODO: checkboxes
-			
+
 
 		} else {
 			// get list of radio buttons with specified name
-	    var radios = document.getElementsByName("answerGroup");
+			var radios = document.getElementsByName("answerGroup");
 
-	    // loop through list of radio buttons
-	    radios.forEach( (button) => {
+			// loop through list of radio buttons
+			radios.forEach((button) => {
 				//let answerContainer = document.getElementById("answer" + button.id);
 				let answerLabel = document.getElementById("label" + button.id);
 				let justification = document.getElementById('justification' + button.id);
 				if (button.checked) {
-					 if (button.value === question.CorrectAnswers[0]) {
-						 score.ActualScore++;
-						 document.getElementById("currentScore").innerHTML = "Score: " + (score.ActualScore / numQuestions) * 100 + '%';
-						 
-					 } else {
-						 //answerContainer.style.color = "red";
-						 answerLabel.style.color = "red";
-						 justification.style.display = 'block';
+					if (button.value === question.CorrectAnswers[0]) {
+						score.ActualScore++;
+						document.getElementById("currentScore").innerHTML = displayPercentCorrect();
 
-					 }
+					} else {
+						//answerContainer.style.color = "red";
+						answerLabel.style.color = "red";
+						justification.style.display = 'block';
+
+					}
 				}
 				if (button.value === question.CorrectAnswers[0]) {
 					//answerContainer.style.color = "green";
@@ -273,48 +268,61 @@ function checkAnswer(questionId, numQuestions) {
 			});
 		}
 
-
-
 		//let submitButton = document.getElementById("submitButton");
 		submitButton.disabled = true;
 
 		//let nextButton = document.getElementById("nextButton");
 		nextButton.disabled = false;
+		score.currentQuestion++;
+		saveQuizScore();
 	});
+
+
 }
 
-function saveAndCloseQuiz(){
+function saveAndCloseQuiz() {
 	itemDB.createItem(scoreDSName, score, () => {
 		console.log("Score has been submitted");
-
-
 		loadQuizList();
-    // close the quiz modal.
-    // document.getElementById("quizContainer").innerHTML = "";
 
 	});
 }
 
-function submitQuiz(){
-	quizContainer = document.getElementById("quizContainer");
-
-	quizContainer.style.display = "none";
-	
-	document.getElementById("finishQuiz").style.display = "block";
-	document.getElementById("currentScore").style.display = "block";
-	
+function saveQuizScore() {
+	itemDB.updateItem(scoreDSName, "Subject", score.Subject, score, () => {
+		console.log("updated score " + score.Subject);
+	});
 }
 
 function getCheckedBoxes() {
-  var checkboxes = document.getElementsByName("answerGroup");
-  var checkboxesChecked = [];
-  // loop over them all
-  for (var i=0; i<checkboxes.length; i++) {
-     // And stick the checked ones onto an array...
-     if (checkboxes[i].checked) {
-        checkboxesChecked.push(checkboxes[i]);
-     }
-  }
-  // Return the array if it is non-empty, or null
-  return checkboxesChecked.length > 0 ? checkboxesChecked : null;
+	var checkboxes = document.getElementsByName("answerGroup");
+	var checkboxesChecked = [];
+	// loop over them all
+	for (var i = 0; i < checkboxes.length; i++) {
+		// And stick the checked ones onto an array...
+		if (checkboxes[i].checked) {
+			checkboxesChecked.push(checkboxes[i]);
+		}
+	}
+	// Return the array if it is non-empty, or null
+	return checkboxesChecked.length > 0 ? checkboxesChecked : null;
+}
+
+function displayQuizResults() {
+	document.getElementById("quizContainer").style.display = "none";
+	document.getElementById("questionNumber").style.display = "none";
+
+	document.getElementById("quizTopic").innerHTML = score.Topic;
+	document.getElementById("finishQuiz").style.display = "block";
+	document.getElementById("currentScore").style.display = "block";
+	document.getElementById("currentScore").innerHTML = displayPercentCorrect();
+
+	closeQuizButton = document.getElementById("closeQuizButton");
+	closeQuizButton.addEventListener("click", () => {
+		loadQuizList();
+	});
+}
+
+function displayPercentCorrect() {
+	return "Score: " + Math.round((score.ActualScore / score.TotalPossible) * 100) + '%';
 }
