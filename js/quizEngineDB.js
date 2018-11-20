@@ -18,8 +18,8 @@ var quizEngineDB = ( function() {
 
       questionDatastores.forEach( (name) => {
         maintainDatastore(name, db, columns, true);
-      })
-    }
+      });
+    };
 
     request.onsuccess = (e) => {
       database = e.target.result;
@@ -283,7 +283,7 @@ iDB.fetchAll = (datastoreName, index, callback) => {
   cursorRequest.onsuccess = (event) => { // STILL NOT WORKING
     let cursor = event.target.result;
 
-    if (!!cursor == false) {
+    if (!cursor == false) {
       return;
     }
 
@@ -299,7 +299,7 @@ iDB.fetchAll = (datastoreName, index, callback) => {
 
   transaction.onerror = (e) => {
     console.log(e);
-  }
+  };
 
   cursorRequest.onerror = iDB.onerror;
 };
@@ -355,11 +355,11 @@ iDB.deleteItem = function(datastoreName, key, callback) {
 
   request.onsuccess = function(e) {
     callback("delete");
-  }
+  };
 
   request.onerror = function(e) {
     console.log(e);
-  }
+  };
 };
 
 iDB.deleteWithoutKey = function (databaseName, datastoreName, property, value, callback) {
@@ -378,7 +378,7 @@ iDB.deleteWithoutKey = function (databaseName, datastoreName, property, value, c
     }
   };
   callback();
-}
+};
 
 iDB.updateItemById = (datastoreName, id, item, callback) => {
   //console.log("updating item by ID");

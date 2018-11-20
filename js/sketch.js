@@ -1,6 +1,6 @@
 var carSim = function(sketch) {
   
-  loadQuizModal();
+  //loadQuizModal();
 
   readQuestions('littlesLaw');
   

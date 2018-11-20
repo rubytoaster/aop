@@ -281,7 +281,7 @@ function loadAboutUs(){
 }
 
 function clearColor(){
-  var defaultColor= "#424242"
+  var defaultColor= "#424242";
   $("#calcLabel").css('color',defaultColor);
   $('#calcsvg').css({fill: defaultColor});
   $(".calculator").css({fill: defaultColor});
@@ -503,7 +503,7 @@ function clickBackToActivity()
 {
   var burger1 = document.getElementById("bur1");
   var burger3 = document.getElementById("bur3");
-  burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"
+  burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;";
   burger3.style="transform:rotate(45deg);width:15px; top:63%;";
   loadActivityPage();
   resetActivityArrow();
@@ -520,7 +520,7 @@ function clickBackToResources()
 {
   var burger1 = document.getElementById("bur1");
   var burger3 = document.getElementById("bur3");
-  burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"
+  burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;";
   burger3.style="transform:rotate(45deg);width:15px; top:63%;";
   loadResources();
   resetArrow();
@@ -533,7 +533,7 @@ function clickBackToCharts()
 {
   var burger1 = document.getElementById("patChart1");
   var burger3 = document.getElementById("patChart3");
-  burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"
+  burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;";
   burger3.style="transform:rotate(45deg);width:15px; top:63%;";
   loadCharts();
   resetChartArrow();
@@ -546,7 +546,7 @@ function clickBackToQuiz()
   console.log("clickBackToQuiz");
   var burger1 = document.getElementById("patQuiz1");
   var burger3 = document.getElementById("patQuiz3");
-  burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"
+  burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;";
   burger3.style="transform:rotate(45deg);width:15px; top:63%;";
   loadQuizList();
   resetQuizArrow();
@@ -565,8 +565,8 @@ function portraitStyle()
       $(".imageStyle").css('background-size', 'contain');
       $(".myProgress").css('bottom', '65px');
        $('nav').hover(function() {
-      $(this).stop().css('height','56px')
-      })
+      $(this).stop().css('height','56px');
+      });
 }
 
 function resetActivityArrow()
@@ -605,7 +605,7 @@ function clickBackToQuiz()
 {
   var burger1 = document.getElementById("patQuiz1");
   var burger3 = document.getElementById("patQuiz3");
-  burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"
+  burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;";
   burger3.style="transform:rotate(45deg);width:15px; top:63%;";
   loadQuizList();
   resetQuizArrow();
@@ -678,8 +678,8 @@ function loadTraining(){
       var comp=AdobeAn.getComposition("D8119AD668E9D44193ADA1BB18D6EFBE");
       var lib=comp.getLibrary();
       var loader = new createjs.LoadQueue(false);
-      loader.addEventListener("fileload", function(evt){handleFileLoad(evt,comp)});
-      loader.addEventListener("complete", function(evt){handleComplete(evt,comp)});
+      loader.addEventListener("fileload", function(evt){handleFileLoad(evt,comp);});
+      loader.addEventListener("complete", function(evt){handleComplete(evt,comp);});
       var lib=comp.getLibrary();
       loader.loadManifest(lib.properties.manifest);
     }
@@ -694,7 +694,7 @@ function loadTraining(){
     var queue = evt.target;
     var ssMetadata = lib.ssMetadata;
     for(i=0; i<ssMetadata.length; i++) {
-      ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} )
+      ss[ssMetadata[i].name] = new createjs.SpriteSheet( {"images": [queue.getResult(ssMetadata[i].name)], "frames": ssMetadata[i].frames} );
     }
     exportRoot = new lib.LittlesLawAnimationWholeSeq();
     stage = new lib.Stage(canvas);
@@ -704,7 +704,7 @@ function loadTraining(){
       stage.addChild(exportRoot);
       createjs.Ticker.setFPS(lib.properties.fps);
       createjs.Ticker.addEventListener("tick", stage);
-    }
+    };
     //Code to support hidpi screens and responsive scaling.
     function makeResponsive(isResp, respDim, isScale, scaleType) {
       var lastW, lastH, lastS=1;
