@@ -924,3 +924,15 @@ ul#horizontal-list li{
   font-weight: bold; 
   color:#000; 
 }
+
+#questionNumber{
+  font-weight:bold;
+  float: right; 
+  color:gray;
+}
+
+.btn-small {
+    height: 24px;
+    line-height: 24px;
+    padding: 0 0.5rem;
+}

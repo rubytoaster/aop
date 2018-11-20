@@ -173,7 +173,7 @@ function nextQuestion(questionId, numQuestions) {
 
 	quizEngineDB.fetchOneByKey(currentDatastore, questionId, (question) => {
 		//Put current question into html
-		document.getElementById("questionNumber").innerHTML = (score.currentQuestion + 1) + " of " + numQuestions;
+		document.getElementById("questionNumber").innerHTML = (score.currentQuestion + 1) + "/" + numQuestions;
 		var quizQuestion = document.getElementById("quizQuestion");
 		var questionText = document.createTextNode(question.Question);
 		//console.log(questionText);
