@@ -367,7 +367,8 @@ function loadLandscapeModal(){
     $('#landscapeModal').modal({
       dismissible: false
     });
-    $('#landscapeModal').modal('open');
+    $('#landscapeModal').modal('open'); 
+    
   }
 
 }
