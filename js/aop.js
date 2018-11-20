@@ -184,24 +184,24 @@ function loadSearchModal(){
 
   }
 
-  function loadEmailModal(){
+  // function loadEmailModal(){
 
-    $("#modal_content").load("content/email.html");
-    $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
-    $(".mailIcon").css("fill", "#0EABDA");
-    $("#mailLabel").css('color','#0EABDA');
+  //   $("#modal_content").load("content/email.html");
+  //   $("#app_cont").css('filter', 'blur(5px) grayscale(50%)');
+  //   $(".mailIcon").css("fill", "#0EABDA");
+  //   $("#mailLabel").css('color','#0EABDA');
 
-    $(document).ready(function(){
-      $('#modal1').modal();
-    });
+  //   $(document).ready(function(){
+  //     $('#modal1').modal();
+  //   });
 
-    $('#modal1').modal({
-      dismissible:false
-    });
-    $('#modal1').modal('open');
+  //   $('#modal1').modal({
+  //     dismissible:false
+  //   });
+  //   $('#modal1').modal('open');
 
 
-  }
+  // }
 
   function loadNotesModal(){
 
