@@ -64,12 +64,12 @@ function loadHome(){
   closeSidenav();
   //loadSidenav();
   $("#menuButton").show();
-//  $("#backButton").css('display', 'none');
-$("#app_cont").load("content/home.html");
-$("#pageTitle").text('AoP');
-$("#app_cont").css('background-color', '#e0e0e0');
-$("#app_cont").css('height','100%');
-$('body').css('background-color', '#e0e0e0');
+  //  $("#backButton").css('display', 'none');
+  $("#app_cont").load("content/home.html");
+  $("#pageTitle").text('AoP');
+  $("#app_cont").css('background-color', '#e0e0e0');
+  $("#app_cont").css('height','100%');
+  $('body').css('background-color', '#e0e0e0');
 }
 
 function clickNextSlide(){
@@ -548,7 +548,7 @@ function clickBackToQuiz()
   var burger3 = document.getElementById("patQuiz3");
   burger1.style="transform:rotate(-45deg);width:15px; top:28%; left:14%;"
   burger3.style="transform:rotate(45deg);width:15px; top:63%;";
-  loadQuizList();
+  saveAndCloseQuiz();
   resetQuizArrow();
   burger1.style="tranform:rotate(45deg); width:24px; top:20%; left:15%;";
   burger3.style="tranform:rotate(-45deg); width:24px; top:70%; left:15%;";
@@ -627,7 +627,7 @@ function loadQuizList(){
 
   openQuestionsNScores();
 }
-
+ 
 function loadQuiz(name, datastoreName){
   clearColor();
   closeGame();
