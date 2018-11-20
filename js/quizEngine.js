@@ -184,7 +184,8 @@ function createQuiz(questions) {
 	nextQuestion(questions[score.currentQuestion].id, numQuestions);
 }
 
-function clearSetRadioDiv(i) {
+function radioButtonClicked() {
+	document.getElementById("submitQuestionButton").disabled = false;
 	console.log("clearSetRadioDiv()");
 	let element = ".answer" + i +" input";
 	console.log(element);
@@ -193,10 +194,8 @@ function clearSetRadioDiv(i) {
         $(this).parent().siblings().css("border", "2px solid white");
         $(this).parent().css("border", "2px solid black"); 
     }
-});
+
 }
-
-
 
 function nextQuestion(questionId, numQuestions) {
 
@@ -224,13 +223,12 @@ function nextQuestion(questionId, numQuestions) {
 			currentAnswer.setAttribute("name", "answerGroup");
 			// currentAnswer.setAttribute("onClick", () => (clearSetRadioDiv()));
 			currentAnswer.setAttribute("value", question.Answers[i - 1]);
-			currentAnswer.addEventListener("click", () => {
-			    clearSetRadioDiv(i);
-			});
+			currentAnswer.addEventListener("click", () => {radioButtonClicked()});
+
 
 			answerLabel = document.createElement("label");
 			answerLabel.setAttribute("for", i);
-			answerLabel.setAttribute("id", "label" + i); ``
+			answerLabel.setAttribute("id", "label" + i); 
 
 			let answerJustification = document.createElement('div');
 			answerJustification.setAttribute('id', "justification" + i);
@@ -260,7 +258,7 @@ function nextQuestion(questionId, numQuestions) {
 			//console.log(question.Answers);
 		}
 
-		submitButton.disabled = false;
+		submitButton.disabled = true;
 		nextButton.disabled = true;
 		saveQuizScore();
 	});
@@ -286,7 +284,7 @@ function checkAnswer(questionId, numQuestions) {
 				if (button.checked) {
 					if (button.value === question.CorrectAnswers[0]) {
 						score.ActualScore++;
-						document.getElementById("currentScore").innerHTML = displayPercentCorrect();
+						document.getElementById("currentScore").innerHTML = displayPercentCorrect(score);
 
 					} else {
 						//answerContainer.style.color = "red";
@@ -350,7 +348,7 @@ function displayQuizResults() {
 	document.getElementById("quizTopic").innerHTML = score.Topic;
 	document.getElementById("finishQuiz").style.display = "block";
 	document.getElementById("currentScore").style.display = "block";
-	document.getElementById("currentScore").innerHTML = displayPercentCorrect();
+	document.getElementById("currentScore").innerHTML = displayPercentCorrect(score);
 
 	closeQuizButton = document.getElementById("closeQuizButton");
 	closeQuizButton.addEventListener("click", () => {
@@ -367,6 +365,6 @@ function displayQuizRetake() {
 	document.getElementById("nextButton").innerHTML = "Next Question";
 }
 
-function displayPercentCorrect() {
+function displayPercentCorrect(score) {
 	return "Score: " + Math.round((score.ActualScore / score.TotalPossible) * 100) + '%';
 }
