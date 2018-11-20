@@ -184,8 +184,8 @@ function createQuiz(questions) {
 	nextQuestion(questions[score.currentQuestion].id, numQuestions);
 }
 
-function clearCheckedDivs() {
-	document.getElementById("answer" + i);
+function radioButtonClicked() {
+	document.getElementById("submitQuestionButton").disabled = false;
 }
 
 function nextQuestion(questionId, numQuestions) {
@@ -213,10 +213,11 @@ function nextQuestion(questionId, numQuestions) {
 			currentAnswer.setAttribute("type", "radio");
 			currentAnswer.setAttribute("name", "answerGroup");
 			currentAnswer.setAttribute("value", question.Answers[i - 1]);
+			currentAnswer.addEventListener("click", () => {radioButtonClicked()});
 
 			answerLabel = document.createElement("label");
 			answerLabel.setAttribute("for", i);
-			answerLabel.setAttribute("id", "label" + i); ``
+			answerLabel.setAttribute("id", "label" + i); 
 
 			let answerJustification = document.createElement('div');
 			answerJustification.setAttribute('id', "justification" + i);
@@ -246,7 +247,7 @@ function nextQuestion(questionId, numQuestions) {
 			//console.log(question.Answers);
 		}
 
-		submitButton.disabled = false;
+		submitButton.disabled = true;
 		nextButton.disabled = true;
 		saveQuizScore();
 	});
