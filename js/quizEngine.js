@@ -184,9 +184,19 @@ function createQuiz(questions) {
 	nextQuestion(questions[score.currentQuestion].id, numQuestions);
 }
 
-function clearCheckedDivs() {
-	document.getElementById("answer" + i);
+function clearSetRadioDiv(i) {
+	console.log("clearSetRadioDiv()");
+	let element = ".answer" + i +" input";
+	console.log(element);
+	$(element).change(function() { 
+    if ($(this).is(":checked")) { 
+        $(this).parent().siblings().css("border", "2px solid white");
+        $(this).parent().css("border", "2px solid black"); 
+    }
+});
 }
+
+
 
 function nextQuestion(questionId, numQuestions) {
 
@@ -212,7 +222,11 @@ function nextQuestion(questionId, numQuestions) {
 			currentAnswer.setAttribute("id", i);
 			currentAnswer.setAttribute("type", "radio");
 			currentAnswer.setAttribute("name", "answerGroup");
+			// currentAnswer.setAttribute("onClick", () => (clearSetRadioDiv()));
 			currentAnswer.setAttribute("value", question.Answers[i - 1]);
+			currentAnswer.addEventListener("click", () => {
+			    clearSetRadioDiv(i);
+			});
 
 			answerLabel = document.createElement("label");
 			answerLabel.setAttribute("for", i);

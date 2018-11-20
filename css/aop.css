@@ -950,6 +950,6 @@ ul#horizontal-list li{
   color:blue; 
 }
 
-[type="radio"]:checked:parent{
+div > [type="radio"]:checked:{
   background-color:red;
 }
