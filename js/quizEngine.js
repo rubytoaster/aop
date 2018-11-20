@@ -6,11 +6,11 @@ const questionColumns = ["Subject", "Topic", "Question", "Answers", "CorrectAnsw
 
 const scoreDBName = "QuizScores";
 const scoreDSName = "quizScores";
-const scoreVersion = 1;
+const scoreVersion = 2;
 const scoreIndecies = ["Subject", "Topic", "TotalPossible", "ActualScore"];
 
 let score = {};
-let submitButton, nextButton;
+let submitButton, nextButton, retakeQuizButton, isEventListenersAdded = 0;
 let counter = 0;
 let currentDatastore;
 
@@ -21,10 +21,10 @@ function openQuestionsNScores() {
 
 		//load questions into db
 		for (index = 0; index < datastores.length; index++) {
-			console.log(index);
+			//console.log(index);
 			quizEngineDB.fetchAll(datastores[index], index, (results, myIndex) => {
 				if (results[0] == null) {
-					console.log(myIndex);
+					//console.log(myIndex);
 
 					// get questions from file.
 					let questions = questionFunctionNames[myIndex]();
@@ -74,13 +74,49 @@ function readQuestions(datastoreName) {
 	currentDatastore = datastoreName;
 	quizEngineDB.fetchAll(datastoreName, null, (results) => {
 		//TODO: shuffle the results.
-
+		isEventListenersAdded = 0;
 		createScore(results);
 
 	});
 }
 
+submitButton = document.getElementById("submitQuestionButton");
+nextButton = document.getElementById("nextButton");
+closeQuizButton = document.getElementById("closeQuizButton");
+retakeQuizButton = document.getElementById("retakeQuizButton");
+
+
+
+//
+function addEventListenersToButtons(questions, numQuestions) {
+	submitButton.addEventListener("click", () => {
+		checkAnswer(questions[score.currentQuestion].id, numQuestions);
+	});
+	nextButton.addEventListener("click", () => {
+		if (score.currentQuestion < numQuestions - 1) {
+			nextQuestion(questions[score.currentQuestion].id, numQuestions);
+		} else if (score.currentQuestion < numQuestions) {
+			let submitQuizButton = document.getElementById("nextButton");
+			submitQuizButton.innerText = "Submit Quiz";
+			// submitQuizButton.setAttribute("class", "modal-close waves-effect btn");
+			nextQuestion(questions[score.currentQuestion].id, numQuestions);
+		}
+		else {
+			displayQuizResults();
+		}
+	});
+	retakeQuizButton.addEventListener("click", () => {
+		console.log("clicked retake quiz button...");
+		score.ActualScore = 0;
+		score.currentQuestion = 0;
+		displayQuizRetake();
+		createQuiz(questions);
+	});
+	isEventListenersAdded = 1;
+}
+
 function createScore(questions) {
+
 
 	itemDB.fetchOneByIndex(scoreDSName, "Subject", questions[0].Subject, (result) => {
 		//Grab score from db if exists
@@ -90,7 +126,7 @@ function createScore(questions) {
 			if (score.currentQuestion == score.TotalPossible) {
 				displayQuizResults();
 			}
-			else{
+			else {
 				createQuiz(questions);
 			}
 		}
@@ -104,17 +140,21 @@ function createScore(questions) {
 				"currentQuestion": 0
 			};
 
-			itemDB.createItem(scoreDSName, score, () => { 
+			itemDB.createItem(scoreDSName, score, () => {
 				createQuiz(questions);
 			});
 		}
 
-		
+
 	});
 }
 
 function createQuiz(questions) {
 
+	submitButton = document.getElementById("submitQuestionButton");
+	nextButton = document.getElementById("nextButton");
+	closeQuizButton = document.getElementById("closeQuizButton");
+	retakeQuizButton = document.getElementById("retakeQuizButton");
 	let numQuestions = questions.length;
 
 	// display questions 1 at a time.
@@ -131,40 +171,21 @@ function createQuiz(questions) {
 
 	// display quiz score status.
 	// display the current status of the quiz
-	document.getElementById("questionNumber").innerHTML = "1 of " + numQuestions;
+	document.getElementById("questionNumber").innerHTML = "1/" + numQuestions;
 
 	document.getElementById("currentScore").innerHTML = "Score: 0%";
 
-	//get the two buttons
-	submitButton = document.getElementById("submitQuestionButton");
-	nextButton = document.getElementById("nextButton");
-	closeQuizButton = document.getElementById("closeQuizButton");
-
 	nextButton.disabled = true;
+
+	if (isEventListenersAdded == 0)
+		addEventListenersToButtons(questions, numQuestions);
 
 	//determine answers and update score.
 	nextQuestion(questions[score.currentQuestion].id, numQuestions);
+}
 
-	submitButton.addEventListener("click", function () {
-		checkAnswer(questions[score.currentQuestion].id, numQuestions);
-
-	});
-
-	nextButton.addEventListener("click", function () {
-		
-		if (score.currentQuestion < numQuestions - 1) {
-			nextQuestion(questions[score.currentQuestion].id, numQuestions);
-		} else if (score.currentQuestion < numQuestions) {
-			let submitQuizButton = document.getElementById("nextButton");
-			submitQuizButton.innerText = "Submit Quiz";
-			// submitQuizButton.setAttribute("class", "modal-close waves-effect btn");
-			nextQuestion(questions[score.currentQuestion].id, numQuestions);
-		}
-		else {
-			displayQuizResults();
-		}
-	});
-
+function radioButtonClicked() {
+	document.getElementById("submitQuestionButton").disabled = false;
 }
 
 function nextQuestion(questionId, numQuestions) {
@@ -173,7 +194,7 @@ function nextQuestion(questionId, numQuestions) {
 
 	quizEngineDB.fetchOneByKey(currentDatastore, questionId, (question) => {
 		//Put current question into html
-		document.getElementById("questionNumber").innerHTML = (score.currentQuestion + 1) + " of " + numQuestions;
+		document.getElementById("questionNumber").innerHTML = (score.currentQuestion + 1) + "/" + numQuestions;
 		var quizQuestion = document.getElementById("quizQuestion");
 		var questionText = document.createTextNode(question.Question);
 		//console.log(questionText);
@@ -192,10 +213,11 @@ function nextQuestion(questionId, numQuestions) {
 			currentAnswer.setAttribute("type", "radio");
 			currentAnswer.setAttribute("name", "answerGroup");
 			currentAnswer.setAttribute("value", question.Answers[i - 1]);
+			currentAnswer.addEventListener("click", () => {radioButtonClicked()});
 
 			answerLabel = document.createElement("label");
 			answerLabel.setAttribute("for", i);
-			answerLabel.setAttribute("id", "label" + i); ``
+			answerLabel.setAttribute("id", "label" + i); 
 
 			let answerJustification = document.createElement('div');
 			answerJustification.setAttribute('id', "justification" + i);
@@ -205,10 +227,13 @@ function nextQuestion(questionId, numQuestions) {
 
 			let answerContainer = document.createElement("div");
 			answerContainer.setAttribute("id", "answer" + i);
+
+			answerContainer.setAttribute("class", "answerStyle");
 			// answerContainer.setAttribute("for", i);
 			answerText = document.createTextNode(question.Answers[i - 1]);
 			answerContainer.appendChild(currentAnswer);
 			answerLabel.appendChild(answerText);
+			answerLabel.setAttribute("class", "answerText");
 			answerContainer.appendChild(answerLabel);
 			answerContainer.appendChild(answerJustification);
 			//currentAnswer.innerHTML = "Test";
@@ -222,7 +247,7 @@ function nextQuestion(questionId, numQuestions) {
 			//console.log(question.Answers);
 		}
 
-		submitButton.disabled = false;
+		submitButton.disabled = true;
 		nextButton.disabled = true;
 		saveQuizScore();
 	});
@@ -248,7 +273,7 @@ function checkAnswer(questionId, numQuestions) {
 				if (button.checked) {
 					if (button.value === question.CorrectAnswers[0]) {
 						score.ActualScore++;
-						document.getElementById("currentScore").innerHTML = displayPercentCorrect();
+						document.getElementById("currentScore").innerHTML = displayPercentCorrect(score);
 
 					} else {
 						//answerContainer.style.color = "red";
@@ -278,10 +303,10 @@ function checkAnswer(questionId, numQuestions) {
 }
 
 function saveAndCloseQuiz() {
-	itemDB.createItem(scoreDSName, score, () => {
-		console.log("Score has been submitted");
+	itemDB.updateItem(scoreDSName, "Subject", score.Subject, score, () => {
+		console.log("updated score " + score.Subject);
+		isEventListenersAdded = 0;
 		loadQuizList();
-
 	});
 }
 
@@ -312,7 +337,7 @@ function displayQuizResults() {
 	document.getElementById("quizTopic").innerHTML = score.Topic;
 	document.getElementById("finishQuiz").style.display = "block";
 	document.getElementById("currentScore").style.display = "block";
-	document.getElementById("currentScore").innerHTML = displayPercentCorrect();
+	document.getElementById("currentScore").innerHTML = displayPercentCorrect(score);
 
 	closeQuizButton = document.getElementById("closeQuizButton");
 	closeQuizButton.addEventListener("click", () => {
@@ -320,6 +345,15 @@ function displayQuizResults() {
 	});
 }
 
-function displayPercentCorrect() {
+function displayQuizRetake() {
+	document.getElementById("quizContainer").style.display = "block";
+	document.getElementById("questionNumber").style.display = "block";
+
+	document.getElementById("finishQuiz").style.display = "none";
+	document.getElementById("currentScore").style.display = "none";
+	document.getElementById("nextButton").innerHTML = "Next Question";
+}
+
+function displayPercentCorrect(score) {
 	return "Score: " + Math.round((score.ActualScore / score.TotalPossible) * 100) + '%';
 }
