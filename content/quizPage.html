@@ -1,34 +1,38 @@
-<div class="container">
-    <div id="quizInfo">
-        <div>
-          <h4 id="quizSubject"></h4>
-          <h5 id="quizTopic"></h4>
-        </div>
-        <div id="scoreInfo">
-          <p id="questionNumber"></p>
-          <p id="currentScore" style="display: none;"></p>
-        </div>
-      </div>
-    
-      <div id="finishQuiz" style="display: none;">
-        <button type="button" id="closeQuizButton" class="modal-close waves-effect btn"
-        style="width:45%;">Close Quiz</button>
-      </div>
-    
-      <div id="quizContainer">
-        <h5 id="quizQuestion"></h5>
-        <form id="answerForm"></form>
-    
-        <button type="button" id="submitQuestionButton" class="btn"
-          style="width:45%;">Check Answer</button>
-        <button type="button" id="nextButton" value="Next"
-          style="width: 45%; margin-left:10px;" class="btn">Next Question</button>
-      </div>
-<div class="row">
-
-
+<div class="container" style="width:95%;">
+	<div class="card-panel">
+	<div id="quizInfo" style="border-bottom:1px solid #ddd; padding-bottom:5px;">
+		<div class="row">
+		<div class="col s9"><h5 id="quizTopic" style="margin:0px;"></h5></div>
+		<div class="col s3"><p id="questionNumber" style="margin:0px;"></p></div> 
 </div>
+
+		<div id="scoreInfo">
+		
+			<p id="currentScore" style="display: none;"></p>
+		</div>
+	</div>
+
+	<div id="finishQuiz" style="display: none;">
+		<button type="button" id="closeQuizButton" class="modal-close waves-effect btn"
+		style="width:45%;">Close Quiz</button>
+	</div>
+
+	<div id="quizContainer">
+		<h5 id="quizQuestion" style="text-align:center;"></h5>
+		<form id="answerForm">
+			
+		</form>
+
+		<button type="button" id="submitQuestionButton" class="btn">Check Answer</button>
+		<button type="button" id="nextButton" value="Next"
+		style="margin-left:10px;" class="btn">Next Question</button>
+	</div>
+	<div class="row">
+
+
+	</div>
 </div> 
+</div>
 <script>
-    readQuestions(currentQuiz);
+	readQuestions(currentQuiz);
 </script>

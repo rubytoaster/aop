@@ -127,7 +127,7 @@ function createQuiz (questions) {
 
 	// display quiz score status.
 	// display the current status of the quiz
-	document.getElementById("questionNumber").innerHTML = "1 of " + numQuestions;
+	document.getElementById("questionNumber").innerHTML = "1/" + numQuestions;
 
 	document.getElementById("currentScore").innerHTML = "Score: 0%";
 
@@ -211,10 +211,12 @@ function nextQuestion(questionId, counter, numQuestions) {
 
 			let answerContainer = document.createElement("div");
 			answerContainer.setAttribute("id", "answer" + i);
+			answerContainer.setAttribute("class", "answerStyle");
       // answerContainer.setAttribute("for", i);
 			answerText = document.createTextNode(question.Answers[i - 1]);
 			answerContainer.appendChild(currentAnswer);
 			answerLabel.appendChild(answerText);
+			answerLabel.setAttribute("class", "answerText");
 			answerContainer.appendChild(answerLabel);
 			answerContainer.appendChild(answerJustification);
 			//currentAnswer.innerHTML = "Test";
