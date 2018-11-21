@@ -77,94 +77,64 @@ let leadershipDiagram = () => {
 let littlesLaw = () => {
 	return [{
 		"Subject": "Little's Law",
-		"Topic": "Wall Walks",
-		"Question": "What is a constraint?",
+		"Topic": "Takt Time",
+		"Question": "Takt Time is the reciprocal of Throughput?  True or False",
 		"Answers": [
-			"The gate with the lowest throughput.",
-			"The most important gate in the machine.",
-			"The amount of time it takes to complete a product.",
-			"A rule that must be upheld in order to maintain safety."
-		],
-		"CorrectAnswers": ["The gate with the lowest throughput."],
+			"True",
+			"False"
+			],
+		"CorrectAnswers": ["True"],
 		"Justifications": [
-			"Yes! A gate with the lowest throughput constrains the system capacity.",
-			"No! A gate with the lowest throughput constrains the system capacity.",
-			"No! A gate with the lowest throughput constrains the system capacity.",
-			"No! A gate with the lowest throughput constrains the system capacity."
-		]
+			"Takt Time is the time divided by unit, which is the reciprocal of Throughput.",
+			"Takt Time is the reciprocal of Throughput"
+			]
   },
    {
 		"Subject": "Little's Law",
-		"Topic": "Wall Walks",
-		"Question": "What is a Wall Walk?",
+		"Topic": "Takt Time",
+		"Question": "Little's Law and Takt time are flow management tools designed to manage WIP?  True or False",
 		"Answers": [
-			"A visual representation of a single process.",
-			"A method of analyzing a value stream map to determine value.",
-			"An established frequent review of WIP.",
-			"A recurring, process-focused review to understand the machine."
-		],
-		"CorrectAnswers": ["A recurring, process-focused review to understand the machine."],
+			"True",
+			"False"
+			],
+		"CorrectAnswers": ["True"],
 		"Justifications": [
-			"No",
-			"no",
-			"No",
-			"yes"
-		]
+			"Creates a steady state in which work is released into the process machine.",
+			"Both flow management and Takt time can be used to manage WIP."
+			]
   },
   {
 		"Subject": "Little's Law",
-		"Topic": "Art of the Possible",
-		"Question": "What is takt time?",
+		"Topic": "Flowtime",
+		"Question": "What is the Calculation for Flowtime?",
 		"Answers": [
-			"The time it takes to plan before production begins.",
-			"The time spent selling your product to a customer.",
-			"How often a single unit must be produced from a machine.",
-			"The hours in a day that can be used for manufacturing."
+			"WIP / Takt Time",
+			"WIP * Takt Time",
+			"Takt Time / WIP "
 		],
-		"CorrectAnswers": ["How often a single unit must be produced from a machine."],
+		"CorrectAnswers": ["WIP * Takt Time"],
 		"Justifications": [
-			"No",
-			"no",
-			"Yes",
-			"no"
+			"WIP = Throughput * Flowtime; divide each side of equation by Throughput to solve for Flowtime",
+			"Flowtime is the amount of WIP multiplied by the rate of items entering the machine.",
+			"WIP = Throughput * Flowtime; divide each side of equation by Throughput to solve for Flowtime"
 		]
   }, 
   {
 		"Subject": "Little's Law",
-		"Topic": "Art of the Possible",
-		"Question": "What is the equation for evaluating Takt Time?",
+		"Topic": "Throughput",
+		"Question": "Why is Little's Law Important?",
 		"Answers": [
-			"Takt Time = total time available",
-			"Takt Time = total time / number of products to be produced",
-			"Takt Time = products to be produced / production days",
-			"Takt Time = production days * products to be produced"
+			"Reduces Cost?",
+			"Reduces manpower?",
+			"Improves speed and reduces WIP."
 		],
-		"CorrectAnswers": ["Takt Time = total time / number of products to be produced"],
+		"CorrectAnswers": ["Improves speed and reduces WIP."],
 		"Justifications": [
-			"No",
-			"no",
-			"Yes",
-			"no"
+			"Not a mechanism for calculating cost?",
+			"Not a mechanism for calculating labor.",
+			"Understanding and utilizing Little's Law will facilitate the improving speed and reducing WIP."
 		]
-  }, 
-  {
-		"Subject": "Little's Law",
-		"Topic": "The Process Machine",
-		"Question": "Are queued assets good or bad for the machine? Why?",
-		"Answers": [
-			"Good: it identifies a constraint",
-			"Bad: because there is a constraint in the machine",
-			"Bad: queue is waste",
-			"Both: It does create waste, but it also identifies a constraint"
-		],
-		"CorrectAnswers": ["Both: It does create waste, but it also identifies a constraint"],
-		"Justifications": [
-			"No",
-			"no",
-			"Yes",
-			"no"
-		]
-	}];
+  }];
 }  
 
 let radiatorChart = () => {
