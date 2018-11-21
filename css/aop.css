@@ -918,7 +918,7 @@ ul#horizontal-list li{
 
 .answerText{
   font-weight: bold; 
-  color:#000; 
+  color:#3F4152;
 }
 
 #questionNumber{
@@ -934,6 +934,7 @@ ul#horizontal-list li{
 
 #quizQuestion{
   font-weight: bold;
+  color: #3F4152;
 }
 
 .btn-small {
@@ -971,16 +972,10 @@ ul#horizontal-list li{
     border-radius: 40px;
     padding: 5px;
     margin-top:8px;
-    margin-bottom:8px;/*
-    background-size: 100% 200%;
-    background-image: linear-gradient(to right, white 50%, pink 50%);
-    -webkit-transition: background-position 5s;
-    -moz-transition: background-position 5s;
-     transition: background-position 1s;*/
+    margin-bottom:8px;
 }
 
 .answerBackground{
-  /*background-color:pink;*/
   background-position: 0 -100%;
 }
 
@@ -997,16 +992,47 @@ ul#horizontal-list li{
     background-position: 0 -100%;
 }
 
-@media only screen and (min-width: 600px) and (max-width: 825px){
+@media only screen and (min-width: 600px) and (max-width: 677px){
   .leadershipQuizBtn{
     padding-top:12px !important;
     padding-bottom:12px !important;
   }
 }
 
-@media only screen and (min-width: 993px) and (max-width: 1028px){
-  .leadershipQuizBtn{
-    padding-top:12px !important;
-    padding-bottom:12px !important;
-  }
+.quizQuit{
+    border: 1px solid gray;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: gray;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    background-color: #eee;
+    font-weight: bold;
+}
+
+#fullJustification{
+  font-weight:bold; 
+  color:#3F4152;
+  text-align:center;
+  line-height: 25px;
+  font-size: 1.5em;
+}
+.justificationStyle{
+  border: 2px solid red;
+  margin-top: -25px;
+  border-radius:8px;
+  padding-top:10px;
+  padding-left: 10px;
+  padding-right: 10px;
+ 
+}
+.wrongAnswerIcon{
+    height: 45px;
+    width: 45px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+/*    border-radius:8px;
+  */
 }

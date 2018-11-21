@@ -25,44 +25,52 @@
           <input type="button" value="Retake Quiz" id="retakeQuizButton" class="waves-effect btn waves-light"  style="width:100%;font-weight:bold;">
         </div>
       </div>
-
-      
     </div>
 
     <div id="quizContainer">
-      <h5 id="quizQuestion" style="text-align:center;"></h5>
+      <h5 id="quizQuestion" style="text-align:center;color:#3F4152"></h5>
       
-      <div id="justificationContainer" style="display: none;">
-        <h6 id="fullJustification"></h6>
+      <div id="justificationContainer" >
+       <img src="css/svg/cancel.svg" class="wrongAnswerIcon">
+       <div class="justificationStyle">
+        <p id="fullJustification"></p>
       </div>
-      
-      <form id="answerForm">
+    </div>
 
-      </form>
+    <form id="answerForm">
+    </form>
 
-      <div class="row">
-        <div class="col s6 m6 l6">
-          <input type="button" value="Check" id="submitQuestionButton" class="btn waves-effect waves-light" style="width:100%;font-weight:bold;">
+    <div class="row">
+      <div class="col s6 m6 l6">
+        <input type="button" value="Check" id="submitQuestionButton" class="btn waves-effect waves-light" style="width:100%;font-weight:bold;">
+      </div>
 
-        </div>
-        <div class="col s6 m6 l6">
-           <input type="button" value="Next" id="nextButton" class="btn waves-effect waves-light" style="width:100%;font-weight:bold;">
-
-         </div>
-       </div>
-
+      <div class="col s6 m6 l6">
+       <input type="button" value="Next" id="nextButton" class="btn waves-effect waves-light" style="width:100%;font-weight:bold;">
      </div>
-     <div id="closeQuiz">
-     </br>
-   </br>
-   <a href="javascript: saveAndCloseQuiz();" id="closeQuizButton" class="">Save and Close Quiz</a>
- </div>
-
- <div class="row">
-
+   </div>
 
  </div>
+ <div id="closeQuiz">
+ </br>
+</br>
+
+
+
 </div>
+
+
+
+<div >
+ <a href="javascript: saveAndCloseQuiz();" id="closeQuizButton" class="quizQuit" >
+  SAVE & QUIT
+</a>
+</div>
+
+</div>
+
+
+
 </div>
 <script>
   readQuestions(currentQuiz);

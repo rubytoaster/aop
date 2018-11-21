@@ -305,7 +305,7 @@ function checkAnswer(questionId, numQuestions) {
 						answerLabel.style.color = "#fff";
 						fullJustification.innerHTML += justification.innerHTML;
 						// justification.style.display = 'block';
-						answerContainer.style.backgroundColor = "red"; 
+						answerContainer.style.backgroundColor = "#f44336"; 
 
 
 					//document.getElementById("answer"+ i).style.backgroundColor = "#0eabda";
@@ -318,7 +318,7 @@ function checkAnswer(questionId, numQuestions) {
 					//answerContainer.style.color = "green";
 					answerLabel.style.color = "#fff";
 					// justification.style.display = 'block';
-					answerContainer.style.backgroundColor = "Green"; 
+					answerContainer.style.backgroundColor = "#00c853"; 
 				}
 			});
 
