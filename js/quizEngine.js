@@ -185,6 +185,13 @@ function createQuiz(questions) {
 	nextQuestion(questions[score.currentQuestion].id, numQuestions);
 }
 
+function setAnswerEventListener(id, numAnswers) {
+	document.getElementById('answer' + id).addEventListener('click', () => {
+		document.getElementById(id).click();
+		radioButtonClicked(numAnswers)
+	});
+}
+
 function radioButtonClicked(numAnswers) {
 	document.getElementById("submitQuestionButton").disabled = false;
 	
@@ -234,7 +241,7 @@ function nextQuestion(questionId, numQuestions) {
 			currentAnswer.setAttribute("name", "answerGroup");
 			// currentAnswer.setAttribute("onClick", () => (clearSetRadioDiv()));
 			currentAnswer.setAttribute("value", question.Answers[i - 1]);
-			currentAnswer.addEventListener("click", () => {radioButtonClicked(i - 1)});
+			// currentAnswer.addEventListener("click", () => {radioButtonClicked(question.Answers.length)});
 
 
 			answerLabel = document.createElement("label");
@@ -258,17 +265,18 @@ function nextQuestion(questionId, numQuestions) {
 			answerLabel.setAttribute("class", "answerText");
 			answerContainer.appendChild(answerLabel);
 			answerContainer.appendChild(answerJustification);
+		
 			//currentAnswer.innerHTML = "Test";
 			//currentAnswer.appendChild(answerText);
 			/*var breakElement = document.createElement("br");*/
 
 			//answerForm.appendChild(currentAnswer);
 			answerForm.appendChild(answerContainer);
+			setAnswerEventListener(i, question.Answers.length);
 		/*	answerForm.appendChild(breakElement);*/
 			//put a break after each question
 			//console.log(question.Answers);
 		}
-
 		submitButton.disabled = true;
 		nextButton.disabled = true;
 		saveQuizScore();
