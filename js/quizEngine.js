@@ -184,17 +184,26 @@ function createQuiz(questions) {
 	nextQuestion(questions[score.currentQuestion].id, numQuestions);
 }
 
-function radioButtonClicked() {
+function radioButtonClicked(numAnswers) {
 	document.getElementById("submitQuestionButton").disabled = false;
-	console.log("clearSetRadioDiv()");
-	let element = ".answer" + i +" input";
-	console.log(element);
-	$(element).change(function() { 
-    if ($(this).is(":checked")) { 
-        $(this).parent().siblings().css("border", "2px solid white");
-        $(this).parent().css("border", "2px solid black"); 
-    }
+	
+	for (i = 1; i <= numAnswers; i++)
+	{
+		if (document.getElementById(i.toString()).checked == true){
+	
+			document.getElementById("answer"+ i).style.backgroundColor = "#0eabda";
+			document.getElementById("answer"+ i).style.transition = "backgroundColor 2s"; 
+			//document.getElementById("answer"+i).setAttribute('class', 'answerBackground answerStyle');	
+			document.getElementById("label"+i).style.color ="#FFF"; 
+			/*document.getElementById("answer"+i).style.transition="background-position 5s";*/
+		} else {
+			//document.getElementById("answer"+i).setAttribute('class', 'answerStyle');
+			document.getElementById("answer"+ i).style.backgroundColor = "white";
+			document.getElementById("label" + i).style.color="Gray";
+		}
+	}
 
+	
 }
 
 function nextQuestion(questionId, numQuestions) {
@@ -223,7 +232,7 @@ function nextQuestion(questionId, numQuestions) {
 			currentAnswer.setAttribute("name", "answerGroup");
 			// currentAnswer.setAttribute("onClick", () => (clearSetRadioDiv()));
 			currentAnswer.setAttribute("value", question.Answers[i - 1]);
-			currentAnswer.addEventListener("click", () => {radioButtonClicked()});
+			currentAnswer.addEventListener("click", () => {radioButtonClicked(i - 1)});
 
 
 			answerLabel = document.createElement("label");
@@ -249,11 +258,11 @@ function nextQuestion(questionId, numQuestions) {
 			answerContainer.appendChild(answerJustification);
 			//currentAnswer.innerHTML = "Test";
 			//currentAnswer.appendChild(answerText);
-			var breakElement = document.createElement("br");
+			/*var breakElement = document.createElement("br");*/
 
 			//answerForm.appendChild(currentAnswer);
 			answerForm.appendChild(answerContainer);
-			answerForm.appendChild(breakElement);
+		/*	answerForm.appendChild(breakElement);*/
 			//put a break after each question
 			//console.log(question.Answers);
 		}
@@ -278,7 +287,7 @@ function checkAnswer(questionId, numQuestions) {
 
 			// loop through list of radio buttons
 			radios.forEach((button) => {
-				//let answerContainer = document.getElementById("answer" + button.id);
+				let answerContainer = document.getElementById("answer" + button.id);
 				let answerLabel = document.getElementById("label" + button.id);
 				let justification = document.getElementById('justification' + button.id);
 				if (button.checked) {
@@ -288,15 +297,22 @@ function checkAnswer(questionId, numQuestions) {
 
 					} else {
 						//answerContainer.style.color = "red";
-						answerLabel.style.color = "red";
+						answerLabel.style.color = "#fff";
 						justification.style.display = 'block';
+						answerContainer.style.backgroundColor = "red"; 
+
+
+					//document.getElementById("answer"+ i).style.backgroundColor = "#0eabda";
+					//document.getElementById("label"+i).style.color ="#FFF"; 
+
 
 					}
 				}
 				if (button.value === question.CorrectAnswers[0]) {
 					//answerContainer.style.color = "green";
-					answerLabel.style.color = "green";
+					answerLabel.style.color = "#fff";
 					justification.style.display = 'block';
+					answerContainer.style.backgroundColor = "Green"; 
 				}
 			});
 		}
