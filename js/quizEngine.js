@@ -1,12 +1,12 @@
 const questionDBName = "quizEngineQuestions";
 // const questionDSName = "questions";
-const questionVersion = 1;
+const questionVersion = 2;
 const datastores = ["leadershipDiagram", "littlesLaw", "radiatorChart", "criticalPath"];
 const questionColumns = ["Subject", "Topic", "Question", "Answers", "CorrectAnswers", "Justifications"]; // TODO: test to see if you can access a question by 'id'
 
 const scoreDBName = "QuizScores";
 const scoreDSName = "quizScores";
-const scoreVersion = 2;
+const scoreVersion = 3;
 const scoreIndecies = ["Subject", "Topic", "TotalPossible", "ActualScore"];
 
 let score = {};
@@ -36,10 +36,8 @@ function openQuestionsNScores() {
 						});
 					});
 				}
-
 			});
 		}
-
 	})
 
 	//Open connection the the QuizScores database and its quizScores datastore, using Subject as the key_path
@@ -72,12 +70,16 @@ function openQuestionsNScores() {
 function readQuestions(datastoreName) {
 	// grab all questions from selected quiz defined by the button
 	currentDatastore = datastoreName;
-	quizEngineDB.fetchAll(datastoreName, null, (results) => {
-		//TODO: shuffle the results.
-		isEventListenersAdded = 0;
-		createScore(results);
+	isEventListenersAdded = 0;
+	displayQuizHTML();
+	getQuestions(datastoreName, createScore); 
 
-	});
+	// quizEngineDB.fetchAll(datastoreName, null, (results) => {
+	// 	//TODO: shuffle the results.
+	// 	isEventListenersAdded = 0;
+	// 	createScore(results);
+
+	// });
 }
 
 submitButton = document.getElementById("submitQuestionButton");
@@ -102,29 +104,21 @@ function addEventListenersToButtons(questions, numQuestions) {
 			nextQuestion(questions[score.currentQuestion].id, numQuestions);
 		}
 		else {
-			displayQuizResults();
+			displayQuizResultsHTML();
 		}
 	});
-	retakeQuizButton.addEventListener("click", () => {
-		console.log("clicked retake quiz button...");
-		score.ActualScore = 0;
-		score.currentQuestion = 0;
-		displayQuizRetake();
-		createQuiz(questions);
-	});
+
 	isEventListenersAdded = 1;
 }
 
 function createScore(questions) {
-
-
 	itemDB.fetchOneByIndex(scoreDSName, "Subject", questions[0].Subject, (result) => {
 		//Grab score from db if exists
 		if (result != null) {
 			score = result;
 			//If the quiz has already been finished, display the results div showing the score received
 			if (score.currentQuestion == score.TotalPossible) {
-				displayQuizResults();
+				displayQuizResultsHTML();
 			}
 			else {
 				createQuiz(questions);
@@ -149,6 +143,13 @@ function createScore(questions) {
 	});
 }
 
+function getQuestions(datastoreName, callback) {
+	quizEngineDB.fetchAll(datastoreName, null, (results) => {
+		//TODO: shuffle the results.
+		callback(results);
+	});
+}
+
 function createQuiz(questions) {
 
 	submitButton = document.getElementById("submitQuestionButton");
@@ -160,7 +161,7 @@ function createQuiz(questions) {
 	// display questions 1 at a time.
 	document.getElementById("quizContainer").display = "block";
 	// document.getElementById("quizSubject").innerHTML = score.Subject;
-	document.getElementById("quizTopic").innerHTML = score.Topic;
+	document.getElementById("quizTopic").innerHTML = score.Subject;
 
 	// display question as the title
 	var currentQuestion = document.getElementById('quizQuestion');
@@ -184,8 +185,26 @@ function createQuiz(questions) {
 	nextQuestion(questions[score.currentQuestion].id, numQuestions);
 }
 
-function radioButtonClicked() {
+function radioButtonClicked(numAnswers) {
 	document.getElementById("submitQuestionButton").disabled = false;
+	
+	for (i = 1; i <= numAnswers; i++)
+	{
+		if (document.getElementById(i.toString()).checked == true){
+	
+			document.getElementById("answer"+ i).style.backgroundColor = "#0eabda";
+			document.getElementById("answer"+ i).style.transition = "backgroundColor 2s"; 
+			//document.getElementById("answer"+i).setAttribute('class', 'answerBackground answerStyle');	
+			document.getElementById("label"+i).style.color ="#FFF"; 
+			/*document.getElementById("answer"+i).style.transition="background-position 5s";*/
+		} else {
+			//document.getElementById("answer"+i).setAttribute('class', 'answerStyle');
+			document.getElementById("answer"+ i).style.backgroundColor = "white";
+			document.getElementById("label" + i).style.color="Gray";
+		}
+	}
+
+	
 }
 
 function nextQuestion(questionId, numQuestions) {
@@ -212,8 +231,10 @@ function nextQuestion(questionId, numQuestions) {
 			currentAnswer.setAttribute("id", i);
 			currentAnswer.setAttribute("type", "radio");
 			currentAnswer.setAttribute("name", "answerGroup");
+			// currentAnswer.setAttribute("onClick", () => (clearSetRadioDiv()));
 			currentAnswer.setAttribute("value", question.Answers[i - 1]);
-			currentAnswer.addEventListener("click", () => {radioButtonClicked()});
+			currentAnswer.addEventListener("click", () => {radioButtonClicked(i - 1)});
+
 
 			answerLabel = document.createElement("label");
 			answerLabel.setAttribute("for", i);
@@ -238,11 +259,11 @@ function nextQuestion(questionId, numQuestions) {
 			answerContainer.appendChild(answerJustification);
 			//currentAnswer.innerHTML = "Test";
 			//currentAnswer.appendChild(answerText);
-			var breakElement = document.createElement("br");
+			/*var breakElement = document.createElement("br");*/
 
 			//answerForm.appendChild(currentAnswer);
 			answerForm.appendChild(answerContainer);
-			answerForm.appendChild(breakElement);
+		/*	answerForm.appendChild(breakElement);*/
 			//put a break after each question
 			//console.log(question.Answers);
 		}
@@ -267,7 +288,7 @@ function checkAnswer(questionId, numQuestions) {
 
 			// loop through list of radio buttons
 			radios.forEach((button) => {
-				//let answerContainer = document.getElementById("answer" + button.id);
+				let answerContainer = document.getElementById("answer" + button.id);
 				let answerLabel = document.getElementById("label" + button.id);
 				let justification = document.getElementById('justification' + button.id);
 				if (button.checked) {
@@ -277,15 +298,22 @@ function checkAnswer(questionId, numQuestions) {
 
 					} else {
 						//answerContainer.style.color = "red";
-						answerLabel.style.color = "red";
+						answerLabel.style.color = "#fff";
 						justification.style.display = 'block';
+						answerContainer.style.backgroundColor = "red"; 
+
+
+					//document.getElementById("answer"+ i).style.backgroundColor = "#0eabda";
+					//document.getElementById("label"+i).style.color ="#FFF"; 
+
 
 					}
 				}
 				if (button.value === question.CorrectAnswers[0]) {
 					//answerContainer.style.color = "green";
-					answerLabel.style.color = "green";
+					answerLabel.style.color = "#fff";
 					justification.style.display = 'block';
+					answerContainer.style.backgroundColor = "Green"; 
 				}
 			});
 		}
@@ -298,8 +326,6 @@ function checkAnswer(questionId, numQuestions) {
 		score.currentQuestion++;
 		saveQuizScore();
 	});
-
-
 }
 
 function saveAndCloseQuiz() {
@@ -330,28 +356,51 @@ function getCheckedBoxes() {
 	return checkboxesChecked.length > 0 ? checkboxesChecked : null;
 }
 
-function displayQuizResults() {
+/*
+* Renders the page to display the elements that show a quiz that has been completed and sets 
+* the displayed button listeners
+*/
+function displayQuizResultsHTML() {
 	document.getElementById("quizContainer").style.display = "none";
 	document.getElementById("questionNumber").style.display = "none";
 
-	document.getElementById("quizTopic").innerHTML = score.Topic;
+	document.getElementById("quizTopic").innerHTML = score.Subject;
 	document.getElementById("finishQuiz").style.display = "block";
 	document.getElementById("currentScore").style.display = "block";
 	document.getElementById("currentScore").innerHTML = displayPercentCorrect(score);
 
 	closeQuizButton = document.getElementById("closeQuizButton");
-	closeQuizButton.addEventListener("click", () => {
-		loadQuizList();
-	});
+	closeQuizButton.addEventListener("click", loadQuizList);
+	
+	retakeQuizButton = document.getElementById("retakeQuizButton");
+	retakeQuizButton.addEventListener("click", retakeQuiz);
+				
 }
 
-function displayQuizRetake() {
+/*
+* Renders the page to display the elements that show a quiz currently being taken, handling
+* adding and removing of button event listeners.
+*/
+function displayQuizHTML() {
 	document.getElementById("quizContainer").style.display = "block";
 	document.getElementById("questionNumber").style.display = "block";
 
 	document.getElementById("finishQuiz").style.display = "none";
 	document.getElementById("currentScore").style.display = "none";
 	document.getElementById("nextButton").innerHTML = "Next Question";
+
+	document.getElementById("closeQuizButton").removeEventListener("click", loadQuizList);
+	document.getElementById("retakeQuizButton").removeEventListener("click", retakeQuiz);
+}
+/*
+* Retakes a quiz that the user has already finished resetting the score values
+*/
+function retakeQuiz() {
+	console.log("clicked retake quiz button...");
+	score.ActualScore = 0;
+	score.currentQuestion = 0;
+	displayQuizHTML();
+	getQuestions(currentDatastore, createQuiz);
 }
 
 function displayPercentCorrect(score) {
