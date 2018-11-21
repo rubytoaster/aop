@@ -380,9 +380,10 @@ function displayQuizResultsHTML() {
 	document.getElementById("quizContainer").style.display = "none";
 	document.getElementById("questionNumber").style.display = "none";
 
-	document.getElementById("quizTopic").innerHTML = score.Subject;
+	document.getElementById("quizTopic").style.display = "none";
 	document.getElementById("finishQuiz").style.display = "block";
 	document.getElementById("currentScore").style.display = "block";
+	document.getElementById("scoreBanner").style.display ="block";
 	document.getElementById("currentScore").innerHTML = displayPercentCorrect(score);
 
 	closeQuizButton = document.getElementById("closeQuizButton");
@@ -400,7 +401,9 @@ function displayQuizResultsHTML() {
 function displayQuizHTML() {
 	document.getElementById("quizContainer").style.display = "block";
 	document.getElementById("questionNumber").style.display = "block";
+	document.getElementById("quizTopic").style.display = "block";
 
+	document.getElementById("scoreBanner").style.display ="none";
 	document.getElementById("finishQuiz").style.display = "none";
 	document.getElementById("currentScore").style.display = "none";
 	document.getElementById("nextButton").innerHTML = "Next Question";
@@ -420,5 +423,5 @@ function retakeQuiz() {
 }
 
 function displayPercentCorrect(score) {
-	return "Score: " + Math.round((score.ActualScore / score.TotalPossible) * 100) + '%';
+	return  Math.round((score.ActualScore / score.TotalPossible) * 100) + '%';
 }
