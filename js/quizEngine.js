@@ -1,12 +1,12 @@
 const questionDBName = "quizEngineQuestions";
 // const questionDSName = "questions";
-const questionVersion = 2;
+const questionVersion = 3;
 const datastores = ["leadershipDiagram", "littlesLaw", "radiatorChart", "criticalPath"];
 const questionColumns = ["Subject", "Topic", "Question", "Answers", "CorrectAnswers", "Justifications"]; // TODO: test to see if you can access a question by 'id'
 
 const scoreDBName = "QuizScores";
 const scoreDSName = "quizScores";
-const scoreVersion = 3;
+const scoreVersion = 4;
 const scoreIndecies = ["Subject", "Topic", "TotalPossible", "ActualScore"];
 
 let score = {};
