@@ -1,12 +1,12 @@
 const questionDBName = "quizEngineQuestions";
 // const questionDSName = "questions";
-const questionVersion = 1;
+const questionVersion = 2;
 const datastores = ["leadershipDiagram", "littlesLaw", "radiatorChart", "criticalPath"];
 const questionColumns = ["Subject", "Topic", "Question", "Answers", "CorrectAnswers", "Justifications"]; // TODO: test to see if you can access a question by 'id'
 
 const scoreDBName = "QuizScores";
 const scoreDSName = "quizScores";
-const scoreVersion = 2;
+const scoreVersion = 3;
 const scoreIndecies = ["Subject", "Topic", "TotalPossible", "ActualScore"];
 
 let score = {};
@@ -161,7 +161,7 @@ function createQuiz(questions) {
 	// display questions 1 at a time.
 	document.getElementById("quizContainer").display = "block";
 	// document.getElementById("quizSubject").innerHTML = score.Subject;
-	document.getElementById("quizTopic").innerHTML = score.Topic;
+	document.getElementById("quizTopic").innerHTML = score.Subject;
 
 	// display question as the title
 	var currentQuestion = document.getElementById('quizQuestion');
@@ -337,7 +337,7 @@ function displayQuizResultsHTML() {
 	document.getElementById("quizContainer").style.display = "none";
 	document.getElementById("questionNumber").style.display = "none";
 
-	document.getElementById("quizTopic").innerHTML = score.Topic;
+	document.getElementById("quizTopic").innerHTML = score.Subject;
 	document.getElementById("finishQuiz").style.display = "block";
 	document.getElementById("currentScore").style.display = "block";
 	document.getElementById("currentScore").innerHTML = displayPercentCorrect(score);
