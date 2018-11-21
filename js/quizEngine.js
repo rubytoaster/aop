@@ -308,17 +308,18 @@ function checkAnswer(questionId, numQuestions) {
 						score.ActualScore++;
 						document.getElementById("currentScore").innerHTML = displayPercentCorrect(score);
 						fullJustification.innerHTML += justification.innerHTML;
+						//correct
+						document.getElementById("justificationBox").setAttribute("class", "justificationRightStyle");
+						document.getElementById("justificationIcon").src = "css/svg/checked.svg";	
+
 					} else {
-						//answerContainer.style.color = "red";
+						//wrong
+						document.getElementById("justificationBox").setAttribute("class", "justificationWrongStyle");
+						document.getElementById("justificationIcon").src = "css/svg/cancel.svg";	
 						answerLabel.style.color = "#fff";
 						fullJustification.innerHTML += justification.innerHTML;
 						// justification.style.display = 'block';
-						answerContainer.style.backgroundColor = "#f44336"; 
-
-
-					//document.getElementById("answer"+ i).style.backgroundColor = "#0eabda";
-					//document.getElementById("label"+i).style.color ="#FFF"; 
-
+						answerContainer.style.backgroundColor = "#f44336";
 
 					}
 				}
