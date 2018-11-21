@@ -92,17 +92,12 @@ retakeQuizButton = document.getElementById("retakeQuizButton");
 //
 function addEventListenersToButtons(questions, numQuestions) {
 	submitButton.addEventListener("click", () => {
-		checkAnswer(questions[score.currentQuestion].id, numQuestions);
+		checkAnswer(questions[score.currentQuestion], numQuestions);
 	});
 	nextButton.addEventListener("click", () => {
-		if (score.currentQuestion < numQuestions - 1) {
-			nextQuestion(questions[score.currentQuestion].id, numQuestions);
-		} else if (score.currentQuestion < numQuestions) {
-			let submitQuizButton = document.getElementById("nextButton");
-			submitQuizButton.innerText = "Submit Quiz";
-			// submitQuizButton.setAttribute("class", "modal-close waves-effect btn");
-			nextQuestion(questions[score.currentQuestion].id, numQuestions);
-		}
+		if (score.currentQuestion < numQuestions) {
+			nextQuestion(questions[score.currentQuestion], numQuestions);
+		} 
 		else {
 			displayQuizResultsHTML();
 		}
@@ -182,14 +177,20 @@ function createQuiz(questions) {
 		addEventListenersToButtons(questions, numQuestions);
 
 	//determine answers and update score.
-	nextQuestion(questions[score.currentQuestion].id, numQuestions);
+	nextQuestion(questions[score.currentQuestion], numQuestions);
 }
 
 function setAnswerEventListener(id, numAnswers) {
 	document.getElementById('answer' + id).addEventListener('click', () => {
 		document.getElementById(id).click();
-		radioButtonClicked(numAnswers)
+		radioButtonClicked(numAnswers);
 	});
+}
+
+function answerListener(id, numAnswers)
+{
+	document.getElementById(id).click();
+	radioButtonClicked(numAnswers);
 }
 
 function radioButtonClicked(numAnswers) {
@@ -214,11 +215,10 @@ function radioButtonClicked(numAnswers) {
 	
 }
 
-function nextQuestion(questionId, numQuestions) {
+function nextQuestion(question, numQuestions) {
 
 	//TODO: We already have our list of questions, why are we querying the db to retrieve them again
 
-	quizEngineDB.fetchOneByKey(currentDatastore, questionId, (question) => {
 		//Put current question into html
 		document.getElementById("justificationContainer").style.display = "none";
 		document.getElementById("questionNumber").innerHTML = (score.currentQuestion + 1) + "/" + numQuestions;
@@ -278,15 +278,13 @@ function nextQuestion(questionId, numQuestions) {
 			//console.log(question.Answers);
 		}
 		submitButton.disabled = true;
+		//submitButton.addEventListener('click', checkAnswer(question.id, numQuestions));
 		nextButton.disabled = true;
 		saveQuizScore();
-	});
 
 }
 
-function checkAnswer(questionId, numQuestions) {
-	quizEngineDB.fetchOneByKey(currentDatastore, questionId, (question) => {
-
+function checkAnswer(question, numQuestions) {
 		let justificationContainer = document.getElementById("justificationContainer");
 		let fullJustification = document.getElementById("fullJustification");
 		fullJustification.innerHTML = "";
@@ -334,6 +332,9 @@ function checkAnswer(questionId, numQuestions) {
 			justificationContainer.style.display = "block"
 		}
 
+		//remove check answer event listener
+		//document.getElementById('submitQuestionButton').removeEventListener('click', checkAnswer(questionId, numQuestions));
+
 		//let submitButton = document.getElementById("submitButton");
 		submitButton.disabled = true;
 
@@ -341,7 +342,6 @@ function checkAnswer(questionId, numQuestions) {
 		nextButton.disabled = false;
 		score.currentQuestion++;
 		saveQuizScore();
-	});
 }
 
 function saveAndCloseQuiz() {
