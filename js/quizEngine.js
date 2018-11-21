@@ -213,6 +213,7 @@ function nextQuestion(questionId, numQuestions) {
 
 	quizEngineDB.fetchOneByKey(currentDatastore, questionId, (question) => {
 		//Put current question into html
+		document.getElementById("justificationContainer").style.display = "none";
 		document.getElementById("questionNumber").innerHTML = (score.currentQuestion + 1) + "/" + numQuestions;
 		var quizQuestion = document.getElementById("quizQuestion");
 		var questionText = document.createTextNode(question.Question);
@@ -278,6 +279,9 @@ function nextQuestion(questionId, numQuestions) {
 function checkAnswer(questionId, numQuestions) {
 	quizEngineDB.fetchOneByKey(currentDatastore, questionId, (question) => {
 
+		let justificationContainer = document.getElementById("justificationContainer");
+		let fullJustification = document.getElementById("fullJustification");
+		fullJustification.innerHTML = "";
 		if (question.CorrectAnswers.length > 1) {
 			// TODO: checkboxes
 
@@ -295,11 +299,12 @@ function checkAnswer(questionId, numQuestions) {
 					if (button.value === question.CorrectAnswers[0]) {
 						score.ActualScore++;
 						document.getElementById("currentScore").innerHTML = displayPercentCorrect(score);
-
+						fullJustification.innerHTML += justification.innerHTML;
 					} else {
 						//answerContainer.style.color = "red";
 						answerLabel.style.color = "#fff";
-						justification.style.display = 'block';
+						fullJustification.innerHTML += justification.innerHTML;
+						// justification.style.display = 'block';
 						answerContainer.style.backgroundColor = "red"; 
 
 
@@ -312,10 +317,12 @@ function checkAnswer(questionId, numQuestions) {
 				if (button.value === question.CorrectAnswers[0]) {
 					//answerContainer.style.color = "green";
 					answerLabel.style.color = "#fff";
-					justification.style.display = 'block';
+					// justification.style.display = 'block';
 					answerContainer.style.backgroundColor = "Green"; 
 				}
 			});
+
+			justificationContainer.style.display = "block"
 		}
 
 		//let submitButton = document.getElementById("submitButton");
