@@ -13,7 +13,6 @@ let submitButton, nextButton;
 let score = {};
 let questions = [];
 let currentDatastore;
-let checkedRadioId = -1;
 
 function openQuestionsNScores() {
 	//Open connection to the quizEngineQuestions database and each of the datastores
@@ -141,32 +140,14 @@ function createQuiz() {
 
 	nextButton.disabled = true;
 
-	// if (isEventListenersAdded == 0){
-	// 	submitButton.addEventListener("click", checkAnswer.bind(null, questions));
-	// 	nextButton.addEventListener("click", checkIfNextQuestionNeeded.bind(null, questions)); 
-	// 	isEventListenersAdded = 1;
-	// }
-
 	//determine answers and update score.
 	nextQuestion();
 }
 
-function setAnswerEventListener(id, numAnswers) {
-	document.getElementById('answer' + id).addEventListener('click', () => {
-		document.getElementById(id).click();
-		radioButtonClicked(numAnswers);
-	});
-}
+function radioButtonClicked() {
+	submitButton.disabled = false;
 
-function answerListener(id, numAnswers) {
-	document.getElementById(id).click();
-	radioButtonClicked(numAnswers);
-}
-
-function radioButtonClicked(numAnswers) {
-	document.getElementById("submitQuestionButton").disabled = false;
-
-	for (i = 1; i <= numAnswers; i++) {
+	for (i = 1; i <= questions[score.currentQuestion].Answers.length; i++) {
 		if (document.getElementById(i.toString()).checked == true) {
 
 			document.getElementById("answer" + i).style.backgroundColor = "#0eabda";
@@ -237,6 +218,7 @@ function nextQuestion() {
 		answerContainer.setAttribute("id", "answer" + i);
 
 		answerContainer.setAttribute("class", "answerStyle");
+		answerContainer.setAttribute("name", "answerRadioGroup")
 		// answerContainer.setAttribute("for", i);
 		answerText = document.createTextNode(question.Answers[i - 1]);
 		answerContainer.appendChild(currentAnswer);
@@ -245,14 +227,46 @@ function nextQuestion() {
 		answerContainer.appendChild(answerLabel);
 		answerContainer.appendChild(answerJustification);
 
-		//answerForm.appendChild(currentAnswer);
 		answerForm.appendChild(answerContainer);
-		setAnswerEventListener(i, question.Answers.length);
 	}
+	addRadioClickEvents(questions[score.currentQuestion].Answers.length);
 	submitButton.disabled = true;
 	nextButton.disabled = true;
 	saveQuizScore();
 
+}
+
+/*
+* Gets all elements with the name answerRadioGroup and defines the onclick
+* event. Also sets its pointer events to normal incase those were set to none
+* previously. 
+*/
+function addRadioClickEvents() {
+	$(document).on("click", "[name='answerRadioGroup']", function (e) {
+		var str = e.currentTarget.id;
+		var i = str.charAt(str.length-1);
+		document.getElementById(i.toString()).checked = true;
+		radioButtonClicked();
+	});
+	var elements = document.getElementsByName("answerRadioGroup")
+	for(var i = 0; i < elements.length; i++){
+		e = elements[i];
+		e.style.pointerEvents = 'auto';
+	}
+	submitButton.style.pointerEvents = 'auto';
+}
+
+/*
+* Gets all elements with the specific answerRadioGroup name and assigns none to its
+* pointer events, essentially disabling click events. Done to the submit button aswell.
+*/
+function removeRadioClickEvents() {
+	var elements = document.getElementsByName("answerRadioGroup")
+	for(var i = 0; i < elements.length; i++){
+		e = elements[i];
+		e.style.pointerEvents = 'none';
+	}
+	submitButton.style.pointerEvents = 'none';
 }
 
 function checkAnswer() {
@@ -310,6 +324,7 @@ function checkAnswer() {
 	nextButton.disabled = false;
 	score.currentQuestion++;
 	saveQuizScore();
+	removeRadioClickEvents();
 }
 
 function saveAndCloseQuiz() {
