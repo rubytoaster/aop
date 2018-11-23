@@ -9,9 +9,9 @@ const scoreDSName = "quizScores";
 const scoreVersion = 5;
 const scoreIndecies = ["Subject", "Topic", "TotalPossible", "ActualScore"];
 
+let submitButton, nextButton;
 let score = {};
-let submitButton, nextButton, isEventListenersAdded = 0;
-let counter = 0;
+let questions = [];
 let currentDatastore;
 let checkedRadioId = -1;
 
@@ -72,40 +72,10 @@ function readQuestions(datastoreName) {
 	// grab all questions from selected quiz defined by the button
 	currentDatastore = datastoreName;
 	isEventListenersAdded = 0;
-	displayQuizHTML();
-	getQuestions(datastoreName, createScore); 
-
-	// quizEngineDB.fetchAll(datastoreName, null, (results) => {
-	// 	//TODO: shuffle the results.
-	// 	isEventListenersAdded = 0;
-	// 	createScore(results);
-
-	// });
+	getQuestions(datastoreName, createScore);
 }
 
-submitButton = document.getElementById("submitQuestionButton");
-nextButton = document.getElementById("nextButton");
-
-
-
-//
-function addEventListenersToButtons(questions, numQuestions) {
-	submitButton.addEventListener("click", () => {
-		checkAnswer(questions[score.currentQuestion], numQuestions);
-	});
-	nextButton.addEventListener("click", () => {
-		if (score.currentQuestion < numQuestions) {
-			nextQuestion(questions[score.currentQuestion], numQuestions);
-		} 
-		else {
-			displayQuizResultsHTML();
-		}
-	});
-
-	isEventListenersAdded = 1;
-}
-
-function createScore(questions) {
+function createScore() {
 	itemDB.fetchOneByIndex(scoreDSName, "Subject", questions[0].Subject, (result) => {
 		//Grab score from db if exists
 		if (result != null) {
@@ -115,7 +85,7 @@ function createScore(questions) {
 				displayQuizResultsHTML();
 			}
 			else {
-				createQuiz(questions);
+				createQuiz();
 			}
 		}
 		//Create new score and add it to db
@@ -129,7 +99,7 @@ function createScore(questions) {
 			};
 
 			itemDB.createItem(scoreDSName, score, () => {
-				createQuiz(questions);
+				createQuiz();
 			});
 		}
 
@@ -140,15 +110,16 @@ function createScore(questions) {
 function getQuestions(datastoreName, callback) {
 	quizEngineDB.fetchAll(datastoreName, null, (results) => {
 		//TODO: shuffle the results.
-		callback(results);
+		questions = results;
+		callback();
 	});
 }
 
-function createQuiz(questions) {
-
+function createQuiz() {
+	displayQuizHTML();
 	submitButton = document.getElementById("submitQuestionButton");
 	nextButton = document.getElementById("nextButton");
-	let numQuestions = questions.length;
+
 
 	// display questions 1 at a time.
 	document.getElementById("quizContainer").display = "block";
@@ -164,17 +135,20 @@ function createQuiz(questions) {
 
 	// display quiz score status.
 	// display the current status of the quiz
-	document.getElementById("questionNumber").innerHTML = "1/" + numQuestions;
+	document.getElementById("questionNumber").innerHTML = "1/" + questions.length;
 
 	document.getElementById("currentScore").innerHTML = "Score: 0%";
 
 	nextButton.disabled = true;
 
-	if (isEventListenersAdded == 0)
-		addEventListenersToButtons(questions, numQuestions);
+	// if (isEventListenersAdded == 0){
+	// 	submitButton.addEventListener("click", checkAnswer.bind(null, questions));
+	// 	nextButton.addEventListener("click", checkIfNextQuestionNeeded.bind(null, questions)); 
+	// 	isEventListenersAdded = 1;
+	// }
 
 	//determine answers and update score.
-	nextQuestion(questions[score.currentQuestion], numQuestions);
+	nextQuestion();
 }
 
 function setAnswerEventListener(id, numAnswers) {
@@ -184,154 +158,158 @@ function setAnswerEventListener(id, numAnswers) {
 	});
 }
 
-function answerListener(id, numAnswers)
-{
+function answerListener(id, numAnswers) {
 	document.getElementById(id).click();
 	radioButtonClicked(numAnswers);
 }
 
 function radioButtonClicked(numAnswers) {
 	document.getElementById("submitQuestionButton").disabled = false;
-	
-	for (i = 1; i <= numAnswers; i++)
-	{
-		if (document.getElementById(i.toString()).checked == true){
-	
-			document.getElementById("answer"+ i).style.backgroundColor = "#0eabda";
-			document.getElementById("answer"+ i).style.transition = "backgroundColor 2s"; 
+
+	for (i = 1; i <= numAnswers; i++) {
+		if (document.getElementById(i.toString()).checked == true) {
+
+			document.getElementById("answer" + i).style.backgroundColor = "#0eabda";
+			document.getElementById("answer" + i).style.transition = "backgroundColor 2s";
 			//document.getElementById("answer"+i).setAttribute('class', 'answerBackground answerStyle');	
-			document.getElementById("label"+i).style.color ="#FFF"; 
+			document.getElementById("label" + i).style.color = "#FFF";
 			/*document.getElementById("answer"+i).style.transition="background-position 5s";*/
 		} else {
 			//document.getElementById("answer"+i).setAttribute('class', 'answerStyle');
-			document.getElementById("answer"+ i).style.backgroundColor = "white";
-			document.getElementById("label" + i).style.color="Gray";
+			document.getElementById("answer" + i).style.backgroundColor = "white";
+			document.getElementById("label" + i).style.color = "Gray";
 		}
 	}
-
-	
 }
 
-function nextQuestion(question, numQuestions) {
-
-	//TODO: We already have our list of questions, why are we querying the db to retrieve them again
-
-		//Put current question into html
-		document.getElementById("justificationContainer").style.display = "none";
-		document.getElementById("questionNumber").innerHTML = (score.currentQuestion + 1) + "/" + numQuestions;
-		var quizQuestion = document.getElementById("quizQuestion");
-		var questionText = document.createTextNode(question.Question);
-		//console.log(questionText);
-		quizQuestion.innerHTML = "";
-		quizQuestion.appendChild(questionText);
+function checkIfNextQuestionNeeded() {
+	if (score.currentQuestion < questions.length) {
+		nextQuestion();
+	}
+	else {
+		displayQuizResultsHTML();
+	}
+}
 
 
-		var answerForm = document.getElementById("answerForm");
-		answerForm.innerHTML = "";
-		var currentAnswer, answerText, answerLabel;
-		//create input elements
-		for (var i = 1; i <= question.Answers.length; i++) {
-			//create the input element and set attributes
-			currentAnswer = document.createElement("input");
-			currentAnswer.setAttribute("id", i);
-			currentAnswer.setAttribute("type", "radio");
-			currentAnswer.setAttribute("name", "answerGroup");
-			// currentAnswer.setAttribute("onClick", () => (clearSetRadioDiv()));
-			currentAnswer.setAttribute("value", question.Answers[i - 1]);
-			// currentAnswer.addEventListener("click", () => {radioButtonClicked(question.Answers.length)});
+function nextQuestion() {
+	//Check if we need to display the next or submit
+	if (score.currentQuestion === questions.length - 1) {
+		document.getElementById("nextButton").value = "Submit";
+	}
+	//Grab current question to show
+	var question = questions[score.currentQuestion];
+	var numQuestions = questions.length;
+	//Put current question into html
+	document.getElementById("justificationContainer").style.display = "none";
+	document.getElementById("questionNumber").innerHTML = (score.currentQuestion + 1) + "/" + numQuestions;
+	var quizQuestion = document.getElementById("quizQuestion");
+	var questionText = document.createTextNode(question.Question);
+	//console.log(questionText);
+	quizQuestion.innerHTML = "";
+	quizQuestion.appendChild(questionText);
 
 
-			answerLabel = document.createElement("label");
-			answerLabel.setAttribute("for", i);
-			answerLabel.setAttribute("id", "label" + i); 
+	var answerForm = document.getElementById("answerForm");
+	answerForm.innerHTML = "";
+	var currentAnswer, answerText, answerLabel;
+	//create input elements
+	for (var i = 1; i <= question.Answers.length; i++) {
+		//create the input element and set attributes
+		currentAnswer = document.createElement("input");
+		currentAnswer.setAttribute("id", i);
+		currentAnswer.setAttribute("type", "radio");
+		currentAnswer.setAttribute("name", "answerGroup");
 
-			let answerJustification = document.createElement('div');
-			answerJustification.setAttribute('id', "justification" + i);
-			answerJustification.setAttribute('style', 'display: none');
-			let justificationText = document.createTextNode(question.Justifications[i - 1]);
-			answerJustification.appendChild(justificationText);
+		currentAnswer.setAttribute("value", question.Answers[i - 1]);
 
-			let answerContainer = document.createElement("div");
-			answerContainer.setAttribute("id", "answer" + i);
+		answerLabel = document.createElement("label");
+		answerLabel.setAttribute("for", i);
+		answerLabel.setAttribute("id", "label" + i);
 
-			answerContainer.setAttribute("class", "answerStyle");
-			// answerContainer.setAttribute("for", i);
-			answerText = document.createTextNode(question.Answers[i - 1]);
-			answerContainer.appendChild(currentAnswer);
-			answerLabel.appendChild(answerText);
-			answerLabel.setAttribute("class", "answerText");
-			answerContainer.appendChild(answerLabel);
-			answerContainer.appendChild(answerJustification);
+		let answerJustification = document.createElement('div');
+		answerJustification.setAttribute('id', "justification" + i);
+		answerJustification.setAttribute('style', 'display: none');
+		let justificationText = document.createTextNode(question.Justifications[i - 1]);
+		answerJustification.appendChild(justificationText);
 
-			//answerForm.appendChild(currentAnswer);
-			answerForm.appendChild(answerContainer);
-			setAnswerEventListener(i, question.Answers.length);
-		}
-		submitButton.disabled = true;
-		//submitButton.addEventListener('click', checkAnswer(question.id, numQuestions));
-		nextButton.disabled = true;
-		saveQuizScore();
+		let answerContainer = document.createElement("div");
+		answerContainer.setAttribute("id", "answer" + i);
+
+		answerContainer.setAttribute("class", "answerStyle");
+		// answerContainer.setAttribute("for", i);
+		answerText = document.createTextNode(question.Answers[i - 1]);
+		answerContainer.appendChild(currentAnswer);
+		answerLabel.appendChild(answerText);
+		answerLabel.setAttribute("class", "answerText");
+		answerContainer.appendChild(answerLabel);
+		answerContainer.appendChild(answerJustification);
+
+		//answerForm.appendChild(currentAnswer);
+		answerForm.appendChild(answerContainer);
+		setAnswerEventListener(i, question.Answers.length);
+	}
+	submitButton.disabled = true;
+	nextButton.disabled = true;
+	saveQuizScore();
 
 }
 
-function checkAnswer(question, numQuestions) {
-		let justificationContainer = document.getElementById("justificationContainer");
-		let fullJustification = document.getElementById("fullJustification");
-		fullJustification.innerHTML = "";
-		if (question.CorrectAnswers.length > 1) {
-			// TODO: checkboxes
+function checkAnswer() {
+	//Grab current question to show
+	var question = questions[score.currentQuestion];
+	var numQuestions = questions.length;
+	let justificationContainer = document.getElementById("justificationContainer");
+	let fullJustification = document.getElementById("fullJustification");
+	fullJustification.innerHTML = "";
+	if (question.CorrectAnswers.length > 1) {
+		// TODO: checkboxes
 
 
-		} else {
-			// get list of radio buttons with specified name
-			var radios = document.getElementsByName("answerGroup");
+	} else {
+		// get list of radio buttons with specified name
+		var radios = document.getElementsByName("answerGroup");
 
-			// loop through list of radio buttons
-			radios.forEach((button) => {
-				let answerContainer = document.getElementById("answer" + button.id);
-				let answerLabel = document.getElementById("label" + button.id);
-				let justification = document.getElementById('justification' + button.id);
-				if (button.checked) {
-					if (button.value === question.CorrectAnswers[0]) {
-						score.ActualScore++;
-						document.getElementById("currentScore").innerHTML = displayPercentCorrect(score);
-						fullJustification.innerHTML += justification.innerHTML;
-						//correct
-						document.getElementById("justificationBox").setAttribute("class", "justificationRightStyle");
-						document.getElementById("justificationIcon").src = "css/svg/checked.svg";	
-
-					} else {
-						//wrong
-						document.getElementById("justificationBox").setAttribute("class", "justificationWrongStyle");
-						document.getElementById("justificationIcon").src = "css/svg/cancel.svg";	
-						answerLabel.style.color = "#fff";
-						fullJustification.innerHTML += justification.innerHTML;
-						// justification.style.display = 'block';
-						answerContainer.style.backgroundColor = "#f44336";
-
-					}
-				}
+		// loop through list of radio buttons
+		radios.forEach((button) => {
+			let answerContainer = document.getElementById("answer" + button.id);
+			let answerLabel = document.getElementById("label" + button.id);
+			let justification = document.getElementById('justification' + button.id);
+			if (button.checked) {
 				if (button.value === question.CorrectAnswers[0]) {
-					//answerContainer.style.color = "green";
+					score.ActualScore++;
+					document.getElementById("currentScore").innerHTML = displayPercentCorrect(score);
+					fullJustification.innerHTML += justification.innerHTML;
+					//correct
+					document.getElementById("justificationBox").setAttribute("class", "justificationRightStyle");
+					document.getElementById("justificationIcon").src = "css/svg/checked.svg";
+
+				} else {
+					//wrong
+					document.getElementById("justificationBox").setAttribute("class", "justificationWrongStyle");
+					document.getElementById("justificationIcon").src = "css/svg/cancel.svg";
 					answerLabel.style.color = "#fff";
+					fullJustification.innerHTML += justification.innerHTML;
 					// justification.style.display = 'block';
-					answerContainer.style.backgroundColor = "#00c853"; 
+					answerContainer.style.backgroundColor = "#f44336";
+
 				}
-			});
+			}
+			if (button.value === question.CorrectAnswers[0]) {
+				//answerContainer.style.color = "green";
+				answerLabel.style.color = "#fff";
+				// justification.style.display = 'block';
+				answerContainer.style.backgroundColor = "#00c853";
+			}
+		});
 
-			justificationContainer.style.display = "block"
-		}
+		justificationContainer.style.display = "block"
+	}
 
-		//remove check answer event listener
-		//document.getElementById('submitQuestionButton').removeEventListener('click', checkAnswer(questionId, numQuestions));
-
-		//let submitButton = document.getElementById("submitButton");
-		submitButton.disabled = true;
-
-		//let nextButton = document.getElementById("nextButton");
-		nextButton.disabled = false;
-		score.currentQuestion++;
-		saveQuizScore();
+	submitButton.disabled = true;
+	nextButton.disabled = false;
+	score.currentQuestion++;
+	saveQuizScore();
 }
 
 function saveAndCloseQuiz() {
@@ -369,19 +347,18 @@ function getCheckedBoxes() {
 function displayQuizResultsHTML() {
 	document.getElementById("quizContainer").style.display = "none";
 	document.getElementById("questionNumber").style.display = "none";
-
 	document.getElementById("quizTopic").style.display = "none";
+
 	document.getElementById("finishQuiz").style.display = "block";
 	document.getElementById("currentScore").style.display = "block";
-	document.getElementById("scoreBanner").style.display ="block";
+	document.getElementById("scoreBanner").style.display = "block";
 	document.getElementById("currentScore").innerHTML = displayPercentCorrect(score);
 
-	closeQuizButton = document.getElementById("closeQuizButton");
-	closeQuizButton.addEventListener("click", loadQuizList);
-	
-	retakeQuizButton = document.getElementById("retakeQuizButton");
-	retakeQuizButton.addEventListener("click", retakeQuiz);
-				
+	document.getElementById("submitQuestionButton").removeEventListener("click", checkAnswer);
+	document.getElementById("nextButton").removeEventListener("click", checkIfNextQuestionNeeded); 
+
+	document.getElementById("closeQuizButton").addEventListener("click", loadQuizList);
+	document.getElementById("retakeQuizButton").addEventListener("click", retakeQuiz);
 }
 
 /*
@@ -393,14 +370,18 @@ function displayQuizHTML() {
 	document.getElementById("questionNumber").style.display = "block";
 	document.getElementById("quizTopic").style.display = "block";
 
-	document.getElementById("scoreBanner").style.display ="none";
+	document.getElementById("scoreBanner").style.display = "none";
 	document.getElementById("finishQuiz").style.display = "none";
 	document.getElementById("currentScore").style.display = "none";
-	document.getElementById("nextButton").innerHTML = "Next Question";
+	
+	document.getElementById("submitQuestionButton").addEventListener("click", checkAnswer);
+	document.getElementById("nextButton").value = "Next";
+	document.getElementById("nextButton").addEventListener("click", checkIfNextQuestionNeeded); 
 
 	document.getElementById("closeQuizButton").removeEventListener("click", loadQuizList);
 	document.getElementById("retakeQuizButton").removeEventListener("click", retakeQuiz);
 }
+
 /*
 * Retakes a quiz that the user has already finished resetting the score values
 */
@@ -408,10 +389,9 @@ function retakeQuiz() {
 	console.log("clicked retake quiz button...");
 	score.ActualScore = 0;
 	score.currentQuestion = 0;
-	displayQuizHTML();
 	getQuestions(currentDatastore, createQuiz);
 }
 
 function displayPercentCorrect(score) {
-	return  Math.round((score.ActualScore / score.TotalPossible) * 100) + '%';
+	return Math.round((score.ActualScore / score.TotalPossible) * 100) + '%';
 }
