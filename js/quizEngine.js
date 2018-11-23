@@ -10,9 +10,10 @@ const scoreVersion = 5;
 const scoreIndecies = ["Subject", "Topic", "TotalPossible", "ActualScore"];
 
 let score = {};
-let submitButton, nextButton, retakeQuizButton, isEventListenersAdded = 0;
+let submitButton, nextButton, isEventListenersAdded = 0;
 let counter = 0;
 let currentDatastore;
+let checkedRadioId = -1;
 
 function openQuestionsNScores() {
 	//Open connection to the quizEngineQuestions database and each of the datastores
@@ -84,8 +85,6 @@ function readQuestions(datastoreName) {
 
 submitButton = document.getElementById("submitQuestionButton");
 nextButton = document.getElementById("nextButton");
-closeQuizButton = document.getElementById("closeQuizButton");
-retakeQuizButton = document.getElementById("retakeQuizButton");
 
 
 
@@ -149,8 +148,6 @@ function createQuiz(questions) {
 
 	submitButton = document.getElementById("submitQuestionButton");
 	nextButton = document.getElementById("nextButton");
-	closeQuizButton = document.getElementById("closeQuizButton");
-	retakeQuizButton = document.getElementById("retakeQuizButton");
 	let numQuestions = questions.length;
 
 	// display questions 1 at a time.
@@ -265,17 +262,10 @@ function nextQuestion(question, numQuestions) {
 			answerLabel.setAttribute("class", "answerText");
 			answerContainer.appendChild(answerLabel);
 			answerContainer.appendChild(answerJustification);
-		
-			//currentAnswer.innerHTML = "Test";
-			//currentAnswer.appendChild(answerText);
-			/*var breakElement = document.createElement("br");*/
 
 			//answerForm.appendChild(currentAnswer);
 			answerForm.appendChild(answerContainer);
 			setAnswerEventListener(i, question.Answers.length);
-		/*	answerForm.appendChild(breakElement);*/
-			//put a break after each question
-			//console.log(question.Answers);
 		}
 		submitButton.disabled = true;
 		//submitButton.addEventListener('click', checkAnswer(question.id, numQuestions));
