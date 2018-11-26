@@ -218,7 +218,8 @@ function nextQuestion() {
 		answerContainer.setAttribute("id", "answer" + i);
 
 		answerContainer.setAttribute("class", "answerStyle");
-		answerContainer.setAttribute("name", "answerRadioGroup")
+		answerContainer.setAttribute("name", "answerRadioGroup");
+		answerContainer.setAttribute("style", "cursor: pointer;"); // allows ios devices to utilize onclick.
 		// answerContainer.setAttribute("for", i);
 		answerText = document.createTextNode(question.Answers[i - 1]);
 		answerContainer.appendChild(currentAnswer);
