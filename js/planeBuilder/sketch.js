@@ -44,9 +44,9 @@ var planeBuilderSim = function(sketch) {
     let defaultToolsLocationX = sketch.width/2;
     let defaultToolsLocationY = sketch.height/3;
     
-    wings = new Wings(sketch, defaultToolsLocationX, defaultToolsLocationY);
-    tail = new Tail(sketch, defaultToolsLocationX - 100, defaultToolsLocationY);
-    cockpit = new Cockpit(sketch, defaultToolsLocationX + 100, defaultToolsLocationY);
+    wings = new Wings(sketch, defaultToolsLocationX, defaultToolsLocationY, wingsImg);
+    tail = new Tail(sketch, defaultToolsLocationX - 100, defaultToolsLocationY, tailImg);
+    cockpit = new Cockpit(sketch, defaultToolsLocationX + 100, defaultToolsLocationY, cockpitImg );
     conveyerBelt = new ConveyerBelt(sketch, 50);
     
     
