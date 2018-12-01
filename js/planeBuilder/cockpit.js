@@ -12,7 +12,7 @@ function Cockpit(sketch, posX, posY)
   
   this.touchStarted = function(cockpitXpos, cockpitYpos)
   {
-    if(sketch.dist(sketch.mouseX, sketch.mouseY, cockpitXpos, cockpitYpos) < 50)
+    if(sketch.dist(sketch.mouseX, sketch.mouseY, cockpitXpos, cockpitYpos) < 100)
     {
       this.drag = true;
     }

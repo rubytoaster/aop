@@ -29,7 +29,7 @@ function Wings(sketch, posX, posY)
     {
       for(let i = 0; i < fuselageList.length; i++)
       {
-        if(sketch.dist(sketch.mouseX, sketch.mouseY, fuselageList[i].posX, fuselageList[i].posY) < 50)
+        if(sketch.dist(sketch.mouseX, sketch.mouseY, fuselageList[i].posX, fuselageList[i].posY) < 100)
         {
           if(fuselageList[i].hasWings == false)
           {
