@@ -12,6 +12,7 @@ var planeBuilderSim = function(sketch) {
   var fuselageWTImg;
   var airplaneCompImg;
   
+  var statsDisplay;
   var wings;
   var tail;
   var cockpit;
@@ -58,17 +59,20 @@ var planeBuilderSim = function(sketch) {
     tail = new Tail(sketch, defaultToolsLocationX - 100, defaultToolsLocationY, tailImg);
     cockpit = new Cockpit(sketch, defaultToolsLocationX + 100, defaultToolsLocationY, cockpitImg );
     conveyerBelt = new ConveyerBelt(sketch, 50);
-    
+    statsDisplay = new StatsDisplay(sketch);
     
   }
 
   sketch.draw = function() {
-    
+        
     if(gameRunning)
     {
       sketch.background(this.bgImg);
+      
+      statsDisplay.update(winCount);
+      
       sketch.textSize(28);
-      sketch.text("Completed: " + winCount, sketch.width/2 - 75, sketch.height/4);
+      //sketch.text("Completed: " + winCount, sketch.width/2 - 75, sketch.height/4);
       
       conveyerBelt.update();
 
