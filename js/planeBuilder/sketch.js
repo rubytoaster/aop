@@ -26,6 +26,8 @@ var planeBuilderSim = function(sketch) {
   var successSnd;
   var gameOverSnd;
   
+  var numberForWin = 10;
+  
   this.fuselageList = [];
   
   this.bgImg = sketch.loadImage("images/game/conveyerImgs/gameBackground.png");
@@ -41,6 +43,7 @@ var planeBuilderSim = function(sketch) {
     attachSnd = sketch.loadSound('sounds/attach.wav');
     successSnd = sketch.loadSound('sounds/success.wav');
     gameOverSnd = sketch.loadSound('sounds/gameOver.mp3');
+    levelWinSnd = sketch.loadSound('sounds/levelWin.mp3');
     
     sketch.frameRate(30);
     can = sketch.createCanvas(700, 350);
@@ -85,6 +88,12 @@ var planeBuilderSim = function(sketch) {
         {
           successSnd.play();
           winCount++;
+          
+          if(winCount >= numberForWin)
+          {
+            levelWinSnd.play();
+            gameRunning = false;
+          }
         }
         else {
           //You lose game stops
