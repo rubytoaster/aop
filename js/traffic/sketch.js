@@ -170,25 +170,3 @@ var trafficSim = function(sketch) {
     carImgs[6] = sketch.loadImage("images/game/trafficSim/cars/7.png");
   }
 }
-
-function loadTrafficModal() {
-  console.log("loadTrafficModal()");
-  var defaultColor = "#424242";
-  var pageTitle = $("#pageTitle").text();
-  console.log(pageTitle);
-  if (pageTitle === "Traffic Simulator") {
-    console.log("populating modal");
-    $("#traffic_modal_content").load("content/trafficModal.html");
-
-    // $(document).ready(function(){
-    //   $('#traffic_modal_content').modal();
-    // });
-    //
-    // $('#traffic_modal_content').modal({
-    //   dismissible:false
-    // });
-    //
-    // $('#traffic_modal_content').modal('open');
-
-  }
-}

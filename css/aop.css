@@ -991,6 +991,22 @@ ul#horizontal-list li{
  display:none;
 }
 
+.precisionRadio div > [type="radio"]:checked + label::after, [type="radio"].with-gap:checked + label::before, [type="radio"].with-gap:checked + label::after {
+ visiblity:none;
+ display:block;
+ margin-left: -0px;
+ margin-top: 0px;
+}
+
+.precisionRadio div > [type="radio"]:not(:checked)+label, [type="radio"]:checked+label
+{
+  transition:none !important;
+  line-height:auto;
+  padding-left:20px;
+  padding-right:10px;
+}
+
+
 .answerStyle{
     border: 1px solid #ddd;
     border-radius: 40px;
