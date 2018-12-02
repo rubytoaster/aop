@@ -231,9 +231,12 @@ function loadSearchModal(){
       dismissible:false
     });
     $('#modal1').modal('open');
-
-
   }
+
+  function clickExitSlideshow()
+  {
+    window.location.href ="index.html";
+     }
 
   function loadNotesModal(){
 
