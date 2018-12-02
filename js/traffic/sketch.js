@@ -54,7 +54,7 @@ var trafficSim = function(sketch) {
   {
     sketch.background(this.empty_road);
 
-    for (let laneNumber = 3; laneNumber > this.numberOfOpenLanes; laneNumber--)
+    for (let laneNumber = 3; laneNumber > numberOfOpenLanes; laneNumber--)
     {
       sketch.image(gate, (can.width / numberOfLanes) * (laneNumber - 1), 0, (can.width / numberOfLanes), 10);
     }
@@ -80,11 +80,10 @@ var trafficSim = function(sketch) {
         if (this.carList[i].update(velocity) == false) {
           carList.splice(i, 1);
           finishedCarCount++;
-          // decriment index so that the car after the
-          // one we deleted still gets rendered
           i--;
         }
       }
+
       // Start timer once we have a "stableish" system
       if (timePassedMs == 0 && furthstCarYpos <= ((-1*carHeight) + ySpawnWindowHeight/2) )
       {
