@@ -13,3 +13,7 @@ function renderTrafficWelcome(){
   console.log("renderTrafficWelcome()");
   $("#traffic_modal_content").load("content/traffic/trafficWelcome.html");
 }
+
+function closeModal(){
+  modal.style.display = "none";
+}

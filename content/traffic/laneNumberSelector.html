@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script language="javascript" type="text/javascript" src="js/traffic/trafficRenderingFunctions.js"></script>
 <style>
 
   /* The Modal (background) */
@@ -51,9 +52,9 @@
   <div class="modal-content">
       <span class="close">&times;</span>
       <p>select the number of lanes you want.</p>
-      <a onclick="startCars(1);">1</a><br/>
-      <a onclick="startCars(2);">2</a><br/>
-      <a onclick="startCars(3);">3</a><br/>
+      <a onclick="startCars(1);closeModal();">1</a><br/>
+      <a onclick="startCars(2);closeModal();">2</a><br/>
+      <a onclick="startCars(3);closeModal();">3</a><br/>
       <p id="completionCount"/><br/>
       <p id="crossScreenTime"/><br/>
       <p id="completionCount"/><br/>
