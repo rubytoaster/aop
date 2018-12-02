@@ -192,8 +192,6 @@ function loadCalculatorModal(){
     $('#modal1').modal('open');
 
   }
-
-
 }
 
 function loadSearchModal(){
@@ -402,8 +400,8 @@ function loadLandscapeModal(){
     $('#landscapeModal').modal({
       dismissible: false
     });
-    $('#landscapeModal').modal('open'); 
-    
+    $('#landscapeModal').modal('open');
+
   }
 
 }
@@ -662,7 +660,7 @@ function loadQuizList(){
 
   openQuestionsNScores();
 }
- 
+
 function loadQuiz(name, datastoreName){
   clearColor();
   closeGame();

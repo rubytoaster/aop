@@ -11,23 +11,24 @@
   <meta name="theme-color" content="#ffffff">
   <style>    
     #canvas {
-           position: fixed;
-           left: 0;
-           top: 0;
-           right: 0;
-           bottom: 0;
-           margin: auto;
+      margin: 0;
+      position: absolute;
+      top: 50%;
+      -ms-transform: translateY(-50%);
+      transform: translateY(-50%);
        }
   </style>
 </head>
   <body style="overflow: hidden; position: fixed;">
     <script src="js/jquery.min.js"></script>
     <script language="javascript" type="text/javascript" src="js/p5.js"></script>
+    <script language="javascript" type="text/javascript" src="js/p5.sound.min.js"></script>
     <script language="javascript" type="text/javascript" src="js/planeBuilder/wings.js"></script>
     <script language="javascript" type="text/javascript" src="js/planeBuilder/tail.js"></script>
     <script language="javascript" type="text/javascript" src="js/planeBuilder/cockpit.js"></script>
     <script language="javascript" type="text/javascript" src="js/planeBuilder/fuselage.js"></script>
     <script language="javascript" type="text/javascript" src="js/planeBuilder/conveyerBeltPlane.js"></script>
+    <script language="javascript" type="text/javascript" src="js/planeBuilder/statsDisplay.js"></script>
     <script language="javascript" type="text/javascript" src="js/planeBuilder/sketch.js"></script>
     <script>
     

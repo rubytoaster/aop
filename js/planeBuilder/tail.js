@@ -6,13 +6,15 @@ function Tail(sketch, posX, posY, tailImg)
   
   this.update = function()
   {
-    sketch.image(tailImg, this.xPos - 25, this.yPos - 20, 50, 50);
-    sketch.text("Tail", this.xPos, this.yPos - 30);
+    sketch.rect(posX - 18 , posY - 28 , 65 , 65,5);
+    sketch.image(tailImg, this.xPos - 12, this.yPos - 20, 50, 50);
+    sketch.textSize(22);
+    sketch.text("Tail", posX, posY - 30);
   }
   
   this.touchStarted = function(tailXpos, tailYpos)
   {
-    if(sketch.dist(sketch.mouseX, sketch.mouseY, tailXpos, tailYpos) < 50)
+    if(sketch.dist(sketch.mouseX, sketch.mouseY, tailXpos, tailYpos) < 60)
     {
       this.drag = true;
     }
@@ -21,7 +23,7 @@ function Tail(sketch, posX, posY, tailImg)
     }
   }
   
-  this.touchEnded = function()
+  this.touchEnded = function(attachSnd)
   {
     
     //I dont exactly like this but not sure atm how else to do it
@@ -34,6 +36,7 @@ function Tail(sketch, posX, posY, tailImg)
           if(fuselageList[i].hasTail == false)
           {
             fuselageList[i].hasTail = true;
+            attachSnd.play();
           }
         }
       }
@@ -49,8 +52,8 @@ function Tail(sketch, posX, posY, tailImg)
   {
     if(this.drag)
     {
-      this.xPos = sketch.mouseX;
-      this.yPos = sketch.mouseY;
+      this.xPos = sketch.mouseX - 20;
+      this.yPos = sketch.mouseY - 20;
     }
   }
   
