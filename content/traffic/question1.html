@@ -51,13 +51,10 @@
 
   <div class="modal-content">
     <span class="close">&times;</span>
-    <span id="startOptions">
-      <p>select the number of lanes you want. </p>
-      <h1 style="margin-top: -15px; margin-bottom:-15px;">
-        <a onclick="startCars(1,30,15,1000);closeModal();" style="margin-right:100px">1 </a>
-        <a onclick="startCars(2,30,15,1000);closeModal();" style="margin-right:100px">2 </a>
-        <a onclick="startCars(3,30,15,1000);closeModal();">3 </a>
-      </h1>
+    <span id="question">
+      <p>Given a throughput of 3 and a flow time of 8 minuets, what is your WIP? </p>
+      <input/>
+      <button onclick="startCars(1,30,15,1000);"/>
     </span>
 
     <span id="runInfo" style="display:none;">
