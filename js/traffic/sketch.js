@@ -30,14 +30,16 @@ var trafficSim = function(sketch) {
 
 
 
-  startCars = function(numLanes) {
+  startCars = function(numLanes, compCount, velo, inter) {
     numberOfOpenLanes = numLanes;
+    completionCount = compCount;
+    velocity = velo;
+    intervalTime = inter;
     for (let i = 1; i <= numberOfOpenLanes; i++) {
       addCar(i);
     }
     $("#startOptions").hide();
     $("#runInfo").show();
-    $("#wip_out").text(completionCount);
   }
 
   sketch.setup = function()
@@ -94,6 +96,7 @@ var trafficSim = function(sketch) {
     if (finishedCarCount >= completionCount)
     {
       complete = true;
+      $("#questionResult").show();
     }
     $("#spawnedCarCount").text(spawnedCarCount);
     $("#finishedCarCount").text(finishedCarCount);
