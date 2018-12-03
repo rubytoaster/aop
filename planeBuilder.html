@@ -29,6 +29,7 @@
     <script language="javascript" type="text/javascript" src="js/planeBuilder/fuselage.js"></script>
     <script language="javascript" type="text/javascript" src="js/planeBuilder/conveyerBeltPlane.js"></script>
     <script language="javascript" type="text/javascript" src="js/planeBuilder/statsDisplay.js"></script>
+    <script language="javascript" type="text/javascript" src="js/planeBuilder/modalRenderers.js"></script>
     <script language="javascript" type="text/javascript" src="js/planeBuilder/sketch.js"></script>
     <script>
     
@@ -43,6 +44,12 @@
       $("#app_cont").empty();
       plane_S = new p5(planeBuilderSim,'app_cont');
     });
+    
+    window.onload = function(e){
+        renderStartGameMenu();
+            }
     </script>
+    
+    <div id="factory_modal_content"></div>
   </body>
 </html>

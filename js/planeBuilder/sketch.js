@@ -12,11 +12,16 @@ var planeBuilderSim = function(sketch) {
   var fuselageWTImg;
   var airplaneCompImg;
   
+  var fuselageTimeout;
+  
   var statsDisplay;
   var wings;
   var tail;
   var cockpit;
-  var converyerBelt;
+  var converyerBelt1;
+  var converyerBelt2;
+  var converyerBelt3;
+  var converyerBelt4;
   var fuselage;
   var velocity = 2;
   
@@ -27,15 +32,21 @@ var planeBuilderSim = function(sketch) {
   var successSnd;
   var gameOverSnd;
   
-  var numberForWin = 10;
+  var numberForWin = 2;
   
   this.fuselageList = [];
   
-  this.bgImg = sketch.loadImage("images/game/conveyerImgs/gameBackground.png");
+  this.bgImg = sketch.loadImage("images/game/planeBuilder/factoryBackground.png");
 
   
-  let fuselageTimeout = setTimeout(addFuselage, 1000);
-
+  startFactory = function(level) {
+      removeAllFuselage();
+      closeModal();
+      this.level = level;
+      winCount = 0;
+      gameRunning = true;
+      addFuselage();
+  }
   
   sketch.setup = function() {
     
@@ -46,19 +57,26 @@ var planeBuilderSim = function(sketch) {
     gameOverSnd = sketch.loadSound('sounds/gameOver.mp3');
     levelWinSnd = sketch.loadSound('sounds/levelWin.mp3');
     
-    sketch.frameRate(30);
+    sketch.frameRate(40);
     can = sketch.createCanvas(700, 350);
     const canvasElt = can.elt;
     canvasElt.style.width = '100%', canvasElt.style.height="100%";
     
     
-    let defaultToolsLocationX = sketch.width/2;
+    let defaultToolsLocationX = sketch.width/2 -32;
     let defaultToolsLocationY = sketch.height - sketch.height/6;
     
     wings = new Wings(sketch, defaultToolsLocationX, defaultToolsLocationY, wingsImg);
     tail = new Tail(sketch, defaultToolsLocationX - 100, defaultToolsLocationY, tailImg);
     cockpit = new Cockpit(sketch, defaultToolsLocationX + 100, defaultToolsLocationY, cockpitImg );
-    conveyerBelt = new ConveyerBelt(sketch, 50);
+    conveyerBelt0 = new ConveyerBelt(sketch, -60);
+    conveyerBelt1 = new ConveyerBelt(sketch, 50);
+    conveyerBelt2 = new ConveyerBelt(sketch, 160);
+    conveyerBelt3 = new ConveyerBelt(sketch, 270);
+    conveyerBelt4 = new ConveyerBelt(sketch, 380);
+    conveyerBelt5 = new ConveyerBelt(sketch, 490);
+    conveyerBelt6 = new ConveyerBelt(sketch, 600);
+
     statsDisplay = new StatsDisplay(sketch);
     
   }
@@ -73,8 +91,14 @@ var planeBuilderSim = function(sketch) {
       
       sketch.textSize(28);
       //sketch.text("Completed: " + winCount, sketch.width/2 - 75, sketch.height/4);
-      
-      conveyerBelt.update();
+      conveyerBelt0.update();
+      conveyerBelt1.update();
+      conveyerBelt2.update();
+      conveyerBelt3.update();
+      conveyerBelt4.update();
+      conveyerBelt5.update();
+      conveyerBelt6.update();
+
 
       for(let i = 0; i < fuselageList.length; i++)
       {
@@ -97,12 +121,39 @@ var planeBuilderSim = function(sketch) {
           {
             levelWinSnd.play();
             gameRunning = false;
+            
+            if(this.level == 1)
+            {
+              displayWinLevel1();
+            }
+            else if(this.level == 2)
+            {
+              displayWinLevel2();
+            }
+            else if(this.level == 3)
+            {
+              displayWinLevel3();
+            }
           }
         }
         else {
           //You lose game stops
           gameRunning = false;
           gameOverSnd.play();
+          
+          if(this.level == 1)
+          {
+            displayLoseLevel1();
+          }
+          else if(this.level == 2)
+          {
+            displayLoseLevel2();
+          }
+          else if(this.level == 3)
+          {
+            displayLoseLevel3();
+          }
+          
         }
         
         this.fuselageList.shift(); 
@@ -137,8 +188,29 @@ var planeBuilderSim = function(sketch) {
     this.fuselageList.push(new Fuselage(sketch, fuselageImg, 
       airplaneCompImg, cockpitImg, fuselageCImg, fuselageTImg, 
       fuselageWImg, fuselageCTImg, fuselageCWImg, fuselageWTImg, wingsImg));
-
-    crateTimeout = setTimeout(addFuselage, 3000);
+      
+    if(this.level == 1)
+    {
+      velocity = 2;
+      fuselageTimeout = setTimeout(addFuselage, 3000);
+    }
+    else if(this.level == 2)
+    {
+      velocity = 3;
+      fuselageTimeout = setTimeout(addFuselage, 2000);
+    }
+    else if(this.level == 3)
+    {
+      velocity = 4;
+      fuselageTimeout = setTimeout(addFuselage, 1000);
+    }
+      
+  }
+  
+  function removeAllFuselage()
+  {
+    fuselageList = [];
+    clearTimeout(fuselageTimeout);
   }
   
   function loadImages()
