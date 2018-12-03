@@ -473,6 +473,7 @@ ul#horizontal-list li{
     width:95%;
   }
 }
+
 @media only screen and (min-height: 569px)
 {
   #calc_sect{
@@ -721,195 +722,6 @@ ul#horizontal-list li{
   display:inline;
 }
 
-
-.templateCard{
-  padding:5px;
-  margin:0;
-  height:100px;
-  border-radius:10px;
-}
-
-/*Background images for the template section*/
-.templateTitle{
-  margin-top:10px;
-  font-weight: bold; 
-  vertical-align: middle;
-  line-height: 90%;
-  font-size:25px;
-  color: #333333;
-  background: #FFFFFF;
-  text-shadow: 2px 2px 0px #FFFFFF, 5px 4px 0px rgba(0,0,0,0.15);
-}
-
-.burndownBackground{
-  background-image: url("../images/templates/burndown_thmb.png");
-  background-repeat: no-repeat;
-  background-size:auto 100%;
-  background-position: center;
-}
-
-.gateOneBackground{
-  background-image: url("../images/templates/gate_one_per_thmb.png");
-  background-repeat: no-repeat;
-  background-size:auto 100%;
-  background-position: center;
-}
-
-.instructionsBackground{
-  background-image: url("../images/templates/instructions_thmb.png");
-  background-repeat: no-repeat;
-  background-size:auto 100%;
-  background-position: center;
-}
-
-.leadershipBackground{
-  background-image: url("../images/templates/leadership_thmb.png");
-  background-repeat: no-repeat;
-  background-size:auto 100%;
-  background-position: center;
-}
-
-.metlBackground{
-  background-image: url("../images/templates/metl_thmb.png");
-  background-repeat: no-repeat;
-  background-size:auto 100%;
-  background-position: center;
-}
-
-.projectGateOneBackground{
-  background-image: url("../images/templates/proj_gate_one_thmb.png");
-  background-repeat: no-repeat;
-  background-size:auto 100%;
-  background-position: center;
-}
-
-.projectGateTwoBackground{
-  background-image: url("../images/templates/proj_gate_two_thmb.png");
-  background-repeat: no-repeat;
-  background-size:auto 100%;
-  background-position: center;
-}
-
-.timeQualityBackground{
-  background-image: url("../images/templates/time_qual_thmb.png");
-  background-repeat: no-repeat;
-  background-size:auto 100%;
-  background-position: center;
-}
-
-.timeRangeBackground{
-  background-image: url("../images/templates/time_range_thmb.png");
-  background-repeat: no-repeat;
-  background-size:auto 100%;
-  background-position: center;
-}
-
-.wallLayoutBackground{
-  background-image: url("../images/templates/wall_layout_thmb.png");
-  background-repeat: no-repeat;
-  background-size:auto 100%;
-  background-position: center;
-}
-
-#burndownCard{
-  position:relative;
-}
-#burndownCard img{
-  position: absolute;
-  bottom:0px;
-  right:0px;
-}
-
-#gateTimeQualityCard{
-  position:relative;
-}
-#gateTimeQualityCard img{
-  position: absolute;
-  bottom:0px;
-  right:0px;
-}
-
-#instructionCard{
-  position:relative;
-}
-#instructionCard img{
-  position: absolute;
-  bottom:0px;
-  right:0px;
-}
-
-#leadershipCard{
-  position:relative;
-}
-#leadershipCard img{
-  position: absolute;
-  bottom:0px;
-  right:0px;
-}
-
-#metlCard{
-  position:relative;
-}
-#metlCard img{
-  position: absolute;
-  bottom:0px;
-  right:0px;
-}
-
-#oneGatePerPageCard{
-  position:relative;
-}
-#oneGatePerPageCard img{
-  position: absolute;
-  bottom:0px;
-  right:0px;
-}
-
-#projectGateOneCard{
-  position:relative;
-}
-#projectGateOneCard img{
-  position: absolute;
-  bottom:0px;
-  right:0px;
-}
-
-#gateTimeQualityCard{
-  position:relative;
-}
-#gateTimeQualityCard img{
-  position: absolute;
-  bottom:0px;
-  right:0px;
-}
-
-#timeRangeCard{
-  position:relative;
-}
-#timeRangeCard img{
-  position: absolute;
-  bottom:0px;
-  right:0px;
-}
-
-#twoGatesPerPageCard{
-  position:relative;
-}
-#twoGatesPerPageCard img{
-  position: absolute;
-  bottom:0px;
-  right:0px;
-}
-
-#wallLayoutCard{
-  position:relative;
-}
-#wallLayoutCard img{
-  position: absolute;
-  bottom:0px;
-  right:0px;
-}
-
 /*----------------------------------------------*/
 .gateChartBackground{
   background-image: url("../images/charts/gate_chart_thmb.png");
@@ -934,11 +746,9 @@ ul#horizontal-list li{
   0px 2px 0 #333333, -2px 0px 0 #333333, 0px -2px 0 #333333, 8px 6px 4px rgba(51,51,51,0.72);}
 
 /*----------------------------------------------*/
-.quizTitle{
+.btnTitle{
   color:#fff;
 }
-
-
 
 .answerText{
   font-weight: bold; 
@@ -1142,7 +952,6 @@ background: linear-gradient(to right, rgba(252,234,33,1) 0%, rgba(251,178,6,1) 2
  bottom: -1em;
 }
 
-
 .ribbon .ribbon-content:before {
  left: 0;
  border-width: 1em 0 0 1em;
@@ -1152,3 +961,8 @@ background: linear-gradient(to right, rgba(252,234,33,1) 0%, rgba(251,178,6,1) 2
  border-width: 1em 1em 0 0;
 }
 /*--------------------------------------------------------------------*/
+.cardTemplate{
+  border-radius:0px !important;
+  padding-left:10px; 
+  margin:.3rem 0 .3rem 0;
+}
