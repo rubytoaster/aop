@@ -662,13 +662,13 @@ ul#horizontal-list li{
 }
 
 .carGameBackground{
-  background-image: url("../css/svg/carGame.PNG");
+  background-image: url("../css/svg/traffic.png");
   background-repeat: no-repeat;
   background-size:100% auto;
 }
 
 .conveyorBeltGameBackground{
-  background-image:url("svg/game2.png");
+  background-image:url("svg/conveyor2.png");
   background-repeat: no-repeat;
   background-size:100% auto;
   background-position-y:bottom;
