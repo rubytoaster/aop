@@ -671,7 +671,7 @@ ul#horizontal-list li{
   background-image:url("svg/conveyor2.png");
   background-repeat: no-repeat;
   background-size:100% auto;
-  background-position-y:bottom;
+  background-position-y:center;
 }
 
 .critcalPathGameBackground{
