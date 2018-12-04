@@ -157,7 +157,7 @@ img {
 <a class="next" onclick="plusSlides(1)">&#10095;</a>
 
 <div class="closeButton">
-<a href="javascript:(closeOverlay())">
+<a href="javascript:(window.top.closeOverlay())">
   <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 512 512" style="transform:rotate(180deg);enable-background:new 0 0 512 512;" xml:space="preserve" width="35px" height="35px">
 <g>
   <g>
@@ -189,7 +189,6 @@ var slideContainer = document.getElementById("slideShowContainer");
 
     for(var i = slideIndex; i <= total; i++)
     {
-    	console.log(i);
     	var slideDiv = document.createElement("div"); 
     	slideDiv.setAttribute('class','mySlides fade'); 
     	var textDiv = document.createElement("div"); 
@@ -199,7 +198,7 @@ var slideContainer = document.getElementById("slideShowContainer");
     	textDiv.appendChild(textNode); 
 
     	var slideImage = document.createElement("img"); 
-      	slideImage.setAttribute("src","../images/IntermediateLevelAoP/Slide"+i+".jpg");
+      	slideImage.setAttribute("src","../images/IntermediateLevelAoP/slide"+i+".jpg");
       	slideDiv.appendChild(slideImage);
       	slideDiv.appendChild(textDiv); 
       	slideContainer.appendChild(slideDiv);

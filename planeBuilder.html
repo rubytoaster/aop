@@ -9,7 +9,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
-  <style>    
+  <style> 
+  @media screen and (orientation:portrait)
+  {   
+    html{
+      transform: rotate(-90deg);
+      transform-origin: left top;
+      width: 100vh;
+      overflow-x: hidden;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      }
+  }
+
+
     #canvas {
       margin: 0;
       position: absolute;
