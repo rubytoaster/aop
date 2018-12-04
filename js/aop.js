@@ -17,6 +17,7 @@ function openIOverlay(fLink) {
   iframe.frameBorder = 0;
   iframe.sandbox = 'allow-modals allow-scripts allow-same-origin';
   iframe.setAttribute("src", fLink);
+  iframe.setAttribute("class","iframeStyle");
   iOl.appendChild(iframe);
   iOl.style.height = "100%";
 }
