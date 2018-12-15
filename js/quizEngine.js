@@ -181,19 +181,12 @@ function createQuiz(questions) {
 }
 
 function setAnswerEventListener(id, numAnswers) {
-	document.getElementById('answer' + id).addEventListener('click', () => {
-		document.getElementById(id).click();
-		radioButtonClicked(numAnswers);
-	});
+	document.getElementById('answer' + id).addEventListener('click', radioButtonClicked(id, numAnswers));
 }
 
-function answerListener(id, numAnswers)
-{
+
+function radioButtonClicked(id, numAnswers) {
 	document.getElementById(id).click();
-	radioButtonClicked(numAnswers);
-}
-
-function radioButtonClicked(numAnswers) {
 	document.getElementById("submitQuestionButton").disabled = false;
 	
 	for (i = 1; i <= numAnswers; i++)
