@@ -38,6 +38,7 @@ var trafficSim = function(sketch) {
     for (let i = 1; i <= numberOfOpenLanes; i++) {
       addCar(i);
     }
+    sketch.frameRate(frameRate);
     $("#startOptions").hide();
     $("#runInfo").show();
   }
@@ -45,7 +46,7 @@ var trafficSim = function(sketch) {
   sketch.setup = function()
   {
     loadImages();
-    sketch.frameRate(frameRate);
+    sketch.frameRate(1);
     can = sketch.createCanvas(canvasWidth, canvasHeight);
     const canvasElt = can.elt;
     canvasElt.style.width = '100%', canvasElt.style.height = "100%";
@@ -135,7 +136,7 @@ var trafficSim = function(sketch) {
   }
 
   function addCar(lane) {
-    var laneWidth = can.width / 3;
+    var laneWidth = can.width / numberOfLanes;
     var yStart = Math.random() * ySpawnWindowHeight;
     var carImg = carImgs[Math.floor(Math.random() * (carImgs.length))];
     this.carList.push(
