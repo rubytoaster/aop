@@ -21,16 +21,11 @@
 
   /* Modal Content */
   .modal-content {
-
       margin: auto;
-
       padding: 20px;
-      padding-bottom: 0px;
-      padding-top: 10px;
+      border: 1px solid #888;
       background-color: white;
-      width: 60%;
-      border-radius: 25px;
-      border: 2px solid #73AD21;
+      width: 85%;
   }
 
   .close {
@@ -47,45 +42,22 @@
   }
 
   .airplaneIcon{
-    height: 20%;
-    width: 25%;
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+    height: 30%;
+    width: 45%;
   }
-
-  .playIcon{
-    height: 10%;
-    width: 20%;
-    display: block;
- margin-left: auto;
- margin-right: auto;
- margin-bottom: 0px;
-margin-top: 0px;
-  }
-
-  #rcorners {
-
-}
 </style>
 </head>
 <body>
 
 
 <!-- The Modal -->
-<div id="myModal" class="modal rcorners">
+<div id="myModal" class="modal">
 
   <div class="modal-content">
     <img src="images/game/planeBuilder/airplaneComp.png" class="airplaneIcon">
 
-      <p>General Smorgasbord needs us to build planes...</p>
-      <p>He says that we need to have our airplanes build in 12 seconds!</p>
-      <p>...And that we need atleast 10 of them</p>
-    </br>
-      <p>Can you handle a flowtime of 12 seconds?</p>
-
-        <img src="images/game/play.png" class="playIcon"  onclick="startFactory(1);">
-      <br/>
+      <p>The General Needs us to build planes are you up for the challenge?</p>
+      <a onclick="startFactory(1);">Start Level 1</a><br/>
   </div>
 
 </div>
@@ -96,6 +68,10 @@ var modal = document.getElementById('myModal');
 var btn = document.getElementById("myBtn");
 
 var span = document.getElementsByClassName("close")[0];
+
+span.onclick = function() {
+    modal.style.display = "none";
+}
 
 </script>
 
