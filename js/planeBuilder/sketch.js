@@ -40,10 +40,10 @@ var planeBuilderSim = function(sketch) {
 
 
   startFactory = function(level) {
-     
+
       removeAllFuselage();
       closeModal();
-      this.level = 3;
+      this.level = level;
       winCount = 0;
       gameRunning = true;
 
@@ -121,8 +121,7 @@ var planeBuilderSim = function(sketch) {
       //Remove non displayed fuselages
       if(fuselageList[0] != null && this.fuselageList[0].posX >= sketch.width)
       {
-        //if(this.fuselageList[0].hasTail && this.fuselageList[0].hasWings && this.fuselageList[0].hasCockpit)
-        if(true)
+        if(this.fuselageList[0].hasTail && this.fuselageList[0].hasWings && this.fuselageList[0].hasCockpit)
         {
           successSnd.play();
           winCount++;
