@@ -43,26 +43,26 @@ var planeBuilderSim = function(sketch) {
 
       removeAllFuselage();
       closeModal();
-      this.level = level;
+      this.level = 3;
       winCount = 0;
       gameRunning = true;
 
       if(this.level == 1)
       {
         speedTxt = "Slow";
-        velocity = 1.75;
+        velocity = 2.25;
         startFlowtime = 11;
       }
       else if(this.level == 2)
       {
         speedTxt = "Medium";
-        velocity = 2.50;
+        velocity = 3.15;
         startFlowtime = 8;
       }
       else if(this.level == 3)
       {
         speedTxt = "Fast";
-        velocity = 3;
+        velocity = 3.75;
         startFlowtime = 7;
       }
 
